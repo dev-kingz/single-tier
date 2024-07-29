@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 const { execSync } = require('child_process');
+const fs = require('fs');
+const path = require('path');
 const figlet = require('figlet');
 const args = process.argv.slice(2);
 
@@ -35,6 +37,12 @@ const repoUrl = 'https://github.com/dev-kingz/single-tier.git';
     try {
         execSync(`git clone ${repoUrl} ${projectName}`, { stdio: 'inherit' });
         spinner.succeed(chalk.green('Repository cloned successfully.'));
+
+        // Update package.json with the new project name
+        const packageJsonPath = path.join(process.cwd(), projectName, 'package.json');
+        const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+        packageJson.name = projectName;
+        fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
         console.log(
             chalk.blueBright(`\nDevKingz: Your ${chalk.yellow(projectName)} app has been created successfully!`),
