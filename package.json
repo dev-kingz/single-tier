@@ -36,5 +36,8 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   },
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "bin": {
+    "single-tier": "./bin/cli.js"
+  }
 }
