@@ -38,6 +38,14 @@ const repoUrl = 'https://github.com/dev-kingz/single-tier.git';
         execSync(`git clone ${repoUrl} ${projectName}`, { stdio: 'inherit' });
         spinner.succeed(chalk.green('Repository cloned successfully.'));
 
+       // Rename or remove any existing bin directory in the cloned project
+       const binDir = path.join(process.cwd(), projectName, 'bin');
+       if (fs.existsSync(binDir)) {
+           const newBinDir = path.join(process.cwd(), projectName, 'bin-backup');
+           fs.renameSync(binDir, newBinDir);
+           console.log(chalk.yellow(`Renamed existing 'bin' directory to 'bin-backup' in ${projectName}`));
+       }
+       
         // Update package.json with the new project name
         const packageJsonPath = path.join(process.cwd(), projectName, 'package.json');
         const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
