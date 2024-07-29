@@ -2,13 +2,12 @@
 
 const { execSync } = require('child_process');
 const figlet = require('figlet');
-const ora = require('ora');
 const args = process.argv.slice(2);
 
-// Function to load chalk dynamically
-async function loadChalk() {
-    const chalk = await import('chalk');
-    return chalk.default;
+// Function to load ESM modules dynamically
+async function loadESM(module) {
+    const mod = await import(module);
+    return mod.default;
 }
 
 if (args.length !== 1) {
@@ -20,7 +19,8 @@ const projectName = args[0];
 const repoUrl = 'https://github.com/dev-kingz/single-tier.git';
 
 (async () => {
-    const chalk = await loadChalk();
+    const chalk = await loadESM('chalk');
+    const ora = await loadESM('ora');
 
     console.log(
         chalk.blue(
