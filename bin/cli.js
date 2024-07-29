@@ -15,6 +15,7 @@ if (args.length !== 1) {
     process.exit(1);
 }
 
+
 const projectName = args[0];
 const repoUrl = 'https://github.com/dev-kingz/single-tier.git';
 
