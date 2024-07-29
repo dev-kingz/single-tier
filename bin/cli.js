@@ -38,10 +38,11 @@ const repoUrl = 'https://github.com/dev-kingz/single-tier.git';
         execSync(`git clone ${repoUrl} ${projectName}`, { stdio: 'inherit' });
         spinner.succeed(chalk.green('Repository cloned successfully.'));
 
-        // Update package.json with the new project name
+        // Update package.json with the new project name and version
         const packageJsonPath = path.join(process.cwd(), projectName, 'package.json');
         const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
         packageJson.name = projectName;
+        packageJson.version = '0.1.0';  // Set version to 0.1.0
         fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
         console.log(
