@@ -15,7 +15,6 @@ if (args.length !== 1) {
     process.exit(1);
 }
 
-
 const projectName = args[0];
 const repoUrl = 'https://github.com/dev-kingz/single-tier.git';
 
@@ -24,31 +23,31 @@ const repoUrl = 'https://github.com/dev-kingz/single-tier.git';
     const ora = await loadESM('ora');
 
     console.log(
-        chalk.blue(
+        chalk.blueBright(
             figlet.textSync('DevKingz', { horizontalLayout: 'full' })
         )
     );
 
     console.log(chalk.green('Creating your new single-tier app...\n'));
 
-    const spinner = ora('Cloning repository...').start();
+    const spinner = ora(chalk.yellow('Cloning repository...')).start();
 
     try {
         execSync(`git clone ${repoUrl} ${projectName}`, { stdio: 'inherit' });
-        spinner.succeed('Repository cloned successfully.');
+        spinner.succeed(chalk.green('Repository cloned successfully.'));
 
         console.log(
             chalk.blueBright(`\nDevKingz: Your ${chalk.yellow(projectName)} app has been created successfully!`),
-            chalk.green("\n\nRun the following commands to start developing:\n"),
-            chalk.cyan(`cd ${projectName}`),
-            chalk.cyan(`npm install`),
-            chalk.cyan(`npm run dev`),
-            chalk.green("\nHappy coding!\n")
+            chalk.green('\nRun the following commands to get started:\n'),
+            chalk.cyan(`  cd ${projectName}\n`),
+            chalk.cyan('  npm install\n'),
+            chalk.cyan('  npm run dev\n'),
+            chalk.green('\nGood Luck on your new App! 🎉\n')
         );
     } catch (error) {
-        spinner.fail('Failed to clone repository.');
+        spinner.fail(chalk.red('Failed to clone repository.'));
         console.error(
-            chalk.red(`\nDevKingz: :( Failed to clone your new single-tier app: ${error.message}`)
+            chalk.red(`\nDevKingz: 😞 Failed to clone your new single-tier app: ${error.message}`)
         );
         process.exit(1);
     }
