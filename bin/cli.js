@@ -24,13 +24,13 @@ const repoUrl = 'https://github.com/dev-kingz/single-tier.git';
 
     console.log(
         chalk.blueBright(
-            figlet.textSync('DevKingz', { horizontalLayout: 'full' })
+            figlet.textSync('DevKingz', { font: '3D-ASCII', horizontalLayout: 'full' })
         )
     );
 
     console.log(chalk.green('Creating your new single-tier app...\n'));
 
-    const spinner = ora(chalk.yellow('Cloning repository...')).start();
+    const spinner = ora(chalk.yellow('Cloning repository...\n')).start();
 
     try {
         execSync(`git clone ${repoUrl} ${projectName}`, { stdio: 'inherit' });
@@ -38,7 +38,7 @@ const repoUrl = 'https://github.com/dev-kingz/single-tier.git';
 
         console.log(
             chalk.blueBright(`\nDevKingz: Your ${chalk.yellow(projectName)} app has been created successfully!`),
-            chalk.green('\nRun the following commands to get started:\n'),
+            chalk.green('\nRun the following commands to get started:\n\n'),
             chalk.cyan(`  cd ${projectName}\n`),
             chalk.cyan('  npm install\n'),
             chalk.cyan('  npm run dev\n'),
