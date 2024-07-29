@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const { execSync } = require('child_process');
-const chalk = require('chalk');
-const figlet = require('figlet');
+import { execSync } from 'child_process';
+import chalk from 'chalk';
+import figlet from 'figlet';
 
 const args = process.argv.slice(2);
 
