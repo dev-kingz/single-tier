@@ -43,6 +43,10 @@ const repoUrl = 'https://github.com/dev-kingz/single-tier.git';
         const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
         packageJson.name = projectName;
         packageJson.version = '0.1.0';  // Set version to 0.1.0
+
+        // Remove 'bin' field from package.json
+        delete packageJson.bin;
+
         fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
         console.log(
