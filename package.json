@@ -1,8 +1,9 @@
 {
   "name": "@devkingz/single-tier",
+  "version": "0.1.0",
   "author": "saadkhaliq15",
   "url": "https://devkingz.com",
-  "version": "0.1.0",
+  "repository": "https://github.com/dev-kingz/single-tier.git",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
