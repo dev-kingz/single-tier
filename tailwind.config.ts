@@ -1,6 +1,16 @@
 import type {Config} from "tailwindcss";
+import colors from "tailwindcss/colors";
 import plugin from "tailwindcss/plugin";
 import animatePlugin from "tailwindcss-animate";
+// @ts-ignore
+import hexToHsl from "hex-to-hsl";
+
+// convert #f5f5f5 to 0 0% 97% using hex-to-hsl
+const convertHexToHsl = (hex: string) => {
+  const initHsl = hexToHsl(hex);
+  // convert [ 0, 0, 97 ] to "0 0% 97%"
+  return `${initHsl[0]} ${initHsl[1]}% ${initHsl[2]}%`;
+};
 
 const config: Config = {
   darkMode: ["class"],
@@ -15,23 +25,23 @@ const config: Config = {
           "html, body, :root": {"@apply h-full font-primary": {}},
 
           ":root": {
-            "--white": "0 0% 96.1%",
-            "--black": "0 0% 9%",
+            "--white": convertHexToHsl(colors.neutral[100]),
+            "--black": convertHexToHsl(colors.neutral[900]),
 
-            "--background": "0 0% 96.1%",
-            "--foreground": "0 0% 9%",
+            "--background": convertHexToHsl(colors.neutral[100]),
+            "--foreground": convertHexToHsl(colors.neutral[900]),
             "--card": "0 0% 100%",
             "--card-foreground": "0 0% 3.9%",
             "--popover": "0 0% 100%",
             "--popover-foreground": "0 0% 3.9%",
             "--primary": "45.4 93.4% 47.5%",
             "--primary-foreground": "0 0% 98%",
-            "--secondary": "0 0% 96.1%",
-            "--secondary-foreground": "0 0% 9%",
-            "--muted": "0 0% 96.1%",
+            "--secondary": convertHexToHsl(colors.neutral[100]),
+            "--secondary-foreground": convertHexToHsl(colors.neutral[900]),
+            "--muted": convertHexToHsl(colors.neutral[100]),
             "--muted-foreground": "0 0% 45.1%",
-            "--accent": "0 0% 96.1%",
-            "--accent-foreground": "0 0% 9%",
+            "--accent": convertHexToHsl(colors.neutral[100]),
+            "--accent-foreground": convertHexToHsl(colors.neutral[900]),
             "--destructive": "0 84.2% 60.2%",
             "--destructive-foreground": "0 0% 98%",
             "--border": "0 0% 89.8%",
@@ -46,14 +56,14 @@ const config: Config = {
           },
 
           ".dark": {
-            "--background": "0 0% 9%",
-            "--foreground": "0 0% 96.1%",
+            "--background": convertHexToHsl(colors.neutral[900]),
+            "--foreground": convertHexToHsl(colors.neutral[100]),
             "--card": "0 0% 3.9%",
             "--card-foreground": "0 0% 98%",
             "--popover": "0 0% 3.9%",
             "--popover-foreground": "0 0% 98%",
             "--primary": "45.4 93.4% 47.5%",
-            "--primary-foreground": "0 0% 9%",
+            "--primary-foreground": convertHexToHsl(colors.neutral[900]),
             "--secondary": "0 0% 14.9%",
             "--secondary-foreground": "0 0% 98%",
             "--muted": "0 0% 14.9%",
@@ -167,13 +177,19 @@ const config: Config = {
               ring: "hsl(var(--ring))",
               background: "hsl(var(--background))",
               foreground: "hsl(var(--foreground))",
+              grey: {
+                DEFAULT: colors.neutral[500],
+                ...colors.neutral,
+              },
               primary: {
                 DEFAULT: "hsl(var(--primary))",
                 foreground: "hsl(var(--primary-foreground))",
+                ...colors.yellow,
               },
               secondary: {
                 DEFAULT: "hsl(var(--secondary))",
                 foreground: "hsl(var(--secondary-foreground))",
+                // spread the secondary color
               },
               destructive: {
                 DEFAULT: "hsl(var(--destructive))",
