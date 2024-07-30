@@ -47,6 +47,12 @@ const repoUrl = 'https://github.com/dev-kingz/single-tier.git';
         // Remove 'bin' field from package.json
         delete packageJson.bin;
 
+        // Remove pnpm-lock.yaml file
+        const pnpmLockPath = path.join(process.cwd(), projectName, 'pnpm-lock.yaml');
+        if (fs.existsSync(pnpmLockPath)) {
+            fs.rmSync(pnpmLockPath);
+        }
+
         fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
         console.log(
