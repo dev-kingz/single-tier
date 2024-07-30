@@ -24,10 +24,10 @@ const MainSection = ({className, type = "sticky"}: HeaderProps) => {
     >
       <BrandIdentity />
       <div className="flexi">
-        <ThemeToggle rounded={"full"} />
-        <SheetTrigger asChild>
+        <ThemeToggle rounded={"full"}/>
+        <SheetTrigger asChild className="flex sm:hidden">
           <Button variant="link">
-            <RxHamburgerMenu className="h-6 w-6 stroke-1 text-background" />
+            <RxHamburgerMenu className="h-6 w-6 stroke-1 text-foreground" />
           </Button>
         </SheetTrigger>
       </div>

@@ -124,6 +124,7 @@ const config: Config = {
           ".flexib": {"@apply flex items-center justify-between": {}},
           ".flexit": {"@apply flex items-center justify-start": {}},
           ".flexi-it": {"@apply flex items-start justify-center": {}},
+          ".flexi-ie": {"@apply flex items-end justify-center": {}},
           ".flexit-it": {"@apply flex items-start justify-start": {}},
           ".flexie-ie": {"@apply flex items-end justify-end": {}},
 

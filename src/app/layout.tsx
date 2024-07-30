@@ -16,6 +16,7 @@ const primary = Poppins({
 
 const secondary = Cinzel({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-secondary",
 });
 
