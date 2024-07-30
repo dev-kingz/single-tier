@@ -6,7 +6,7 @@ import {Cinzel, Poppins} from "next/font/google";
 import Header from "@/components/menus/header";
 import MainSection from "@/components/menus/header/main-section";
 import Footer from "@/components/menus/footer";
-import { Brand } from "@/constants/brand";
+import {Brand} from "@/constants/brand";
 
 const primary = Poppins({
   subsets: ["latin"],

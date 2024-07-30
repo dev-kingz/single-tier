@@ -20,7 +20,7 @@ const BrandIdentity = () => {
         height={50}
         className="hidden dark:flex"
       />
-      <h3 className="text-foreground font-secondary font-semibold">{brand.name}</h3>
+      <h3 className="font-secondary font-semibold text-foreground">{brand.name}</h3>
     </div>
   );
 };

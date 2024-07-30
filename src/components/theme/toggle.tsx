@@ -30,9 +30,10 @@ const ThemeToggle = ({...props}: ButtonProps) => {
     <div>
       <Button
         size={"icon"}
+        variant={"inverted"}
         onClick={toggleTheme}
         className="ThemeToggle
-        bg-foreground drop-shadow-md transition-all duration-300
+        drop-shadow-md transition-all duration-300
         hover:scale-110"
         {...props}
       >

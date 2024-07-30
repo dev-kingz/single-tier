@@ -27,7 +27,7 @@ const MainSection = ({className, type = "sticky"}: HeaderProps) => {
         <ThemeToggle rounded={"full"}/>
         <SheetTrigger asChild className="flex sm:hidden">
           <Button variant="link">
-            <RxHamburgerMenu className="h-6 w-6 stroke-1 text-foreground" />
+            <RxHamburgerMenu className="h-6 w-6 stroke-1 text-black dark:text-white" />
           </Button>
         </SheetTrigger>
       </div>
