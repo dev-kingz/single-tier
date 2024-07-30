@@ -1,8 +1,10 @@
+import {ThemePlugin} from "theme-plugin";
 import type {Config} from "tailwindcss";
 import animatePlugin from "tailwindcss-animate";
-import {ThemePlugin} from "@/plugins/tailwind";
 
-const config: Omit<Config, "content"> = {
+const config: Config = {
+  darkMode: ["class"],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   plugins: [animatePlugin, ThemePlugin],
 };
 

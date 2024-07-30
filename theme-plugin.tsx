@@ -1,53 +1,11 @@
-// import {PluginCreator} from "tailwindcss/types/config";
 import plugin from "tailwindcss/plugin";
-import {Cinzel, Poppins} from "next/font/google";
-
-const primary = Poppins({
-  subsets: ["latin"],
-  weight: ["800"],
-  variable: "--body-primary",
-});
-
-const secondary = Cinzel({
-  subsets: ["latin"],
-  variable: "--body-secondary",
-});
 
 export const ThemePlugin = plugin(
-  function ({addBase, addComponents, addUtilities}) {
-    const typographyStyles = {
-      phone: {
-        h1: "text-2xl font-bold leading-9",
-        h2: "text-2xl font-bold leading-9",
-        h3: "text-xl font-bold leading-9",
-        h4: "text-lg font-bold leading-7",
-        h5: "text-base font-bold leading-7",
-        h6: "text-sm font-semibold leading-6",
-        p: "text-sm font-medium leading-6",
-      },
-      tablet: {
-        h1: "text-3xl font-bold leading-9",
-        h2: "text-2xl font-bold leading-9",
-        h3: "text-xl font-bold leading-9",
-        h4: "text-xl font-bold leading-7",
-        h5: "text-base font-bold leading-7",
-        h6: "text-sm font-semibold leading-7",
-        p: "text-sm font-medium leading-7",
-      },
-      desktop: {
-        h1: "text-4xl font-bold leading-10",
-        h2: "text-3xl font-bold leading-9",
-        h3: "text-2xl font-bold leading-9",
-        h4: "text-lg font-bold leading-7",
-        h5: "text-base font-bold leading-7",
-        h6: "text-base font-bold leading-7",
-        p: "text-base font-medium leading-7",
-      },
-    };
+  function ({addBase, addComponents}) {
     addBase({
       "*": {"@apply border-border": {}},
       body: {"@apply bg-background text-foreground": {}},
-      "html, body, root:": {"@apply h-full font-primary": {}},
+      "html, body, :root": {"@apply h-full font-primary": {}},
 
       ":root": {
         "--background": "0 0% 100%",
@@ -75,7 +33,8 @@ export const ThemePlugin = plugin(
         "--chart-3": "197 37% 24%",
         "--chart-4": "43 74% 66%",
         "--chart-5": "27 87% 67%",
-    
+      },
+
       ".dark": {
         "--background": "0 0% 3.9%",
         "--foreground": "0 0% 98%",
@@ -100,53 +59,45 @@ export const ThemePlugin = plugin(
         "--chart-2": "160 60% 45%",
         "--chart-3": "30 80% 55%",
         "--chart-4": "280 65% 60%",
-        "--chart-5": "340 75% 55%"
-        }
+        "--chart-5": "340 75% 55%",
       },
+      // [HTMLTags] List
+      li: {"@apply my-3": {}},
 
       // [HTMLTags] Typography
       // Phone
-      "@media only screen and (max-width: 640px)": Object.fromEntries(
-        Object.entries(typographyStyles.phone).map(([tag, classes]) => [tag, {"@apply": classes}]),
-      ),
+      "@media only screen and (max-width: 640px)": {
+        h1: {"@apply text-2xl font-bold leading-9": {}},
+        h2: {"@apply text-2xl font-bold leading-9": {}},
+        h3: {"@apply text-xl font-bold leading-9": {}},
+        h4: {"@apply text-lg font-bold leading-7": {}},
+        h5: {"@apply text-base font-bold leading-7": {}},
+        h6: {"@apply text-sm font-semibold leading-6": {}},
+        p: {"@apply text-sm font-medium leading-6": {}},
+      },
       // Tablet
-      "@media screen and (min-width: 641px) and (max-width: 1023px)": Object.fromEntries(
-        Object.entries(typographyStyles.tablet).map(([tag, classes]) => [tag, {"@apply": classes}]),
-      ),
+      "@media screen and (min-width: 641px) and (max-width: 1023px)": {
+        h1: {"@apply text-3xl font-bold leading-9": {}},
+        h2: {"@apply text-2xl font-bold leading-9": {}},
+        h3: {"@apply text-xl font-bold leading-9": {}},
+        h4: {"@apply text-xl font-bold leading-7": {}},
+        h5: {"@apply text-base font-bold leading-7": {}},
+        h6: {"@apply text-sm font-semibold leading-7": {}},
+        p: {"@apply text-sm font-medium leading-7": {}},
+      },
       // Desktop
-      "@media screen and (min-width: 1024px)": Object.fromEntries(
-        Object.entries(typographyStyles.desktop).map(([tag, classes]) => [
-          tag,
-          {"@apply": classes},
-        ]),
-      ),
-
-      // [HTMLTags] List
-      li: {"@apply my-3": {}},
+      "@media screen and (min-width: 1024px)": {
+        h1: {"@apply text-4xl font-bold leading-10": {}},
+        h2: {"@apply text-3xl font-bold leading-9": {}},
+        h3: {"@apply text-2xl font-bold leading-9": {}},
+        h4: {"@apply text-lg font-bold leading-7": {}},
+        h5: {"@apply text-base font-bold leading-7": {}},
+        h6: {"@apply text-base font-bold leading-7": {}},
+        p: {"@apply text-base font-medium leading-7": {}},
+      },
     });
+
     addComponents({
-      // [Classes] Typography
-      // Phone
-      "@media only screen and (max-width: 640px)": Object.fromEntries(
-        Object.entries(typographyStyles.phone).map(([tag, classes]) => [
-          `.${tag}`,
-          {"@apply": `${classes} !important`},
-        ]),
-      ),
-      // Tablet
-      "@media screen and (min-width: 641px) and (max-width: 1023px)": Object.fromEntries(
-        Object.entries(typographyStyles.tablet).map(([tag, classes]) => [
-          `.${tag}`,
-          {"@apply": `${classes} !important`},
-        ]),
-      ),
-      // Desktop
-      "@media screen and (min-width: 1024px)": Object.fromEntries(
-        Object.entries(typographyStyles.desktop).map(([tag, classes]) => [
-          `.${tag}`,
-          {"@apply": `${classes} !important`},
-        ]),
-      ),
       // Layout
       // [Classes] Flex
       ".flexi": {"@apply flex items-center justify-center": {}},
@@ -155,18 +106,42 @@ export const ThemePlugin = plugin(
       ".flexi-it": {"@apply flex items-start justify-center": {}},
       ".flexit-it": {"@apply flex items-start justify-start": {}},
       ".flexie-ie": {"@apply flex items-end justify-end": {}},
+
+      // [Classes] Typography
+      // Phone
+      "@media only screen and (max-width: 640px)": {
+        ".h1": {"@apply text-2xl font-bold leading-9 !important": {}},
+        ".h2": {"@apply text-2xl font-bold leading-9 !important": {}},
+        ".h3": {"@apply text-xl font-bold leading-9 !important": {}},
+        ".h4": {"@apply text-lg font-bold leading-7 !important": {}},
+        ".h5": {"@apply text-base font-bold leading-7 !important": {}},
+        ".h6": {"@apply text-sm font-semibold leading-6 !important": {}},
+        ".pp": {"@apply text-sm font-medium leading-6 !important": {}},
+        "::-webkit-scrollbar": {width: "2px"},
+      },
+      // Tablet
+      "@media screen and (min-width: 641px) and (max-width: 1023px)": {
+        ".h1": {"@apply text-3xl font-bold leading-9 !important": {}},
+        ".h2": {"@apply text-2xl font-bold leading-9 !important": {}},
+        ".h3": {"@apply text-xl font-bold leading-9 !important": {}},
+        ".h4": {"@apply text-xl font-bold leading-7 !important": {}},
+        ".h5": {"@apply text-base font-bold leading-7 !important": {}},
+        ".h6": {"@apply text-sm font-semibold leading-7 !important": {}},
+        ".pp": {"@apply text-sm font-medium leading-7 !important": {}},
+      },
+      // Desktop
+      "@media screen and (min-width: 1024px)": {
+        ".h1": {"@apply text-4xl font-bold leading-10 !important": {}},
+        ".h2": {"@apply text-3xl font-bold leading-9 !important": {}},
+        ".h3": {"@apply text-2xl font-bold leading-9 !important": {}},
+        ".h4": {"@apply text-lg font-bold leading-7 !important": {}},
+        ".h5": {"@apply text-base font-bold leading-7 !important": {}},
+        ".h6": {"@apply text-base font-bold leading-7 !important": {}},
+        ".pp": {"@apply text-base font-medium leading-7 !important": {}},
+      },
     });
-    addUtilities({});
   },
   {
-    darkMode: ["class"],
-    content: [
-      "./src/**/*.{ts,tsx}",
-      "./app/**/*.{ts,tsx}",
-      "./pages/**/*.{ts,tsx}",
-      "./components/**/*.{ts,tsx}",
-    ],
-    prefix: "",
     theme: {
       container: {
         center: true,
@@ -254,3 +229,41 @@ export const ThemePlugin = plugin(
     },
   },
 );
+
+type TypographyStyles = {
+  [key: string]: string;
+};
+
+type MediaQueries = {
+  [key: string]: TypographyStyles;
+};
+
+const typographyStyles: MediaQueries = {
+  phone: {
+    h1: "text-2xl font-bold leading-9",
+    h2: "text-2xl font-bold leading-9",
+    h3: "text-xl font-bold leading-9",
+    h4: "text-lg font-bold leading-7",
+    h5: "text-base font-bold leading-7",
+    h6: "text-sm font-semibold leading-6",
+    p: "text-sm font-medium leading-6",
+  },
+  tablet: {
+    h1: "text-3xl font-bold leading-9",
+    h2: "text-2xl font-bold leading-9",
+    h3: "text-xl font-bold leading-9",
+    h4: "text-xl font-bold leading-7",
+    h5: "text-base font-bold leading-7",
+    h6: "text-sm font-semibold leading-7",
+    p: "text-sm font-medium leading-7",
+  },
+  desktop: {
+    h1: "text-4xl font-bold leading-10",
+    h2: "text-3xl font-bold leading-9",
+    h3: "text-2xl font-bold leading-9",
+    h4: "text-lg font-bold leading-7",
+    h5: "text-base font-bold leading-7",
+    h6: "text-base font-bold leading-7",
+    p: "text-base font-medium leading-7",
+  },
+};
