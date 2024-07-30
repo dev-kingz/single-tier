@@ -1,6 +1,5 @@
 // import {PluginCreator} from "tailwindcss/types/config";
 import plugin from "tailwindcss/plugin";
-// import themeColors from "./theme/colors";
 import {Cinzel, Poppins} from "next/font/google";
 
 const primary = Poppins({
@@ -46,8 +45,8 @@ export const ThemePlugin = plugin(
       },
     };
     addBase({
-      //   "*": {"@apply border-border": {}},
-      //   body: {"@apply bg-background text-foreground": {}},
+      "*": {"@apply border-border": {}},
+      body: {"@apply bg-background text-foreground": {}},
       "html, body, root:": {"@apply h-full": {}},
 
       // [HTMLTags] Typography
