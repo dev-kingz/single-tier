@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const TermsAndConditionsPage = () => {
-  return (
-    <div>TermsAndConditionsPage</div>
-  )
-}
+  return <div>TermsAndConditionsPage</div>;
+};
 
-export default TermsAndConditionsPage
+export default TermsAndConditionsPage;

@@ -1,4 +1,3 @@
-
 export default function Home() {
   return (
     <main className="flexi h-full w-full gap-x-4 ">

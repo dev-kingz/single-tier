@@ -13,7 +13,7 @@ const MainSection = ({className, type = "sticky"}: HeaderProps) => {
       className={cn(
         [
           "MainSection flexib w-full p-4 sm:p-5",
-          "from-primary-400 to-primary-600 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] text-foreground",
+          "bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary-400 to-primary-600 text-foreground",
           type === "sticky" && "sticky top-0 z-50",
           type === "fixed" &&
             "fixed top-0 z-50 bg-transparent text-white dark:bg-transparent dark:text-white",
@@ -24,10 +24,10 @@ const MainSection = ({className, type = "sticky"}: HeaderProps) => {
     >
       <BrandIdentity />
       <div className="flexi">
-        <ThemeToggle rounded={"full"}/>
+        <ThemeToggle rounded={"full"} />
         <SheetTrigger asChild className="flex sm:hidden">
           <Button variant="link">
-            <RxHamburgerMenu className="h-6 w-6 stroke-1 text-black dark:text-white" />
+            <RxHamburgerMenu className="h-6 w-6 stroke-1 text-foreground" />
           </Button>
         </SheetTrigger>
       </div>

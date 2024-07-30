@@ -1,7 +1,7 @@
 import React from "react";
 
 const LastSection = () => {
-  return <section className="LastSection w-full h-14 flexi">LastSection</section>;
+  return <section className="LastSection flexi h-14 w-full">LastSection</section>;
 };
 
 export default LastSection;
