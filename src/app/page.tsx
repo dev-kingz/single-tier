@@ -1,4 +1,4 @@
 
 export default function Home() {
-  return <main className="flex min-h-screen flex-col items-center justify-between p-24"></main>;
+  return <main className="flexi h-full bg-[radil-gradient(eclipse-at-top,_var(--tw-gradient-stops))] from-sky-400 to-blue-800"></main>;
 }
