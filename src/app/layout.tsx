@@ -4,6 +4,8 @@ import Providers from "@/app/providers";
 
 import {Cinzel, Poppins} from "next/font/google";
 import Header from "@/components/menus/header";
+import MainSection from "@/components/menus/header/main-section";
+import Footer from "@/components/menus/footer";
 
 const primary = Poppins({
   subsets: ["latin"],
@@ -32,10 +34,13 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${primary.variable} ${secondary.variable}`}
     >
-      <body>
+      <body suppressHydrationWarning>
         <Providers>
-          <Header />
+          <Header>
+            <MainSection />
+          </Header>
           {children}
+          <Footer />
         </Providers>
       </body>
     </html>
