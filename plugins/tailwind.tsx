@@ -47,7 +47,7 @@ export const ThemePlugin = plugin(
     addBase({
       "*": {"@apply border-border": {}},
       body: {"@apply bg-background text-foreground": {}},
-      "html, body, root:": {"@apply h-full": {}},
+      "html, body, root:": {"@apply h-full font-primary": {}},
 
       // [HTMLTags] Typography
       // Phone
