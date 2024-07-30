@@ -3,6 +3,7 @@
   "version": "0.1.24",
   "author": "saadkhaliq15",
   "url": "https://devkingz.com",
+  "homepage": "https://devkingz.com",
   "repository": "https://github.com/dev-kingz/single-tier.git",
   "scripts": {
     "dev": "next dev",
