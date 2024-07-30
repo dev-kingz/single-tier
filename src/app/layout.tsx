@@ -3,6 +3,7 @@ import type {Metadata} from "next";
 import Providers from "@/app/providers";
 
 import {Cinzel, Poppins} from "next/font/google";
+import PrimaryMenu from "@/components/menus/primary-menu";
 
 const primary = Poppins({
   subsets: ["latin"],
@@ -32,7 +33,10 @@ export default function RootLayout({
       className={`${primary.variable} ${secondary.variable}`}
     >
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <PrimaryMenu />
+          {children}
+        </Providers>
       </body>
     </html>
   );

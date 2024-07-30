@@ -28,15 +28,19 @@ const ThemeToggle = ({...props}: ButtonProps) => {
 
   return (
     <div>
-      {/* Toggle button */}
       <Button
         size={"icon"}
+        variant={"outline"}
         onClick={toggleTheme}
         className="ThemeToggle
-        duration-300 hover:scale-110"
+        drop-shadow-md transition-all duration-300 hover:scale-110"
         {...props}
       >
-        {currentTheme === "dark" ? <BsSun /> : <BsMoonStars />}
+        {currentTheme === "dark" ? (
+          <BsSun className="h-5 w-5 stroke-[0.5] text-yellow-500" />
+        ) : (
+          <BsMoonStars className="h-5 w-5" />
+        )}
       </Button>
     </div>
   );

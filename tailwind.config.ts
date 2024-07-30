@@ -15,8 +15,11 @@ const config: Config = {
           "html, body, :root": {"@apply h-full font-primary": {}},
 
           ":root": {
-            "--background": "0 0% 100%",
-            "--foreground": "0 0% 3.9%",
+            "--white": "0 0% 96.1%",
+            "--black": "0 0% 9%",
+
+            "--background": "0 0% 96.1%",
+            "--foreground": "0 0% 9%",
             "--card": "0 0% 100%",
             "--card-foreground": "0 0% 3.9%",
             "--popover": "0 0% 100%",
@@ -43,8 +46,8 @@ const config: Config = {
           },
 
           ".dark": {
-            "--background": "0 0% 3.9%",
-            "--foreground": "0 0% 98%",
+            "--background": "0 0% 9%",
+            "--foreground": "0 0% 96.1%",
             "--card": "0 0% 3.9%",
             "--card-foreground": "0 0% 98%",
             "--popover": "0 0% 3.9%",

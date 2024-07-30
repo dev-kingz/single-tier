@@ -34,7 +34,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "tailwind.config.ts"
-  ],
+, "src/components/menus/primary-menu/hamburger/index.tsx"  ],
   "exclude": [
     "node_modules"
   ]
