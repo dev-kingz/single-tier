@@ -2,6 +2,9 @@ import React from "react";
 import {ThemeToggle} from "@/components/theme/toggle";
 import {cn} from "@/lib/utils";
 import {HeaderProps} from "@/components/menus/header";
+import {SheetTrigger} from "@/components/ui/sheet";
+import {Button} from "@/components/ui/button";
+import {RxHamburgerMenu} from "react-icons/rx";
 import BrandIdentity from "@/components/menus/header/main-section/brand-identity";
 
 const MainSection = ({className, type = "sticky"}: HeaderProps) => {
@@ -20,7 +23,14 @@ const MainSection = ({className, type = "sticky"}: HeaderProps) => {
       )}
     >
       <BrandIdentity />
-      <ThemeToggle rounded={"full"} />
+      <div className="flexi">
+        <ThemeToggle rounded={"full"} />
+        <SheetTrigger asChild>
+          <Button variant="link">
+            <RxHamburgerMenu className="h-6 w-6 stroke-1 text-background" />
+          </Button>
+        </SheetTrigger>
+      </div>
     </section>
   );
 };

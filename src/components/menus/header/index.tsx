@@ -1,6 +1,8 @@
-import React from "react";
+"use client";
+import React, {useState} from "react";
 import {cn} from "@/lib/utils";
 import HamburgerSidebar from "@/components/menus/header/hamburger-sidebar";
+import {Sheet} from "@/components/ui/sheet";
 
 export interface HeaderProps {
   children?: React.ReactNode;
@@ -9,6 +11,9 @@ export interface HeaderProps {
 }
 
 const Header = ({children, className, type = "sticky"}: HeaderProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClose = () => setIsOpen(false);
   return (
     <header
       className={cn(
@@ -23,8 +28,10 @@ const Header = ({children, className, type = "sticky"}: HeaderProps) => {
         className,
       )}
     >
-      {children}
-      <HamburgerSidebar />
+      <Sheet open={isOpen} onOpenChange={setIsOpen}>
+        {children}
+        <HamburgerSidebar handleClose={handleClose} />
+      </Sheet>
     </header>
   );
 };
