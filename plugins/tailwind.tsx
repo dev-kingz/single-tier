@@ -107,10 +107,10 @@ export const ThemePlugin = plugin(
   {
     darkMode: ["class"],
     content: [
-      "./pages/**/*.{ts,tsx}",
-      "./components/**/*.{ts,tsx}",
-      "./app/**/*.{ts,tsx}",
       "./src/**/*.{ts,tsx}",
+      "./pages/**/*.{ts,tsx}",
+      "./app/**/*.{ts,tsx}",
+      "./components/**/*.{ts,tsx}",
     ],
     prefix: "",
     theme: {
