@@ -3,11 +3,11 @@ import React, {useState} from "react";
 import {cn} from "@/lib/utils";
 import HamburgerSidebar from "@/components/menus/header/hamburger-sidebar";
 import {Sheet} from "@/components/ui/sheet";
+import {BaseProps} from "@/types/theme";
+import { Separator } from "@/components/ui/separator";
 
-export interface HeaderProps {
-  children?: React.ReactNode;
+export interface HeaderProps extends BaseProps {
   type?: "sticky" | "fixed" | "static";
-  className?: string;
 }
 
 const Header = ({children, className, type = "sticky"}: HeaderProps) => {
@@ -18,11 +18,9 @@ const Header = ({children, className, type = "sticky"}: HeaderProps) => {
     <header
       className={cn(
         [
-          "Header w-full",
-          "bg-background text-foreground",
-          type === "sticky" && "sticky top-0 z-50",
-          type === "fixed" &&
-            "fixed top-0 z-50 bg-transparent text-white dark:bg-transparent dark:text-white",
+          "Header w-full z-50",
+          type === "sticky" && "sticky top-0",
+          type === "fixed" && "fixed top-0",
           type === "static" && "static",
         ],
         className,
@@ -30,6 +28,7 @@ const Header = ({children, className, type = "sticky"}: HeaderProps) => {
     >
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         {children}
+        <Separator />
         <HamburgerSidebar handleClose={handleClose} />
       </Sheet>
     </header>

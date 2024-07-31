@@ -7,20 +7,20 @@ const BrandIdentity = () => {
   return (
     <div className="flexi">
       <Image
-        src={brand["white-icon"]}
+        src={brand["whiteIcon"]}
         alt={brand.name}
         width={50}
         height={50}
-        className="flex dark:hidden"
+        className="flex drop-shadow-md dark:hidden"
       />
       <Image
-        src={brand["black-icon"]}
+        src={brand["blackIcon"]}
         alt={brand.name}
         width={50}
         height={50}
-        className="hidden dark:flex"
+        className="hidden drop-shadow-md dark:flex"
       />
-      <h3 className="font-secondary font-semibold text-foreground">{brand.name}</h3>
+      <h3 className="font-secondary font-semibold text-foreground drop-shadow-md">{brand.name}</h3>
     </div>
   );
 };

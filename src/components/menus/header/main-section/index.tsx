@@ -12,8 +12,9 @@ const MainSection = ({className, type = "sticky"}: HeaderProps) => {
     <section
       className={cn(
         [
-          "MainSection flexib w-full p-4 sm:p-5",
-          "bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary-400 to-primary-600 text-foreground",
+          "MainSection",
+          "flexib w-full p-2 sm:p-3", // Adjut the Layout here
+          "bg-background text-foreground", // Adjust the colors here
           type === "sticky" && "sticky top-0 z-50",
           type === "fixed" &&
             "fixed top-0 z-50 bg-transparent text-white dark:bg-transparent dark:text-white",
