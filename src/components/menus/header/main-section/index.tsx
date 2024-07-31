@@ -5,7 +5,7 @@ import {HeaderProps} from "@/components/menus/header";
 import {SheetTrigger} from "@/components/ui/sheet";
 import {Button} from "@/components/ui/button";
 import {RxHamburgerMenu} from "react-icons/rx";
-import BrandIdentity from "@/components/menus/header/main-section/brand-identity";
+import BrandIdentity from "@/components/brand/brand-identity";
 
 const MainSection = ({className, type = "sticky"}: HeaderProps) => {
   return (

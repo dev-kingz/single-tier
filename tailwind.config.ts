@@ -138,6 +138,7 @@ const config: Config = {
             ".h5": {[typographySizes.phone.h5]: {}},
             ".h6": {[typographySizes.phone.h6]: {}},
             ".pp": {[typographySizes.phone.p]: {}},
+            ".ppl": {[typographySizes.phone.pl]: {}},
           },
           // Tablet
           "@media screen and (min-width: 641px) and (max-width: 1023px)": {
@@ -148,6 +149,7 @@ const config: Config = {
             ".h5": {[typographySizes.tablet.h5]: {}},
             ".h6": {[typographySizes.tablet.h6]: {}},
             ".pp": {[typographySizes.tablet.p]: {}},
+            ".ppl": {[typographySizes.tablet.pl]: {}},
           },
           // Desktop
           "@media screen and (min-width: 1024px)": {
@@ -158,6 +160,7 @@ const config: Config = {
             ".h5": {[typographySizes.desktop.h5]: {}},
             ".h6": {[typographySizes.desktop.h6]: {}},
             ".pp": {[typographySizes.desktop.p]: {}},
+            ".ppl": {[typographySizes.desktop.pl]: {}},
           },
         });
       },
@@ -268,6 +271,7 @@ interface TypographySize {
   h5: string;
   h6: string;
   p: string;
+  pl: string;
 }
 
 interface TypographySizes {
@@ -285,6 +289,7 @@ const typographySizes: TypographySizes = {
     h5: "@apply text-base font-bold leading-7 !important",
     h6: "@apply text-sm font-semibold leading-6 !important",
     p: "@apply text-sm font-medium leading-6 !important",
+    pl: "@apply text-xs font-light leading-6 !important",
   },
   tablet: {
     h1: "@apply text-3xl font-bold leading-9 !important",
@@ -294,6 +299,7 @@ const typographySizes: TypographySizes = {
     h5: "@apply text-base font-bold leading-7 !important",
     h6: "@apply text-sm font-semibold leading-7 !important",
     p: "@apply text-sm font-medium leading-7 !important",
+    pl: "@apply text-xs font-light leading-7 !important",
   },
   desktop: {
     h1: "@apply text-4xl font-bold leading-10 !important",
@@ -303,5 +309,6 @@ const typographySizes: TypographySizes = {
     h5: "@apply text-base font-bold leading-7 !important",
     h6: "@apply text-base font-bold leading-7 !important",
     p: "@apply text-base font-medium leading-7 !important",
+    pl: "@apply text-sm font-light leading-7 !important",
   },
 };

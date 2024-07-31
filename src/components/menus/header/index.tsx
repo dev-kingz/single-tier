@@ -4,7 +4,7 @@ import {cn} from "@/lib/utils";
 import HamburgerSidebar from "@/components/menus/header/hamburger-sidebar";
 import {Sheet} from "@/components/ui/sheet";
 import {BaseProps} from "@/types/theme";
-import { Separator } from "@/components/ui/separator";
+import {Separator} from "@/components/ui/separator";
 
 export interface HeaderProps extends BaseProps {
   type?: "sticky" | "fixed" | "static";
@@ -18,7 +18,7 @@ const Header = ({children, className, type = "sticky"}: HeaderProps) => {
     <header
       className={cn(
         [
-          "Header w-full z-50",
+          "Header z-50 w-full",
           type === "sticky" && "sticky top-0",
           type === "fixed" && "fixed top-0",
           type === "static" && "static",
