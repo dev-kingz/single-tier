@@ -87,33 +87,33 @@ const config: Config = {
           // [HTMLTags] Typography
           // Phone
           "@media only screen and (max-width: 640px)": {
-            h1: {"@apply text-2xl font-bold leading-9": {}},
-            h2: {"@apply text-2xl font-bold leading-9": {}},
-            h3: {"@apply text-xl font-bold leading-9": {}},
-            h4: {"@apply text-lg font-bold leading-7": {}},
-            h5: {"@apply text-base font-bold leading-7": {}},
-            h6: {"@apply text-sm font-semibold leading-6": {}},
-            p: {"@apply text-sm font-medium leading-6": {}},
+            h1: {[typographySizes.phone.h1]: {}},
+            h2: {[typographySizes.phone.h2]: {}},
+            h3: {[typographySizes.phone.h3]: {}},
+            h4: {[typographySizes.phone.h4]: {}},
+            h5: {[typographySizes.phone.h5]: {}},
+            h6: {[typographySizes.phone.h6]: {}},
+            p: {[typographySizes.phone.p]: {}},
           },
           // Tablet
           "@media screen and (min-width: 641px) and (max-width: 1023px)": {
-            h1: {"@apply text-3xl font-bold leading-9": {}},
-            h2: {"@apply text-2xl font-bold leading-9": {}},
-            h3: {"@apply text-xl font-bold leading-9": {}},
-            h4: {"@apply text-xl font-bold leading-7": {}},
-            h5: {"@apply text-base font-bold leading-7": {}},
-            h6: {"@apply text-sm font-semibold leading-7": {}},
-            p: {"@apply text-sm font-medium leading-7": {}},
+            h1: {[typographySizes.tablet.h1]: {}},
+            h2: {[typographySizes.tablet.h2]: {}},
+            h3: {[typographySizes.tablet.h3]: {}},
+            h4: {[typographySizes.tablet.h4]: {}},
+            h5: {[typographySizes.tablet.h5]: {}},
+            h6: {[typographySizes.tablet.h6]: {}},
+            p: {[typographySizes.tablet.p]: {}},
           },
           // Desktop
           "@media screen and (min-width: 1024px)": {
-            h1: {"@apply text-4xl font-bold leading-10": {}},
-            h2: {"@apply text-3xl font-bold leading-9": {}},
-            h3: {"@apply text-2xl font-bold leading-9": {}},
-            h4: {"@apply text-lg font-bold leading-7": {}},
-            h5: {"@apply text-base font-bold leading-7": {}},
-            h6: {"@apply text-base font-bold leading-7": {}},
-            p: {"@apply text-base font-medium leading-7": {}},
+            h1: {[typographySizes.desktop.h1]: {}},
+            h2: {[typographySizes.desktop.h2]: {}},
+            h3: {[typographySizes.desktop.h3]: {}},
+            h4: {[typographySizes.desktop.h4]: {}},
+            h5: {[typographySizes.desktop.h5]: {}},
+            h6: {[typographySizes.desktop.h6]: {}},
+            p: {[typographySizes.desktop.p]: {}},
           },
         });
 
@@ -131,34 +131,33 @@ const config: Config = {
           // [Classes] Typography
           // Phone
           "@media only screen and (max-width: 640px)": {
-            ".h1": {"@apply text-2xl font-bold leading-9 !important": {}},
-            ".h2": {"@apply text-2xl font-bold leading-9 !important": {}},
-            ".h3": {"@apply text-xl font-bold leading-9 !important": {}},
-            ".h4": {"@apply text-lg font-bold leading-7 !important": {}},
-            ".h5": {"@apply text-base font-bold leading-7 !important": {}},
-            ".h6": {"@apply text-sm font-semibold leading-6 !important": {}},
-            ".pp": {"@apply text-sm font-medium leading-6 !important": {}},
-            "::-webkit-scrollbar": {width: "2px"},
+            ".h1": {[typographySizes.phone.h1]: {}},
+            ".h2": {[typographySizes.phone.h2]: {}},
+            ".h3": {[typographySizes.phone.h3]: {}},
+            ".h4": {[typographySizes.phone.h4]: {}},
+            ".h5": {[typographySizes.phone.h5]: {}},
+            ".h6": {[typographySizes.phone.h6]: {}},
+            ".pp": {[typographySizes.phone.p]: {}},
           },
           // Tablet
           "@media screen and (min-width: 641px) and (max-width: 1023px)": {
-            ".h1": {"@apply text-3xl font-bold leading-9 !important": {}},
-            ".h2": {"@apply text-2xl font-bold leading-9 !important": {}},
-            ".h3": {"@apply text-xl font-bold leading-9 !important": {}},
-            ".h4": {"@apply text-xl font-bold leading-7 !important": {}},
-            ".h5": {"@apply text-base font-bold leading-7 !important": {}},
-            ".h6": {"@apply text-sm font-semibold leading-7 !important": {}},
-            ".pp": {"@apply text-sm font-medium leading-7 !important": {}},
+            ".h1": {[typographySizes.tablet.h1]: {}},
+            ".h2": {[typographySizes.tablet.h2]: {}},
+            ".h3": {[typographySizes.tablet.h3]: {}},
+            ".h4": {[typographySizes.tablet.h4]: {}},
+            ".h5": {[typographySizes.tablet.h5]: {}},
+            ".h6": {[typographySizes.tablet.h6]: {}},
+            ".pp": {[typographySizes.tablet.p]: {}},
           },
           // Desktop
           "@media screen and (min-width: 1024px)": {
-            ".h1": {"@apply text-4xl font-bold leading-10 !important": {}},
-            ".h2": {"@apply text-3xl font-bold leading-9 !important": {}},
-            ".h3": {"@apply text-2xl font-bold leading-9 !important": {}},
-            ".h4": {"@apply text-lg font-bold leading-7 !important": {}},
-            ".h5": {"@apply text-base font-bold leading-7 !important": {}},
-            ".h6": {"@apply text-base font-bold leading-7 !important": {}},
-            ".pp": {"@apply text-base font-medium leading-7 !important": {}},
+            ".h1": {[typographySizes.desktop.h1]: {}},
+            ".h2": {[typographySizes.desktop.h2]: {}},
+            ".h3": {[typographySizes.desktop.h3]: {}},
+            ".h4": {[typographySizes.desktop.h4]: {}},
+            ".h5": {[typographySizes.desktop.h5]: {}},
+            ".h6": {[typographySizes.desktop.h6]: {}},
+            ".pp": {[typographySizes.desktop.p]: {}},
           },
         });
       },
@@ -260,3 +259,49 @@ const config: Config = {
 };
 
 export default config;
+
+interface TypographySize {
+  h1: string;
+  h2: string;
+  h3: string;
+  h4: string;
+  h5: string;
+  h6: string;
+  p: string;
+}
+
+interface TypographySizes {
+  phone: TypographySize;
+  tablet: TypographySize;
+  desktop: TypographySize;
+}
+
+const typographySizes: TypographySizes = {
+  phone: {
+    h1: "@apply text-2xl font-bold leading-9 !important",
+    h2: "@apply text-2xl font-bold leading-9 !important",
+    h3: "@apply text-xl font-bold leading-9 !important",
+    h4: "@apply text-lg font-bold leading-7 !important",
+    h5: "@apply text-base font-bold leading-7 !important",
+    h6: "@apply text-sm font-semibold leading-6 !important",
+    p: "@apply text-sm font-medium leading-6 !important",
+  },
+  tablet: {
+    h1: "@apply text-3xl font-bold leading-9 !important",
+    h2: "@apply text-2xl font-bold leading-9 !important",
+    h3: "@apply text-xl font-bold leading-9 !important",
+    h4: "@apply text-xl font-bold leading-7 !important",
+    h5: "@apply text-base font-bold leading-7 !important",
+    h6: "@apply text-sm font-semibold leading-7 !important",
+    p: "@apply text-sm font-medium leading-7 !important",
+  },
+  desktop: {
+    h1: "@apply text-4xl font-bold leading-10 !important",
+    h2: "@apply text-3xl font-bold leading-9 !important",
+    h3: "@apply text-2xl font-bold leading-9 !important",
+    h4: "@apply text-lg font-bold leading-7 !important",
+    h5: "@apply text-base font-bold leading-7 !important",
+    h6: "@apply text-base font-bold leading-7 !important",
+    p: "@apply text-base font-medium leading-7 !important",
+  },
+};
