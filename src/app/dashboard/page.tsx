@@ -1,11 +1,11 @@
 import React from "react";
 
-const AboutUsPage = () => {
+const page = () => {
   return (
     <main className="flexi h-full w-full gap-x-4 ">
-      <h1>About Us</h1>
+      <h1>Dashboard</h1>
     </main>
   );
 };
 
-export default AboutUsPage;
+export default page;
