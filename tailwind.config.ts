@@ -23,6 +23,7 @@ const config: Config = {
           "*": {"@apply border-border": {}},
           body: {"@apply bg-background text-foreground": {}},
           "html, body, :root": {"@apply h-full font-primary": {}},
+          main: {"@apply flex items-center justify-center h-full w-full": {}},
 
           ":root": {
             "--white": convertHexToHsl(colors.neutral[100]),
@@ -85,6 +86,10 @@ const config: Config = {
           li: {"@apply my-3": {}},
 
           // [HTMLTags] Typography
+
+          // Headings
+          "h1, h2, h3, h4, h5, h6": {"@apply font-secondary": {}},
+
           // Phone
           "@media only screen and (max-width: 640px)": {
             h1: {[typographySizes.phone.h1]: {}},

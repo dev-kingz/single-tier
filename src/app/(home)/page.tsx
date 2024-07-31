@@ -1,8 +1,7 @@
 export default function Home() {
   return (
-    <main className="flexi h-full w-full gap-x-4 ">
+    <main>
       <h1>Hello</h1>
-      <div className="h-screen bg-background"></div>
     </main>
   );
 }

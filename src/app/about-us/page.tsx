@@ -2,7 +2,7 @@ import React from "react";
 
 const AboutUsPage = () => {
   return (
-    <main className="flexi h-full w-full gap-x-4 ">
+    <main>
       <h1>About Us</h1>
     </main>
   );

@@ -14,10 +14,10 @@ const MainSection = ({className, type = "sticky"}: HeaderProps) => {
         [
           "MainSection",
           "flexib w-full p-2 sm:p-3", // Adjut the Layout here
-          "bg-background text-foreground", // Adjust the colors here
+          "bg-background text-foreground drop-shadow-md", // Adjust the colors here
           type === "sticky" && "sticky top-0 z-50",
           type === "fixed" &&
-            "fixed top-0 z-50 bg-transparent text-white dark:bg-transparent dark:text-white",
+            "fixed top-0 z-50 bg-transparent text-white drop-shadow-none dark:bg-transparent dark:text-white",
           type === "static" && "static",
         ],
         className,
