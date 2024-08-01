@@ -19,7 +19,7 @@ const HamburgerSidebar = ({handleClose}: HamburgerSidebarProps) => {
     <aside>
       <SheetContent className="flexi flex-col sm:hidden">
         <Button onClick={handleClose} variant={"link"}>
-          <GiCrossedBones className="absolute right-[14px] top-[13px] z-10 h-5 w-5 cursor-pointer text-foreground" />
+          <GiCrossedBones className="text-foreground absolute right-[14px] top-[13px] z-10 h-5 w-5 cursor-pointer" />
         </Button>
         <SheetHeader>
           <SheetTitle>Edit profile</SheetTitle>

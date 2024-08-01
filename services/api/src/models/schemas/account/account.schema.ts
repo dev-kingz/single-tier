@@ -1,10 +1,10 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
 
 @Schema({
   timestamps: true,
 })
 export class Account {
-  @Prop({ required: true, select: false })
+  @Prop({required: true, select: false})
   password: string;
 }
 

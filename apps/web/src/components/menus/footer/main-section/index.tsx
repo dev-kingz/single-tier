@@ -5,7 +5,7 @@ import BrandDescription from "./brand-description";
 
 const MainSection = () => {
   return (
-    <section className="MainSection flexi w-full flex-col gap-4 bg-foreground px-8 text-background sm:flex-row sm:px-2">
+    <section className="MainSection flexi bg-foreground text-background w-full flex-col gap-4 px-8 sm:flex-row sm:px-2">
       <BrandDescription />
       <QuickLinks />
       <ContactUs />

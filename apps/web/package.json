@@ -4,7 +4,7 @@
   "author": "saadkhaliq15",
   "scripts": {
     "dev": "next dev --turbo -p 3001",
-    "build": "prettier --write \"**/*.{ts,tsx,md}\" && next build",
+    "build": "next build",
     "start": "next start -p 3001",
     "lint": "next lint",
     "check-types": "tsc --noEmit",

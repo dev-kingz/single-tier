@@ -1,6 +1,6 @@
-import { Global, Module } from '@nestjs/common';
-import { DatabaseConnectionService } from './services';
-import { MongooseModule } from '@nestjs/mongoose';
+import {Global, Module} from "@nestjs/common";
+import {DatabaseConnectionService} from "./services";
+import {MongooseModule} from "@nestjs/mongoose";
 
 @Global()
 @Module({

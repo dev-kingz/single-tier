@@ -35,7 +35,7 @@ const BrandIdentity = ({className, inverted = false}: BrandIdentityProps) => {
       />
       <h3
         className={cn(
-          "BrandName -mb-1 font-secondary drop-shadow-md",
+          "BrandName font-secondary -mb-1 drop-shadow-md",
           inverted ? "text-background" : "",
         )}
       >

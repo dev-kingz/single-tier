@@ -1,1 +1,1 @@
-export * from "./registration.controller"
+export * from "./registration.controller";

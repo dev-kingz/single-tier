@@ -1,6 +1,6 @@
-import { Global, Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import models from './constants/models';
+import {Global, Module} from "@nestjs/common";
+import {MongooseModule} from "@nestjs/mongoose";
+import models from "./constants/models";
 
 @Global()
 @Module({
