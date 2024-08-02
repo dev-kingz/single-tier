@@ -3,8 +3,8 @@ import {AppModule} from "./app.module";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  
   console.log("Node Environment: ", process.env.NODE_ENV);
-
   const port = process.env.NODE_ENV === "production" ? 4000 : 4001;
   const appName = process.env.APP_NAME;
 
