@@ -1,6 +1,6 @@
 import {Controller, Get} from "@nestjs/common";
 
-@Controller("registration")
+@Controller("/auth/registration")
 export class RegistrationController {
   @Get()
   getHello(): string {
