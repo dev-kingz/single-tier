@@ -1,1 +1,1 @@
-// export * from "./personalInfo.schema";
+export * from "./personalInfo.schema";

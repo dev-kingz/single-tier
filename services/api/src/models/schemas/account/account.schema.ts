@@ -1,15 +1,15 @@
-// import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
+import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
 
-// @Schema({
-//   timestamps: true,
-// })
-// export class Account {
-//   @Prop({required: true, select: false})
-//   password: string;
-// }
+@Schema({
+  timestamps: true,
+})
+export class Account {
+  @Prop({required: true, select: false})
+  password: string;
+}
 
-// export type AccountDocument = Account & Document;
+export type AccountDocument = Account & Document;
 
-// export const ACCOUNT_MODEL = Account.name; // Account
+export const ACCOUNT_MODEL = Account.name; // Account
 
-// export const AccountSchema = SchemaFactory.createForClass(Account);
+export const AccountSchema = SchemaFactory.createForClass(Account);
