@@ -1,10 +1,10 @@
 import { Controller, Get } from '@nestjs/common';
 
 @Controller('auth')
-export class AuthenticationController {
+export class AuthController {
 
     @Get()
     getHello(): string {
-        return 'Hello from Authentication Controller';
+        return 'Hello from Auth Controller';
     }
 }
