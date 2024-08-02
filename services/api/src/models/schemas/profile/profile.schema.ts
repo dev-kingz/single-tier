@@ -1,15 +1,20 @@
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
 import {Types} from "mongoose";
-import {PersonalInfo, PERSONALINFO_MODEL} from "../personalInfo/personalInfo.schema";
+import {PersonalInfo, PERSONALINFO_MODEL} from "../personalInfo";
+import { User, USER_MODEL } from "../user";
 
 @Schema({
   timestamps: true,
 })
 export class Profile {
+
+  @Prop({type: Types.ObjectId, ref: `'${USER_MODEL}'`})
+  user: Types.ObjectId | User;
+
   @Prop({required: true, unique: true})
   username: string;
 
-  @Prop({type: Types.ObjectId, ref: PERSONALINFO_MODEL, required: true})
+  @Prop({type: Types.ObjectId, ref: `'${PERSONALINFO_MODEL}'`, required: true})
   personalInfo: Types.ObjectId | PersonalInfo;
 }
 
