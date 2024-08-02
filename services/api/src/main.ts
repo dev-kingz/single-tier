@@ -9,6 +9,6 @@ async function bootstrap() {
 
   // Use the retrieved configuration values
   await app.listen(port);
-  console.log(`${appName} is running on: ${await app.getUrl()}`);
+  console.log(`\n${appName} is running on: ${await app.getUrl()}`);
 }
 bootstrap();
