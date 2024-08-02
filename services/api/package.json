@@ -9,6 +9,7 @@
     "dev": "nest start --watch",
     "start": "node dist/main",
     "build": "nest build",
+    "start-local": "node dist/main",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "start:debug": "nest start --debug --watch",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
