@@ -1,28 +1,28 @@
 {
-    "$schema": "https://turbo.build/schema.json",
-    "globalDependencies": ["**/.env.*local"],
-    "tasks": {
-      "start": {
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env*", "**/.env.local", "**/.env.development", "**/.env.production"],
+  "tasks": {
+    "start": {
       "cache": false,
       "persistent": true
     },
-      "build": {
-        "dependsOn": ["^build"],
-        "outputs": [".next/**", "!.next/cache/**","dist/**"]
-      },
-      "check-types": {
-        "dependsOn": ["^check-types"]
-      },
-      "dev": {
-        "persistent": true,
-        "cache": false
-      },
-      "format": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+    },
+    "dev": {
+      "persistent": true,
+      "cache": false
+    },
+    "format": {
       "dependsOn": ["^format"]
-      },
-      "clear": {
-        "dependsOn": ["^clear"],
-        "cache": false
-      }
+    },
+    "check-types": {
+      "dependsOn": ["^check-types"]
+    },
+    "clear": {
+      "dependsOn": ["^clear"],
+      "cache": false
     }
   }
+}
