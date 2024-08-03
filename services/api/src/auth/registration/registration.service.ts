@@ -3,10 +3,14 @@ import {CreateUserDto} from "./dto";
 import {InjectModel} from "@nestjs/mongoose";
 import {Model} from "mongoose";
 import {USER_MODEL, UserDocument} from "src/models/schemas/user";
+import {JwtService} from "@nestjs/jwt";
 
 @Injectable()
 export class RegistrationService {
-  constructor(@InjectModel(USER_MODEL) private readonly userModel: Model<UserDocument>) {}
+  constructor(
+    @InjectModel(USER_MODEL) private readonly userModel: Model<UserDocument>,
+    private jwtService: JwtService,
+  ) {}
 
   async register(createUserDto: CreateUserDto) {
     try {
@@ -20,8 +24,24 @@ export class RegistrationService {
         password,
       });
 
+      const payload = {
+        user: {
+          id: user._id,
+        },
+      };
+
       return {
         user,
+        tokens: {
+          accessToken: await this.jwtService.signAsync(payload, {
+            expiresIn: "1d",
+            secret: process.env.JWT_SECRET,
+          }),
+          refreshToken: await this.jwtService.signAsync(payload, {
+            expiresIn: "7d",
+            secret: process.env.JWT_REFRESH_TOKEN,
+          }),
+        },
       };
     } catch (error) {
       if (error.name === "ValidationError") {

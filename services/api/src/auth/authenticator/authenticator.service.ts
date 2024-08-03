@@ -29,6 +29,24 @@ export class AuthenticatorService {
     // Remove the password from the account document
     user.password = undefined;
 
-    return user;
+    const payload = {
+      user: {
+        id: user._id,
+      },
+    };
+
+    return {
+      user,
+      tokens: {
+        accessToken: await this.jwtService.signAsync(payload, {
+          expiresIn: "1d",
+          secret: process.env.JWT_SECRET,
+        }),
+        refreshToken: await this.jwtService.signAsync(payload, {
+          expiresIn: "7d",
+          secret: process.env.JWT_REFRESH_TOKEN,
+        }),
+      },
+    };
   }
 }
