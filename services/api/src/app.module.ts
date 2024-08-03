@@ -5,6 +5,7 @@ import {ConfigModule} from "@nestjs/config";
 import {DatabaseModule} from "./database/database.module";
 import {ModelsModule} from "./models/models.module";
 import {AuthModule} from "./auth/auth.module";
+import {IsUniqueConstraint} from "./validators/is-unique";
 
 @Module({
   imports: [
@@ -17,6 +18,6 @@ import {AuthModule} from "./auth/auth.module";
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, IsUniqueConstraint],
 })
 export class AppModule {}
