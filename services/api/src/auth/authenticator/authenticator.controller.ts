@@ -8,6 +8,6 @@ export class AuthenticatorController {
 
   @Post('login')
   async login(loginDTO: LoginDto) {
-    return this.authenticatorService.login();
+    return this.authenticatorService.login(loginDTO);
   }
 }
