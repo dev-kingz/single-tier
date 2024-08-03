@@ -3,6 +3,7 @@ import {BaseProps} from "@/types/theme";
 import React from "react";
 import {FcLandscape} from "react-icons/fc";
 import {Breadcrumbs, BreadcrumbsListProps} from "@/components/headers/title-header/breadcrumbs";
+import { Separator } from "@/components/ui/separator";
 
 interface TitleHeaderProps extends BaseProps, BreadcrumbsListProps {
   title: string;
@@ -26,11 +27,12 @@ const TitleHeader = ({
       <div className="flexit-it w-full max-w-7xl gap-3 ps-5">
         {icon}
         <div className="flexi-it text-foreground flex-col">
-          <h1>{title}</h1>
-          <h6 className="font-normal">{subTitle}</h6>
+          <h2>{title}</h2>
+          <h6 className="text-sm font-normal">{subTitle}</h6>
           {showBreadcrumb && <Breadcrumbs breadcrumbList={breadcrumbList} />}
         </div>
       </div>
+      <Separator />
     </section>
   );
 };

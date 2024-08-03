@@ -23,8 +23,8 @@ export function Breadcrumbs({breadcrumbList}: BreadcrumbsListProps) {
       <BreadcrumbList className="py-0">
         {breadcrumbList &&
           breadcrumbList.map((breadcrumb, index) => (
-            <>
-              <BreadcrumbItem key={index}>
+            <div className="inline-flex items-center gap-1.5" key={index}>
+              <BreadcrumbItem>
                 {breadcrumb.currentPage ? (
                   <BreadcrumbPage>{breadcrumb.label}</BreadcrumbPage>
                 ) : (
@@ -32,7 +32,7 @@ export function Breadcrumbs({breadcrumbList}: BreadcrumbsListProps) {
                 )}
               </BreadcrumbItem>
               {index < breadcrumbList.length - 1 && <BreadcrumbSeparator />}
-            </>
+            </div>
           ))}
       </BreadcrumbList>
     </Breadcrumb>
