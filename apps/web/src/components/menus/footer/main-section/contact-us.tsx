@@ -1,13 +1,12 @@
 import {cn} from "@/lib/utils";
 import {BaseProps} from "@/types/theme";
-import React from "react";
+import SocialIcons from "@/components/icons/socials";
 
 const ContactUs = ({className}: BaseProps) => {
   return (
-    <section
-      className={cn("ContactUs", "flexi w-full flex-col sm:flex-row sm:justify-start", className)}
-    >
+    <section className={cn("ContactUs", "flexi w-full flex-col sm:items-start gap-2", className)}>
       <h4>Contact Us</h4>
+      <SocialIcons />
     </section>
   );
 };

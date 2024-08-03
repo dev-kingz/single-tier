@@ -5,7 +5,7 @@ import React from "react";
 const QuickLinks = ({className}: BaseProps) => {
   return (
     <section
-      className={cn("QuickLinks", "flexi w-full flex-col sm:flex-row sm:justify-start", className)}
+      className={cn("QuickLinks", "flexi w-full flex-col sm:items-start", className)}
     >
       <h4>Quick Links</h4>
     </section>

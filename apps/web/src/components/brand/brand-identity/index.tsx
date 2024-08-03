@@ -6,10 +6,10 @@ import Link from "next/link";
 import React from "react";
 
 interface BrandIdentityProps extends BaseProps {
-  inverted?: boolean;
+  position?: "header" | "footer";
 }
 
-const BrandIdentity = ({className, inverted = false}: BrandIdentityProps) => {
+const BrandIdentity = ({className, position = "header"}: BrandIdentityProps) => {
   const brand = Brand;
   return (
     <Link href={"/"} className={cn("BrandIdentity flexi gap-x-1", className)}>
@@ -20,7 +20,8 @@ const BrandIdentity = ({className, inverted = false}: BrandIdentityProps) => {
         height={50}
         className={cn(
           "BrandIconWhite drop-shadow-md",
-          inverted ? "hidden dark:flex" : "flex dark:hidden",
+          position === "header" ? "flex dark:hidden" : "",
+          position === "footer" ? "hidden dark:flex" : "",
         )}
       />
       <Image
@@ -30,13 +31,14 @@ const BrandIdentity = ({className, inverted = false}: BrandIdentityProps) => {
         height={50}
         className={cn(
           "BrandIconBlack drop-shadow-md",
-          inverted ? "flex dark:hidden" : "hidden dark:flex",
+          position === "header" ? "hidden dark:flex" : "",
+          position === "footer" ? "flex dark:hidden" : "",
         )}
       />
       <h3
         className={cn(
           "BrandName font-secondary -mb-1 drop-shadow-md",
-          inverted ? "text-background" : "",
+          position === "header" ? "text-foreground" : "",
         )}
       >
         {brand.name}
