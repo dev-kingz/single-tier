@@ -30,11 +30,14 @@ export class RegistrationService {
         },
       };
 
+      // Check for the stayLoggedIn flag
+      const expiresIn = "1d";
+
       return {
         user,
         tokens: {
           accessToken: await this.jwtService.signAsync(payload, {
-            expiresIn: "1d",
+            expiresIn,
             secret: process.env.JWT_SECRET,
           }),
           refreshToken: await this.jwtService.signAsync(payload, {

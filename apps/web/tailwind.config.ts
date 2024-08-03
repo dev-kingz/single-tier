@@ -20,11 +20,16 @@ const config: Config = {
     plugin(
       function ({addBase, addComponents}) {
         addBase({
+
+          // Root Layout
           "*": {"@apply border-border": {}},
           body: {"@apply bg-background text-foreground": {}},
           "html, body, :root": {"@apply h-full font-primary": {}},
-          main: {"@apply flex items-center justify-center h-full w-full": {}},
 
+          // Page Layout
+          main: {"@apply flex items-center justify-start flex-col h-full w-full": {}},
+
+          // Colors
           ":root": {
             "--white": convertHexToHsl(colors.neutral[100]),
             "--black": convertHexToHsl(colors.neutral[900]),

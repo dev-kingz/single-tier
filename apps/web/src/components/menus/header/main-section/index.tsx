@@ -1,11 +1,9 @@
 import React from "react";
-import {ThemeToggle} from "@/components/theme/toggle";
 import {cn} from "@/lib/utils";
 import {HeaderProps} from "@/components/menus/header";
-import {SheetTrigger} from "@/components/ui/sheet";
-import {Button} from "@/components/ui/button";
-import {RxHamburgerMenu} from "react-icons/rx";
 import BrandIdentity from "@/components/brand/brand-identity";
+import LastCol from "./last-col";
+import NavMenu from "./nav-menu";
 
 const MainSection = ({className, type = "sticky"}: HeaderProps) => {
   return (
@@ -24,14 +22,8 @@ const MainSection = ({className, type = "sticky"}: HeaderProps) => {
       )}
     >
       <BrandIdentity />
-      <div className="flexi">
-        <ThemeToggle rounded={"full"} />
-        <SheetTrigger asChild className="flex sm:hidden">
-          <Button variant="link">
-            <RxHamburgerMenu className="text-foreground h-6 w-6 stroke-1" />
-          </Button>
-        </SheetTrigger>
-      </div>
+      <NavMenu />
+      <LastCol />
     </section>
   );
 };

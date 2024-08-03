@@ -8,11 +8,11 @@ const BrandDescription = ({className}: BaseProps) => {
     <section
       className={cn(
         "BrandDescription",
-        "flexi w-full flex-col sm:flex-row sm:justify-start",
+        "flexi w-full flex-col sm:items-start gap-4",
         className,
       )}
     >
-      <BrandIdentity className="flex-col sm:flex-row" inverted />
+      <BrandIdentity className="flex-col sm:flex-row" position="footer" />
     </section>
   );
 };
