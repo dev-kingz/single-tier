@@ -3,6 +3,7 @@ interface IBrand {
   slogan: string;
   whiteIcon: string;
   blackIcon: string;
+  email: string;
   socials: {
     facebook?: string;
     tiktok?: string;
@@ -16,6 +17,7 @@ export const Brand = {
   slogan: "Turning Dreams into Reality!",
   whiteIcon: "/icons/white.png",
   blackIcon: "/icons/black.png",
+  email: "contact@devkingz.com",
   socials: {
     facebook: "https://facebook.com/anda",
     tiktok: "https://tiktok.com/anda",

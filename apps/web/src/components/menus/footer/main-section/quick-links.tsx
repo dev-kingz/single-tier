@@ -9,14 +9,14 @@ const QuickLinks = ({className}: BaseProps) => {
     <section className={cn("QuickLinks", "flexi w-full flex-col gap-4 sm:items-start", className)}>
       <h4>Quick Links</h4>
       <div className="Links flexi-it w-full flex-col">
-        <Button variant={"link"} className="text-background">
+        <Button variant={"link"} className="text-background px-0">
           <Link href="/about">
-            <h6>About Us </h6>
+            <p>About Us </p>
           </Link>
         </Button>
-        <Button variant={"link"} className="text-background">
+        <Button variant={"link"} className="text-background px-0">
           <Link href="/contact">
-            <h6>Contact Us</h6>
+            <p>Contact Us</p>
           </Link>
         </Button>
       </div>
