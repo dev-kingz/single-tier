@@ -8,7 +8,7 @@ const QuickLinks = ({className}: BaseProps) => {
   return (
     <section className={cn("QuickLinks", "flexi w-full flex-col gap-4 sm:items-start", className)}>
       <h4>Quick Links</h4>
-      <div className="Links flexi-it w-full flex-col">
+      <div className="Links flexi sm:items-start w-full flex-col">
         <Button variant={"link"} className="text-background px-0">
           <Link href="/about">
             <p>About Us </p>

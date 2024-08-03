@@ -14,7 +14,7 @@ import {
 
 const NavMenu = () => {
   return (
-    <NavigationMenu>
+    <NavigationMenu className="hidden sm:flex">
       <NavigationMenuList>
         <NavigationMenuItem>
           <Link href="/" legacyBehavior passHref>
