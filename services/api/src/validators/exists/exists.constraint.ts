@@ -14,7 +14,6 @@ export class ExistsConstraint implements ValidatorConstraintInterface {
   constructor(@InjectConnection() private readonly connection: Connection) {}
 
   async validate(value: any, args: ValidationArguments) {
-    console.log(args);
     const {modelName, field}: ExistsInterface = args.constraints[0];
     const model = this.connection.model(modelName);
     if (field) {
