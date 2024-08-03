@@ -6,6 +6,7 @@ import {DatabaseModule} from "./database/database.module";
 import {ModelsModule} from "./models/models.module";
 import {AuthModule} from "./auth/auth.module";
 import {IsUniqueConstraint} from "./validators/is-unique";
+import {ExistsConstraint} from "./validators/exists";
 
 @Module({
   imports: [
@@ -18,6 +19,6 @@ import {IsUniqueConstraint} from "./validators/is-unique";
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService, IsUniqueConstraint],
+  providers: [AppService, IsUniqueConstraint, ExistsConstraint],
 })
 export class AppModule {}
