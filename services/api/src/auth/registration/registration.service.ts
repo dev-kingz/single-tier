@@ -1,8 +1,8 @@
 import {BadRequestException, Injectable, ServiceUnavailableException} from "@nestjs/common";
 import {CreateUserDto} from "./dto";
 import {InjectModel} from "@nestjs/mongoose";
-import {USER_MODEL, UserDocument} from "src/models/schemas/user";
 import {Model} from "mongoose";
+import {USER_MODEL, UserDocument} from "src/models/schemas/user";
 import {ACCOUNT_MODEL, AccountDocument} from "src/models/schemas/account";
 import {PROFILE_MODEL, ProfileDocument} from "src/models/schemas/profile";
 import {PERSONALINFO_MODEL, PersonalInfoDocument} from "src/models/schemas/personalInfo";
@@ -19,25 +19,21 @@ export class RegistrationService {
 
   async register(createUserDto: CreateUserDto) {
     try {
+      const {name, username, email, password} = createUserDto;
+
       // Create a new User document
       const user = await this.userModel.create({});
 
       // Create a new Account document
-      const account = await this.accountModel.create({
-        user: user._id,
-        password: createUserDto.password,
-      });
+      const account = await this.accountModel.create({user: user._id, password});
 
       // Create a new PersonalInfo document
-      const personalInfo = await this.personalInfoModel.create({
-        name: createUserDto.name,
-        email: createUserDto.email,
-      });
+      const personalInfo = await this.personalInfoModel.create({user, name, email});
 
       // Create a new Profile document
       const profile = await this.profileModel.create({
         user: user._id,
-        username: createUserDto.username,
+        username,
         personalInfo: personalInfo._id,
       });
 
@@ -45,11 +41,12 @@ export class RegistrationService {
       const updatedUser = await this.userModel
         .findByIdAndUpdate(user._id, {account: account._id, profile: profile._id}, {new: true})
         .populate("account")
-        .populate({path: "profile", populate: "personalInfo"});
+        .populate({path: "profile", populate: {path: "personalInfo", select: {user: 0}}});
 
-      return updatedUser;
+      return {
+        user: updatedUser,
+      };
     } catch (error) {
-      console.error("Error during registration:", error);
       if (error.name === "ValidationError") {
         throw new BadRequestException(error.errors);
       }

@@ -22,3 +22,8 @@ export type ProfileDocument = Profile & Document;
 export const PROFILE_MODEL = Profile.name; // Profile
 
 export const ProfileSchema = SchemaFactory.createForClass(Profile);
+
+ProfileSchema.pre("findOne", function (next) {
+  this.populate("personalInfo");
+  next();
+});

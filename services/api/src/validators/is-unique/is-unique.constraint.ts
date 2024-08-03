@@ -17,10 +17,10 @@ export class IsUniqueConstraint implements ValidatorConstraintInterface {
     const {modelName, field}: IsUniqeInterface = args.constraints[0];
     const model = this.connection.model(modelName);
     if (field) {
-      const count = await model.countDocuments({[field]: value}).exec();
+      const count = await model.countDocuments({[field]: value});
       return count === 0;
     }
-    const count = await model.countDocuments({[args.property]: value}).exec();
+    const count = await model.countDocuments({[args.property]: value});
     return count === 0;
   }
 

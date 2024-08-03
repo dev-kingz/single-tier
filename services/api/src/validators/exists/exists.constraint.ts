@@ -17,15 +17,14 @@ export class ExistsConstraint implements ValidatorConstraintInterface {
     const {modelName, field}: ExistsInterface = args.constraints[0];
     const model = this.connection.model(modelName);
     if (field) {
-      const count = await model.countDocuments({[field]: value}).exec();
+      const count = await model.countDocuments({[field]: value});
       return count > 0;
     }
-    const count = await model.countDocuments({[args.property]: value}).exec();
+    const count = await model.countDocuments({[args.property]: value});
     return count > 0;
   }
 
   defaultMessage(args: ValidationArguments) {
-    const {modelName}: ExistsInterface = args.constraints[0];
-    return `${modelName} does not exist!`;
+    return `${args.constraints[0].field || args.property} does not exist!`;
   }
 }
