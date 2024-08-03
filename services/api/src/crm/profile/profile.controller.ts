@@ -10,6 +10,6 @@ export class ProfileController {
   @UseGuards(JwtGuard)
   @Get(":id")
   async getProfile(@Param("id") id: Types.ObjectId) {
-    return this.profileService.getProfile(id);
+    return await this.profileService.getProfile(id);
   }
 }

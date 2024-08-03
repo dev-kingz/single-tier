@@ -1,4 +1,4 @@
-import {IsEmail, IsNotEmpty, IsString} from "class-validator";
+import {IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsString} from "class-validator";
 import {USER_MODEL} from "src/models/schemas/user";
 import {Exists} from "src/validators/exists";
 
@@ -11,4 +11,8 @@ export class LoginDto {
   @IsString()
   @IsNotEmpty()
   password: string;
+
+  @IsBoolean()
+  @IsOptional()
+  stayLoggedIn: boolean;
 }

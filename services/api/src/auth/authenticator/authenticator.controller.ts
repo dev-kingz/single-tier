@@ -1,6 +1,7 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthenticatorService } from './authenticator.service';
 import { LoginDto } from './dto';
+import { RefreshGuard } from './guards/refresh.guard';
 
 @Controller('/auth/authenticator')
 export class AuthenticatorController {
@@ -8,6 +9,12 @@ export class AuthenticatorController {
 
   @Post('login')
   async login(@Body() loginDTO: LoginDto) {
-    return this.authenticatorService.login(loginDTO);
+    return await this.authenticatorService.login(loginDTO);
+  }
+
+  @UseGuards(RefreshGuard)
+  @Post('refresh')
+  async refresh(@Request() request) {
+    return await this.authenticatorService.refresh(request);
   }
 }
