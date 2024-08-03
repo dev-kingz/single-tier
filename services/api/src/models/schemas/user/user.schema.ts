@@ -20,8 +20,3 @@ export const USER_MODEL = User.name; // User
 
 export const UserSchema = SchemaFactory.createForClass(User);
 
-UserSchema.pre("findOne", function (next) {
-  this.populate("profile");
-  this.populate("account");
-  next();
-});
