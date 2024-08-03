@@ -6,7 +6,7 @@ import {RegistrationService} from "./registration.service";
 export class RegistrationController {
   constructor(private readonly registrationService: RegistrationService) {}
 
-  @Post("/register")
+  @Post("register")
   register(@Body() createUserDto: CreateUserDto) {
     return this.registrationService.register(createUserDto);
   }

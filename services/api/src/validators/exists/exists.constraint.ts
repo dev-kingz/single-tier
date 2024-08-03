@@ -26,6 +26,7 @@ export class ExistsConstraint implements ValidatorConstraintInterface {
   }
 
   defaultMessage(args: ValidationArguments) {
-    return `${args.property} does not exist!`;
+    const {modelName}: ExistsInterface = args.constraints[0];
+    return `${modelName} does not exist!`;
   }
 }
