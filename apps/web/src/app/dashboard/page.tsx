@@ -6,10 +6,11 @@ const DashboardPage = () => {
     <main>
       <TitleHeader
         title="Dashboard"
+        subTitle="Your personal dashboard!"
         showBreadcrumb
         breadcrumbList={[
           {label: "Home", href: "/"},
-          {label: "Dashboard", href: "/dashboard"},
+          {label: "Dashboard", currentPage: true},
         ]}
       />
     </main>

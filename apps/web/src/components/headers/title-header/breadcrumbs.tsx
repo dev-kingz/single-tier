@@ -2,14 +2,15 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
-  BreadcrumbList,
   BreadcrumbPage,
+  BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
 export interface BreadcrumbsProps {
   label: string;
-  href: string;
+  href?: string;
+  currentPage?: boolean;
 }
 
 export interface BreadcrumbsListProps {
@@ -24,7 +25,11 @@ export function Breadcrumbs({breadcrumbList}: BreadcrumbsListProps) {
           breadcrumbList.map((breadcrumb, index) => (
             <>
               <BreadcrumbItem key={index}>
-                <BreadcrumbLink href={`${breadcrumb.href}`}>{breadcrumb.label}</BreadcrumbLink>
+                {breadcrumb.currentPage ? (
+                  <BreadcrumbPage>{breadcrumb.label}</BreadcrumbPage>
+                ) : (
+                  <BreadcrumbLink href={`${breadcrumb.href}`}>{breadcrumb.label}</BreadcrumbLink>
+                )}
               </BreadcrumbItem>
               {index < breadcrumbList.length - 1 && <BreadcrumbSeparator />}
             </>
