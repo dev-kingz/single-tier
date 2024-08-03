@@ -41,18 +41,15 @@ export class RegistrationService {
         personalInfo: personalInfo._id,
       });
 
-      // Update the User document with the Account and Profile references
-      const updatedUser = await this.userModel.findByIdAndUpdate(
-        user._id,
-        {
-          account: account._id,
-          profile: profile._id,
-        },
-        {new: true},
-      );
+      // Update the User document with the Account and Profile references with populated fields with also populating personalInfo inside profile
+      const updatedUser = await this.userModel
+        .findByIdAndUpdate(user._id, {account: account._id, profile: profile._id}, {new: true})
+        .populate("account")
+        .populate({path: "profile", populate: "personalInfo"});
 
       return updatedUser;
     } catch (error) {
+      console.error("Error during registration:", error);
       if (error.name === "ValidationError") {
         throw new BadRequestException(error.errors);
       }

@@ -7,10 +7,10 @@ import {Account, ACCOUNT_MODEL} from "../account";
   timestamps: true,
 })
 export class User {
-  @Prop({type: Types.ObjectId, ref: `'${PROFILE_MODEL}'`})
+  @Prop({type: Types.ObjectId, ref: `${PROFILE_MODEL}`})
   profile: Types.ObjectId | Profile;
 
-  @Prop({type: Types.ObjectId, ref: `'${ACCOUNT_MODEL}'`})
+  @Prop({type: Types.ObjectId, ref: `${ACCOUNT_MODEL}`})
   account: Types.ObjectId | Account;
 }
 
@@ -25,4 +25,3 @@ UserSchema.pre("findOne", function (next) {
   this.populate("account");
   next();
 });
-

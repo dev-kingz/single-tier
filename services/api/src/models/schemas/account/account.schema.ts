@@ -7,14 +7,11 @@ import { User, USER_MODEL } from "../user";
   timestamps: true,
 })
 export class Account {
-  @Prop({type: Types.ObjectId, ref: `'${USER_MODEL}'`})
+  @Prop({type: Types.ObjectId, ref: `${USER_MODEL}`})
   user: Types.ObjectId | User;
 
   @Prop({required: true, select: false})
   password: string;
-
-  @Prop({default: Date.now})
-  createdAt: Date;
 }
 
 export type AccountDocument = Account & Document;
