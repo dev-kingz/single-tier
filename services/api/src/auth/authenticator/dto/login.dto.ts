@@ -1,11 +1,11 @@
 import {IsEmail, IsNotEmpty, IsString} from "class-validator";
-import {PERSONALINFO_MODEL} from "src/models/schemas/personalInfo";
+import {USER_MODEL} from "src/models/schemas/user";
 import {Exists} from "src/validators/exists";
 
 export class LoginDto {
   @IsEmail()
   @IsNotEmpty()
-  @Exists({modelName: PERSONALINFO_MODEL})
+  @Exists({modelName: USER_MODEL})
   email: string;
 
   @IsString()

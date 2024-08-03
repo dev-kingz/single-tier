@@ -1,17 +1,21 @@
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
 import {Types} from "mongoose";
-import {Profile, PROFILE_MODEL} from "../profile";
-import {Account, ACCOUNT_MODEL} from "../account";
 
 @Schema({
   timestamps: true,
 })
 export class User {
-  @Prop({type: Types.ObjectId, ref: `${PROFILE_MODEL}`})
-  profile: Types.ObjectId | Profile;
+  @Prop({required: true})
+  name: string;
+  
+  @Prop({required: true, unique: true})
+  username: string;
+  
+  @Prop({required: true, unique: true})
+  email: string;
 
-  @Prop({type: Types.ObjectId, ref: `${ACCOUNT_MODEL}`})
-  account: Types.ObjectId | Account;
+  @Prop({required: true, select: false})
+  password: string;
 }
 
 export type UserDocument = User & Document;

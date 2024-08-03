@@ -3,48 +3,25 @@ import {CreateUserDto} from "./dto";
 import {InjectModel} from "@nestjs/mongoose";
 import {Model} from "mongoose";
 import {USER_MODEL, UserDocument} from "src/models/schemas/user";
-import {ACCOUNT_MODEL, AccountDocument} from "src/models/schemas/account";
-import {PROFILE_MODEL, ProfileDocument} from "src/models/schemas/profile";
-import {PERSONALINFO_MODEL, PersonalInfoDocument} from "src/models/schemas/personalInfo";
 
 @Injectable()
 export class RegistrationService {
-  constructor(
-    @InjectModel(USER_MODEL) private readonly userModel: Model<UserDocument>,
-    @InjectModel(ACCOUNT_MODEL) private readonly accountModel: Model<AccountDocument>,
-    @InjectModel(PROFILE_MODEL) private readonly profileModel: Model<ProfileDocument>,
-    @InjectModel(PERSONALINFO_MODEL)
-    private readonly personalInfoModel: Model<PersonalInfoDocument>,
-  ) {}
+  constructor(@InjectModel(USER_MODEL) private readonly userModel: Model<UserDocument>) {}
 
   async register(createUserDto: CreateUserDto) {
     try {
       const {name, username, email, password} = createUserDto;
 
       // Create a new User document
-      const user = await this.userModel.create({});
-
-      // Create a new Account document
-      const account = await this.accountModel.create({user: user._id, password});
-
-      // Create a new PersonalInfo document
-      const personalInfo = await this.personalInfoModel.create({user, name, email});
-
-      // Create a new Profile document
-      const profile = await this.profileModel.create({
-        user: user._id,
+      const user = await this.userModel.create({
+        name,
         username,
-        personalInfo: personalInfo._id,
+        email,
+        password,
       });
 
-      // Update the User document with the Account and Profile references with populated fields with also populating personalInfo inside profile
-      const updatedUser = await this.userModel
-        .findByIdAndUpdate(user._id, {account: account._id, profile: profile._id}, {new: true})
-        .populate("account")
-        .populate({path: "profile", populate: {path: "personalInfo", select: {user: 0}}});
-
       return {
-        user: updatedUser,
+        user,
       };
     } catch (error) {
       if (error.name === "ValidationError") {

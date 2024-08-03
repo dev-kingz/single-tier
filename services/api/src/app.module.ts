@@ -7,6 +7,7 @@ import {ModelsModule} from "./models/models.module";
 import {AuthModule} from "./auth/auth.module";
 import {IsUniqueConstraint} from "./validators/is-unique";
 import {ExistsConstraint} from "./validators/exists";
+import {RequestContextModule} from "nestjs-request-context";
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import {ExistsConstraint} from "./validators/exists";
     }),
     DatabaseModule,
     ModelsModule,
+    RequestContextModule,
     // <------------ APP MODULES ------------>
     AuthModule,
   ],
