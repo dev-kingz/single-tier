@@ -7,7 +7,7 @@ const LastCol = () => {
   const brand = Brand;
 
   return (
-    <div className="PrivacyAndTerms flexi flex-col sm:flex-row gap-0">
+    <div className="PrivacyAndTerms flexi gap-0">
       <Button asChild variant="link" className="text-foreground py-0">
         <Link href={"/privacy-and-policy"} className="PrivacyAndPolicy">
           <p className="ppl">Privacy and Policy</p>
