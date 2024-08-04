@@ -10,17 +10,17 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import {NavList} from "../hamburger-sidebar/constants";
+import {NavList} from "../constants";
 
 const NavMenu = () => {
   const navList = NavList;
   return (
     <NavigationMenu className="hidden sm:flex">
-      <NavigationMenuList>
+      <NavigationMenuList className="gap-x-4">
         {navList.map((navItem) => (
-          <NavigationMenuItem key={navItem.href}>
+          <NavigationMenuItem key={navItem.href} className="underline-offset-4 hover:underline">
             <Link href={navItem.href} passHref>
-                {navItem.title}
+              {navItem.title}
             </Link>
           </NavigationMenuItem>
         ))}
