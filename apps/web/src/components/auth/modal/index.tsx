@@ -19,7 +19,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import {LoginForm} from "../forms";
+import {LoginForm, SignupForm} from "../forms";
 import {cn} from "@/lib/utils";
 import { useMediaQuery } from "@/hooks";
 
@@ -50,7 +50,7 @@ export function AuthModal({triggerStyles, authAction}: AuthModalProps) {
                   : "Create an account to get started."}
               </DialogDescription>
             </DialogHeader>
-            <LoginForm />
+            {authAction=== "login"? <LoginForm /> : <SignupForm />}
           </DialogContent>
         </Dialog>
       );
@@ -63,8 +63,8 @@ export function AuthModal({triggerStyles, authAction}: AuthModalProps) {
             {authAction === "login" ? "Login" : "Sign Up"}
           </Button>
         </DrawerTrigger>
-        <DrawerContent className="h-[70vh] flexi flex-col justify-start">
-          <DrawerHeader className="text-left">
+        <DrawerContent className="h-[80vh] flexi flex-col justify-start">
+          <DrawerHeader>
             <DrawerTitle>{authAction === "login" ? "Login" : "Sign Up"}</DrawerTitle>
             <DrawerDescription>
               {authAction === "login"
@@ -72,14 +72,7 @@ export function AuthModal({triggerStyles, authAction}: AuthModalProps) {
                 : "Create an account to get started."}
             </DrawerDescription>
           </DrawerHeader>
-          <LoginForm className="px-4" />
-          <DrawerFooter className="pt-2">
-            <DrawerClose asChild>
-              <Button variant={"primary"}>
-                Cancel
-              </Button>
-            </DrawerClose>
-          </DrawerFooter>
+          {authAction=== "login"? <LoginForm /> : <SignupForm />}
         </DrawerContent>
       </Drawer>
     );
