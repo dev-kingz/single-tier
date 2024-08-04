@@ -1,5 +1,9 @@
 import TitleHeader from "@/components/headers/title-header";
 import React from "react";
+import Introduction from "./sections/introduction";
+import Consent from "./sections/consent";
+import InformationWeCollect from "./sections/information-we-collect";
+import InformationUse from "./sections/information-use";
 
 const PrivacyAndPolicyPage = () => {
   return (
@@ -13,6 +17,9 @@ const PrivacyAndPolicyPage = () => {
           {label: "Privacy and Policy", currentPage: true},
         ]}
       />
+      <Introduction/>
+      <InformationWeCollect/>
+      <InformationUse/>
     </main>
   );
 };
