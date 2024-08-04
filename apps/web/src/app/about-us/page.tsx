@@ -23,6 +23,7 @@ const AboutUsPage = () => {
         width={500}
         height={300}
       />
+      
     </main>
   );
 };
