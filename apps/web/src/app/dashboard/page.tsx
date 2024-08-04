@@ -14,8 +14,10 @@ const DashboardPage = () => {
           {label: "Dashboard", currentPage: true},
         ]}
       />
-
-      <AuthModal authAction={"login"} />
+      <div className="flexi gap-x-5 w-full max-w-lg px-5">
+        <AuthModal authAction={"login"} triggerStyles="w-full" />
+        <AuthModal authAction={"signup"} triggerStyles="w-full" />
+      </div>
     </main>
   );
 };

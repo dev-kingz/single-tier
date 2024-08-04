@@ -19,8 +19,17 @@ import {BaseProps} from "@/types/theme";
 import {cn} from "@/lib/utils";
 
 const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+  name: z.string().min(3, {
+    message: "Name must be at least 3 characters.",
+  }),
+  username: z.string().min(3, {
+    message: "Username must be at least 3 characters.",
+  }),
+  email: z.string().email({
+    message: "Please enter a valid email address.",
+  }),
+  password: z.string().min(6, {
+    message: "Password must be at least 6 characters.",
   }),
 });
 
@@ -29,7 +38,10 @@ const SignupForm = ({className}: BaseProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      name: "",
       username: "",
+      email: "",
+      password: "",
     },
   });
 
@@ -45,19 +57,57 @@ const SignupForm = ({className}: BaseProps) => {
       <form onSubmit={form.handleSubmit(onSubmit)} className={cn("space-y-8", className)}>
         <FormField
           control={form.control}
+          name="name"
+          render={({field}) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input placeholder="John" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="username"
           render={({field}) => (
             <FormItem>
               <FormLabel>Username</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="john" {...field} />
               </FormControl>
-              <FormDescription>This is your public display name.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <FormField
+          control={form.control}
+          name="email"
+          render={({field}) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="john@example.com" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="password"
+          render={({field}) => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input placeholder="******" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button variant={"primary"} className="w-full" type="submit">Submit</Button>
       </form>
     </Form>
   );
