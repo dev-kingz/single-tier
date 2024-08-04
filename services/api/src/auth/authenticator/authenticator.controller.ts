@@ -1,19 +1,19 @@
-import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
-import { AuthenticatorService } from './authenticator.service';
-import { LoginDto } from './dto';
-import { RefreshGuard } from './guards/refresh.guard';
+import {Body, Controller, Post, Request, UseGuards} from "@nestjs/common";
+import {AuthenticatorService} from "./authenticator.service";
+import {LoginDto} from "./dto";
+import {RefreshGuard} from "./guards/refresh.guard";
 
-@Controller('/auth/authenticator')
+@Controller("/auth/authenticator")
 export class AuthenticatorController {
   constructor(private readonly authenticatorService: AuthenticatorService) {}
 
-  @Post('login')
+  @Post("login")
   async login(@Body() loginDTO: LoginDto) {
     return await this.authenticatorService.login(loginDTO);
   }
 
   @UseGuards(RefreshGuard)
-  @Post('refresh')
+  @Post("refresh")
   async refresh(@Request() request) {
     return await this.authenticatorService.refresh(request);
   }

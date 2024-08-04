@@ -73,7 +73,9 @@ const LoginForm = ({className}: BaseProps) => {
             </FormItem>
           )}
         />
-        <Button variant={"primary"} className="w-full" type="submit">Submit</Button>
+        <Button variant={"primary"} className="w-full" type="submit">
+          Submit
+        </Button>
       </form>
     </Form>
   );

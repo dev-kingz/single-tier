@@ -8,7 +8,7 @@ import {AuthModule} from "./auth/auth.module";
 import {IsUniqueConstraint} from "./validators/is-unique";
 import {ExistsConstraint} from "./validators/exists";
 import {RequestContextModule} from "nestjs-request-context";
-import { CrmModule } from './crm/crm.module';
+import {CrmModule} from "./crm/crm.module";
 
 @Module({
   imports: [
