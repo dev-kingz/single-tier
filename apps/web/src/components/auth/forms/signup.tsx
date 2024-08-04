@@ -5,15 +5,7 @@ import {useForm} from "react-hook-form";
 import {z} from "zod";
 
 import {Button} from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
 import {BaseProps} from "@/types/theme";
 import {cn} from "@/lib/utils";
@@ -33,7 +25,11 @@ const formSchema = z.object({
   }),
 });
 
-const SignupForm = ({className}: BaseProps) => {
+interface SignupFormProps extends BaseProps {
+  setOpen?: (value: boolean) => void;
+}
+
+const SignupForm = ({setOpen, className}: SignupFormProps) => {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -49,12 +45,16 @@ const SignupForm = ({className}: BaseProps) => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
+    if (setOpen) {
+      setOpen(false);
+    }
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className={cn("space-y-8", className)}>
+        <h2>Signup</h2>
+        <p>Create an account to get started.</p>
         <FormField
           control={form.control}
           name="name"
