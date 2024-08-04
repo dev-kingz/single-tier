@@ -1,5 +1,6 @@
+import React from 'react'
 import TitleHeader from "@/components/headers/title-header";
-import React from "react";
+import Introduction from "./sections/introduction";
 
 const TermsAndConditionsPage = () => {
   return (
@@ -13,6 +14,7 @@ const TermsAndConditionsPage = () => {
           {label: "Terms and Conditions", currentPage: true},
         ]}
       />
+      <Introduction/>
     </main>
   );
 };
