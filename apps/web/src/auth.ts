@@ -18,7 +18,7 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
           const {email, password} = await loginSchema.parseAsync(credentials);
           console.log("inside authorize", email, password);
 
-          const user = {email, password};
+          const user = await fetch(`${process.env.SERVER_URL}/api/auth/login`, {
 
           if (user) {
             const isMatched = true;
