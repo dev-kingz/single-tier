@@ -1,36 +1,27 @@
 "use client";
-
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
 import {z} from "zod";
 
+import {loginSchema} from "@/schemas";
 import {Button} from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
 import {BaseProps} from "@/types/theme";
 import {cn} from "@/lib/utils";
+import {SignIn} from "@/actions";
+import { useRouter } from "next/navigation";
 
-const formSchema = z.object({
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-  password: z.string().min(6, {
-    message: "Password must be at least 6 characters.",
-  }),
-});
+interface LoginFormProps extends BaseProps {
+  setOpen?: (value: boolean) => void;
+}
 
-const LoginForm = ({className}: BaseProps) => {
+const LoginForm = ({className, setOpen}: LoginFormProps) => {
+  const router = useRouter();
+
   // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -38,15 +29,19 @@ const LoginForm = ({className}: BaseProps) => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof loginSchema>) {
+    const response = await SignIn(values);
+    if (response) {
+      router.refresh();
+      setOpen && setOpen(false);
+    }
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className={cn("space-y-8", className)}>
+        <h2>Login</h2>
+        <p>Welcome back! Please login to continue.</p>
         <FormField
           control={form.control}
           name="email"
@@ -74,7 +69,7 @@ const LoginForm = ({className}: BaseProps) => {
           )}
         />
         <Button variant={"primary"} className="w-full" type="submit">
-          Submit
+          Login
         </Button>
       </form>
     </Form>

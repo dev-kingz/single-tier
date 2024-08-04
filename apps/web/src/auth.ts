@@ -1,34 +1,40 @@
 import NextAuth from "next-auth";
-
+import CredentialsProvider from "next-auth/providers/credentials";
+import {loginSchema} from "./schemas";
 
 export const {handlers, signIn, signOut, auth} = NextAuth({
+  session: {
+    strategy: "jwt",
+  },
   providers: [
-    Credentials({
-      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-      // e.g. domain, username, password, 2FA token, etc.
+    CredentialsProvider({
       credentials: {
         email: {},
         password: {},
       },
       authorize: async (credentials) => {
-        let user = null
- 
-        // logic to salt and hash password
-        const pwHash = saltAndHashPassword(credentials.password)
- 
-        // logic to verify if the user exists
-        user = await getUserFromDb(credentials.email, pwHash)
- 
-        if (!user) {
-          // No user found, so this is their first attempt to login
-          // meaning this is also the place you could do registration
-          throw new Error("User not found.")
+        try {
+          if (credentials === null) return null;
+          const {email, password} = await loginSchema.parseAsync(credentials);
+          console.log("inside authorize", email, password);
+
+          const user = {email, password};
+
+          if (user) {
+            const isMatched = true;
+
+            if (isMatched) {
+              return user;
+            } else {
+              throw new Error("Invalid credentials");
+            }
+          } else {
+            throw new Error("No user found");
+          }
+        } catch (error) {
+          throw new Error(error as any);
         }
- 
-        // return user object with their profile data
-        return user
       },
     }),
-
   ],
 });
