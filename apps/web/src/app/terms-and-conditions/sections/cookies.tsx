@@ -1,22 +1,11 @@
+import SectionHeader from '@/components/headers/section-header'
 import React from 'react'
 
-const cookies = () => {
+const Cookies = () => {
     return (
-        <section className="CookiesSection flex flex-col w-full ">
-            <h3
-                className="SubHeading 
-                    self-stretch
-                    text-black dark:text-white"
-            >
-                Cookies
-                <br />
-                <br />
-            </h3>
-            <p
-                className="Text 
-                    self-stretch
-                    text-black dark:text-white"
-            >
+        <section className="CookiesSection flexit-it flex-col px-8 sm:px-48">
+            <SectionHeader title="Cookies"/>
+            <p className="Text">
                 We employ the use of cookies. By accessing DigiLearn, you agreed to use cookies in
                 agreement with the DigiLearn&apos;s Privacy Policy.
                 <br />
@@ -32,4 +21,4 @@ const cookies = () => {
     )
 }
 
-export default cookies
+export default Cookies

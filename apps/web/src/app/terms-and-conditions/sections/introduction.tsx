@@ -1,18 +1,9 @@
-import { Brand } from '@/constants/brand'
 import React from 'react'
 
 const Introduction = () => {
     return (
-        <div
-            className="TermsandConditions
-                flexis flex-col
-                self-stretch px-8 py-5 sm:py-10 
-                lg:px-48"
-        >
-            <p
-                className="Text 
-                    self-stretch
-                    text-black dark:text-white"
+        <section className="Introduction flexit-it px-8 sm:px-48 py-4">
+            <p className="Text"
             >
                 Welcome to DevKingz!
                 <br />
@@ -40,7 +31,7 @@ const Introduction = () => {
                 <br />
                 <br />
             </p>
-        </div>
+        </section>
     )
 }
 
