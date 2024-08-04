@@ -20,7 +20,6 @@ const config: Config = {
     plugin(
       function ({addBase, addComponents}) {
         addBase({
-
           // Root Layout
           "*": {"@apply border-border": {}},
           body: {"@apply bg-background text-foreground": {}},

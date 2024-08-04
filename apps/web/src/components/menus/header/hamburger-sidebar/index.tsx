@@ -43,7 +43,7 @@ const HamburgerSidebar = ({handleClose}: HamburgerSidebarProps) => {
               <AccordionItem key={navItem.href} value={navItem.href}>
                 {navItem.children ? (
                   <div key={navItem.href}>
-                    <AccordionTrigger className="py-3 font-bold transition-all duration-300 active:bg-accent1.02]">
+                    <AccordionTrigger className="active:bg-accent1.02] py-3 font-bold transition-all duration-300">
                       {navItem.title}
                     </AccordionTrigger>
                     <AccordionContent className="flexi-it flex-col gap-y-3">
@@ -53,7 +53,10 @@ const HamburgerSidebar = ({handleClose}: HamburgerSidebarProps) => {
                           key={child.href}
                           onClick={handleClose}
                         >
-                          <Link href={child.href} className="flexib w-full transition-all duration-200 active:bg-accent">
+                          <Link
+                            href={child.href}
+                            className="flexib active:bg-accent w-full transition-all duration-200"
+                          >
                             <p>{child.title}</p> <RiArrowRightWideFill />
                           </Link>
                           {index !== childArray.length - 1 && <Separator />}
@@ -65,7 +68,7 @@ const HamburgerSidebar = ({handleClose}: HamburgerSidebarProps) => {
                   <Link
                     href={navItem.href}
                     key={navItem.href}
-                    className="flex w-full transition-all duration-200 active:bg-accent"
+                    className="active:bg-accent flex w-full transition-all duration-200"
                     onClick={handleClose}
                   >
                     <AccordionHeader className="flex py-3">{navItem.title}</AccordionHeader>

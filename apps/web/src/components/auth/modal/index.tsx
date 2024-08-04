@@ -1,5 +1,5 @@
 "use client";
-import * as React from "react";
+import {useState} from "react";
 import {Button} from "@/components/ui/button";
 import {
   Dialog,
@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/drawer";
 import {LoginForm, SignupForm} from "../forms";
 import {cn} from "@/lib/utils";
-import { useMediaQuery } from "@/hooks";
+import {useMediaQuery} from "@/hooks";
 
 interface AuthModalProps {
   triggerStyles?: string;
@@ -29,54 +29,56 @@ interface AuthModalProps {
 }
 
 export function AuthModal({triggerStyles, authAction}: AuthModalProps) {
-  if (authAction === "login" || authAction === "signup") {
-    const [open, setOpen] = React.useState(false);
-    const isDesktop = useMediaQuery("(min-width: 768px)");
+  const [open, setOpen] = useState(false);
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
-    if (isDesktop) {
-      return (
-        <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild>
-            <Button variant="primary" className={cn("Trigger", triggerStyles)}>
-              {authAction === "login" ? "Login" : "Sign Up"}
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
-            <DialogHeader>
-              <DialogTitle>{authAction === "login" ? "Login" : "Sign Up"}</DialogTitle>
-              <DialogDescription>
-                {authAction === "login"
-                  ? "Welcome back! Please login to continue."
-                  : "Create an account to get started."}
-              </DialogDescription>
-            </DialogHeader>
-            {authAction=== "login"? <LoginForm /> : <SignupForm />}
-          </DialogContent>
-        </Dialog>
-      );
-    }
-
+  if (authAction === "logout") {
     return (
-      <Drawer open={open} onOpenChange={setOpen}>
-        <DrawerTrigger asChild>
-          <Button variant="primary" className={cn("Trigger", triggerStyles)}>
-            {authAction === "login" ? "Login" : "Sign Up"}
-          </Button>
-        </DrawerTrigger>
-        <DrawerContent className="h-[80vh] flexi flex-col justify-start">
-          <DrawerHeader>
-            <DrawerTitle>{authAction === "login" ? "Login" : "Sign Up"}</DrawerTitle>
-            <DrawerDescription>
-              {authAction === "login"
-                ? "Welcome back! Please login to continue."
-                : "Create an account to get started."}
-            </DrawerDescription>
-          </DrawerHeader>
-          {authAction=== "login"? <LoginForm /> : <SignupForm />}
-        </DrawerContent>
-      </Drawer>
+      <Button variant="primary" className={cn("Trigger", triggerStyles)}>
+        Logout
+      </Button>
     );
-  } else if (authAction === "logout") {
-    return <Button variant="primary" className={cn("Trigger", triggerStyles)}>Logout</Button>;
   }
+
+  const isLogin = authAction === "login";
+  const actionText = isLogin ? "Login" : "Sign Up";
+  const descriptionText = isLogin
+    ? "Welcome back! Please login to continue."
+    : "Create an account to get started.";
+
+  if (isDesktop) {
+    return (
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          <Button variant="primary" className={cn("Trigger", triggerStyles)}>
+            {actionText}
+          </Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>{actionText}</DialogTitle>
+            <DialogDescription>{descriptionText}</DialogDescription>
+          </DialogHeader>
+          {isLogin ? <LoginForm /> : <SignupForm />}
+        </DialogContent>
+      </Dialog>
+    );
+  }
+
+  return (
+    <Drawer open={open} onOpenChange={setOpen}>
+      <DrawerTrigger asChild>
+        <Button variant="primary" className={cn("Trigger", triggerStyles)}>
+          {actionText}
+        </Button>
+      </DrawerTrigger>
+      <DrawerContent className="flexi h-[80vh] flex-col justify-start">
+        <DrawerHeader>
+          <DrawerTitle>{actionText}</DrawerTitle>
+          <DrawerDescription>{descriptionText}</DrawerDescription>
+        </DrawerHeader>
+        {isLogin ? <LoginForm /> : <SignupForm />}
+      </DrawerContent>
+    </Drawer>
+  );
 }
