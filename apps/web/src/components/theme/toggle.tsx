@@ -30,17 +30,17 @@ const ThemeToggle = ({...props}: ButtonProps) => {
     <div>
       <Button
         size={"icon"}
-        variant={"inverted"}
+        variant={"link"}
         onClick={toggleTheme}
         className="ThemeToggle
-        drop-shadow-md transition-all duration-300
-        hover:scale-110"
+        transition-all duration-300 ease-in-out transform
+        hover:scale-125"
         {...props}
       >
         {currentTheme === "dark" ? (
-          <BsSun className="h-5 w-5 stroke-[0.5] text-yellow-500" />
+          <BsSun className="h-6 w-6 stroke-[0.5] text-yellow-500" />
         ) : (
-          <BsMoonStars className="h-5 w-5 text-white" />
+          <BsMoonStars className="h-6 w-6 text-black" />
         )}
       </Button>
     </div>
