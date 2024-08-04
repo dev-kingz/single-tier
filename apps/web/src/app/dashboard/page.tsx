@@ -1,6 +1,6 @@
-import {AuthModals} from "@/components/auth/modals";
-import TitleHeader from "@/components/headers/title-header";
 import React from "react";
+import {AuthModal} from "@/components/auth/modal";
+import TitleHeader from "@/components/headers/title-header";
 
 const DashboardPage = () => {
   return (
@@ -15,7 +15,7 @@ const DashboardPage = () => {
         ]}
       />
 
-      <AuthModals />
+      <AuthModal authAction={"login"} />
     </main>
   );
 };
