@@ -1,3 +1,4 @@
+import {AuthModals} from "@/components/auth/modals";
 import TitleHeader from "@/components/headers/title-header";
 import React from "react";
 
@@ -13,6 +14,8 @@ const DashboardPage = () => {
           {label: "Dashboard", currentPage: true},
         ]}
       />
+
+      <AuthModals />
     </main>
   );
 };

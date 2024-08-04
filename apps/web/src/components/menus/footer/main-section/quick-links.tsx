@@ -10,12 +10,12 @@ const QuickLinks = ({className}: BaseProps) => {
       <h4>Quick Links</h4>
       <div className="Links flexi sm:items-start w-full flex-col">
         <Button variant={"link"} className="text-background px-0">
-          <Link href="/about">
+          <Link href="/about-us">
             <p>About Us </p>
           </Link>
         </Button>
         <Button variant={"link"} className="text-background px-0">
-          <Link href="/contact">
+          <Link href="/contact-us">
             <p>Contact Us</p>
           </Link>
         </Button>
