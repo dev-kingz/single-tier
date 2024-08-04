@@ -19,7 +19,7 @@ import {
 import {NavList} from "../constants";
 import Link from "next/link";
 import {Separator} from "@/components/ui/separator";
-import { RiArrowRightWideFill } from "react-icons/ri";
+import {RiArrowRightWideFill} from "react-icons/ri";
 
 interface HamburgerSidebarProps {
   handleClose: () => void;
@@ -43,22 +43,36 @@ const HamburgerSidebar = ({handleClose}: HamburgerSidebarProps) => {
               <AccordionItem key={navItem.href} value={navItem.href}>
                 {navItem.children ? (
                   <div key={navItem.href}>
-                    <AccordionTrigger className="py-3 font-bold">{navItem.title}</AccordionTrigger>
+                    <AccordionTrigger className="active:bg-accent1.02] py-3 font-bold transition-all duration-300">
+                      {navItem.title}
+                    </AccordionTrigger>
                     <AccordionContent className="flexi-it flex-col gap-y-3">
-                      {navItem.children.map((child,index, childArray) => (
-                        <>
-                          <Link key={child.href} href={child.href} className="flexib w-full">
+                      {navItem.children.map((child, index, childArray) => (
+                        <div
+                          className="flexi-it w-full flex-col gap-y-3"
+                          key={child.href}
+                          onClick={handleClose}
+                        >
+                          <Link
+                            href={child.href}
+                            className="flexib active:bg-accent w-full transition-all duration-200"
+                          >
                             <p>{child.title}</p> <RiArrowRightWideFill />
                           </Link>
-                          {index !== childArray.length - 1 &&
-                          <Separator />
-                          }
-                        </>
+                          {index !== childArray.length - 1 && <Separator />}
+                        </div>
                       ))}
                     </AccordionContent>
                   </div>
                 ) : (
-                  <AccordionHeader className="flex py-3">{navItem.title}</AccordionHeader>
+                  <Link
+                    href={navItem.href}
+                    key={navItem.href}
+                    className="active:bg-accent flex w-full transition-all duration-200"
+                    onClick={handleClose}
+                  >
+                    <AccordionHeader className="flex py-3">{navItem.title}</AccordionHeader>
+                  </Link>
                 )}
               </AccordionItem>
             ))}

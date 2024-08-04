@@ -33,7 +33,7 @@ const ThemeToggle = ({...props}: ButtonProps) => {
         variant={"link"}
         onClick={toggleTheme}
         className="ThemeToggle
-        transition-all duration-300 ease-in-out transform
+        transform transition-all duration-300 ease-in-out
         hover:scale-125"
         {...props}
       >

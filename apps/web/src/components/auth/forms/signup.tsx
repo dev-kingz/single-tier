@@ -19,6 +19,12 @@ import {BaseProps} from "@/types/theme";
 import {cn} from "@/lib/utils";
 
 const formSchema = z.object({
+  name: z.string().min(3, {
+    message: "Name must be at least 3 characters.",
+  }),
+  username: z.string().min(3, {
+    message: "Username must be at least 3 characters.",
+  }),
   email: z.string().email({
     message: "Please enter a valid email address.",
   }),
@@ -27,11 +33,13 @@ const formSchema = z.object({
   }),
 });
 
-const LoginForm = ({className}: BaseProps) => {
+const SignupForm = ({className}: BaseProps) => {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      name: "",
+      username: "",
       email: "",
       password: "",
     },
@@ -49,12 +57,38 @@ const LoginForm = ({className}: BaseProps) => {
       <form onSubmit={form.handleSubmit(onSubmit)} className={cn("space-y-8", className)}>
         <FormField
           control={form.control}
+          name="name"
+          render={({field}) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input placeholder="John" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="username"
+          render={({field}) => (
+            <FormItem>
+              <FormLabel>Username</FormLabel>
+              <FormControl>
+                <Input placeholder="john" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="email"
           render={({field}) => (
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="name@example.com" {...field} />
+                <Input placeholder="john@example.com" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -81,4 +115,4 @@ const LoginForm = ({className}: BaseProps) => {
   );
 };
 
-export {LoginForm};
+export {SignupForm};

@@ -30,7 +30,7 @@ const SocialIcons = ({position = "footer", className}: SocialIconsProps) => {
           <Link
             key={platform}
             href={url}
-            className="border-background rounded-lg border-[1px] p-1.5 drop-shadow-md hover:cursor-pointer hover:drop-shadow-lg hover:scale-105 transition-all"
+            className="border-background rounded-lg border-[1px] p-1.5 drop-shadow-md transition-all hover:scale-105 hover:cursor-pointer hover:drop-shadow-lg"
             target="_blank"
             rel="noopener noreferrer"
           >

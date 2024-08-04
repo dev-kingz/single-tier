@@ -4,7 +4,7 @@ import React from "react";
 const PrivacyAndPolicyPage = () => {
   return (
     <main>
-     <TitleHeader
+      <TitleHeader
         title="Privacy and Policy"
         subTitle="Our privacy and policy!"
         showBreadcrumb

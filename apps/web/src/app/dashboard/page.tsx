@@ -1,6 +1,6 @@
-import {AuthModals} from "@/components/auth/modals";
-import TitleHeader from "@/components/headers/title-header";
 import React from "react";
+import {AuthModal} from "@/components/auth/modal";
+import TitleHeader from "@/components/headers/title-header";
 
 const DashboardPage = () => {
   return (
@@ -14,8 +14,10 @@ const DashboardPage = () => {
           {label: "Dashboard", currentPage: true},
         ]}
       />
-
-      <AuthModals />
+      <div className="flexi w-full max-w-lg gap-x-5 px-5">
+        <AuthModal authAction={"login"} triggerStyles="w-full" />
+        <AuthModal authAction={"signup"} triggerStyles="w-full" />
+      </div>
     </main>
   );
 };

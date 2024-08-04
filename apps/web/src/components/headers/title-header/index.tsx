@@ -3,7 +3,7 @@ import {BaseProps} from "@/types/theme";
 import React from "react";
 import {FcLandscape} from "react-icons/fc";
 import {Breadcrumbs, BreadcrumbsListProps} from "@/components/headers/title-header/breadcrumbs";
-import { Separator } from "@/components/ui/separator";
+import {Separator} from "@/components/ui/separator";
 
 interface TitleHeaderProps extends BaseProps, BreadcrumbsListProps {
   title: string;
