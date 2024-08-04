@@ -19,7 +19,7 @@ import {
 import {NavList} from "../constants";
 import Link from "next/link";
 import {Separator} from "@/components/ui/separator";
-import { RiArrowRightWideFill } from "react-icons/ri";
+import {RiArrowRightWideFill} from "react-icons/ri";
 
 interface HamburgerSidebarProps {
   handleClose: () => void;
@@ -45,15 +45,13 @@ const HamburgerSidebar = ({handleClose}: HamburgerSidebarProps) => {
                   <div key={navItem.href}>
                     <AccordionTrigger className="py-3 font-bold">{navItem.title}</AccordionTrigger>
                     <AccordionContent className="flexi-it flex-col gap-y-3">
-                      {navItem.children.map((child,index, childArray) => (
-                        <>
-                          <Link key={child.href} href={child.href} className="flexib w-full">
+                      {navItem.children.map((child, index, childArray) => (
+                        <div className="flexi-it w-full flex-col gap-y-3" key={child.href}>
+                          <Link href={child.href} className="flexib w-full">
                             <p>{child.title}</p> <RiArrowRightWideFill />
                           </Link>
-                          {index !== childArray.length - 1 &&
-                          <Separator />
-                          }
-                        </>
+                          {index !== childArray.length - 1 && <Separator />}
+                        </div>
                       ))}
                     </AccordionContent>
                   </div>
