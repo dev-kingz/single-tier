@@ -43,11 +43,17 @@ const HamburgerSidebar = ({handleClose}: HamburgerSidebarProps) => {
               <AccordionItem key={navItem.href} value={navItem.href}>
                 {navItem.children ? (
                   <div key={navItem.href}>
-                    <AccordionTrigger className="py-3 font-bold active:scale-105 transition-all duration-300">{navItem.title}</AccordionTrigger>
+                    <AccordionTrigger className="py-3 font-bold transition-all duration-300 active:bg-accent1.02]">
+                      {navItem.title}
+                    </AccordionTrigger>
                     <AccordionContent className="flexi-it flex-col gap-y-3">
                       {navItem.children.map((child, index, childArray) => (
-                        <div className="flexi-it w-full flex-col gap-y-3" key={child.href}>
-                          <Link href={child.href} className="flexib w-full">
+                        <div
+                          className="flexi-it w-full flex-col gap-y-3"
+                          key={child.href}
+                          onClick={handleClose}
+                        >
+                          <Link href={child.href} className="flexib w-full transition-all duration-200 active:bg-accent">
                             <p>{child.title}</p> <RiArrowRightWideFill />
                           </Link>
                           {index !== childArray.length - 1 && <Separator />}
@@ -56,7 +62,14 @@ const HamburgerSidebar = ({handleClose}: HamburgerSidebarProps) => {
                     </AccordionContent>
                   </div>
                 ) : (
-                  <AccordionHeader className="flex py-3 active:scale-110 transition-all duration-200">{navItem.title}</AccordionHeader>
+                  <Link
+                    href={navItem.href}
+                    key={navItem.href}
+                    className="flex w-full transition-all duration-200 active:bg-accent"
+                    onClick={handleClose}
+                  >
+                    <AccordionHeader className="flex py-3">{navItem.title}</AccordionHeader>
+                  </Link>
                 )}
               </AccordionItem>
             ))}

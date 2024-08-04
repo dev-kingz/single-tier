@@ -1,6 +1,5 @@
 "use client";
 import * as React from "react";
-import {useMediaQuery} from "usehooks-ts";
 
 import {Button} from "@/components/ui/button";
 import {
@@ -23,6 +22,7 @@ import {
 } from "@/components/ui/drawer";
 import {LoginForm} from "../forms";
 import {cn} from "@/lib/utils";
+import { useMediaQuery } from "@/hooks";
 
 interface AuthModalProps {
   triggerStyles?: string;
@@ -60,7 +60,7 @@ export function AuthModal({triggerStyles, authAction}: AuthModalProps) {
     return (
       <Drawer open={open} onOpenChange={setOpen}>
         <DrawerTrigger asChild>
-          <Button variant="outline" className={cn("Trigger", triggerStyles)}>
+          <Button className={cn("Trigger", triggerStyles)}>
             {authAction === "login" ? "Login" : "Sign Up"}
           </Button>
         </DrawerTrigger>
@@ -76,7 +76,7 @@ export function AuthModal({triggerStyles, authAction}: AuthModalProps) {
           <LoginForm className="px-4" />
           <DrawerFooter className="pt-2">
             <DrawerClose asChild>
-              <Button variant="outline" className={cn("Trigger", triggerStyles)}>
+              <Button className={cn("Trigger", triggerStyles)}>
                 Cancel
               </Button>
             </DrawerClose>
@@ -85,6 +85,6 @@ export function AuthModal({triggerStyles, authAction}: AuthModalProps) {
       </Drawer>
     );
   } else if (authAction === "logout") {
-    return <Button variant="outline">Logout</Button>;
+    return <Button>Logout</Button>;
   }
 }
