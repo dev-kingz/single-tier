@@ -43,7 +43,7 @@ const HamburgerSidebar = ({handleClose}: HamburgerSidebarProps) => {
               <AccordionItem key={navItem.href} value={navItem.href}>
                 {navItem.children ? (
                   <div key={navItem.href}>
-                    <AccordionTrigger className="py-3 font-bold">{navItem.title}</AccordionTrigger>
+                    <AccordionTrigger className="py-3 font-bold active:scale-105 transition-all duration-300">{navItem.title}</AccordionTrigger>
                     <AccordionContent className="flexi-it flex-col gap-y-3">
                       {navItem.children.map((child, index, childArray) => (
                         <div className="flexi-it w-full flex-col gap-y-3" key={child.href}>
@@ -56,7 +56,7 @@ const HamburgerSidebar = ({handleClose}: HamburgerSidebarProps) => {
                     </AccordionContent>
                   </div>
                 ) : (
-                  <AccordionHeader className="flex py-3">{navItem.title}</AccordionHeader>
+                  <AccordionHeader className="flex py-3 active:scale-110 transition-all duration-200">{navItem.title}</AccordionHeader>
                 )}
               </AccordionItem>
             ))}
