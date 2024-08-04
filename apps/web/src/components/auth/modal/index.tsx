@@ -1,6 +1,5 @@
 "use client";
 import * as React from "react";
-
 import {Button} from "@/components/ui/button";
 import {
   Dialog,
@@ -38,7 +37,7 @@ export function AuthModal({triggerStyles, authAction}: AuthModalProps) {
       return (
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button variant="outline" className={cn("Trigger", triggerStyles)}>
+            <Button variant="primary" className={cn("Trigger", triggerStyles)}>
               {authAction === "login" ? "Login" : "Sign Up"}
             </Button>
           </DialogTrigger>
@@ -60,11 +59,11 @@ export function AuthModal({triggerStyles, authAction}: AuthModalProps) {
     return (
       <Drawer open={open} onOpenChange={setOpen}>
         <DrawerTrigger asChild>
-          <Button className={cn("Trigger", triggerStyles)}>
+          <Button variant="primary" className={cn("Trigger", triggerStyles)}>
             {authAction === "login" ? "Login" : "Sign Up"}
           </Button>
         </DrawerTrigger>
-        <DrawerContent>
+        <DrawerContent className="h-[70vh] flexi flex-col justify-start">
           <DrawerHeader className="text-left">
             <DrawerTitle>{authAction === "login" ? "Login" : "Sign Up"}</DrawerTitle>
             <DrawerDescription>
@@ -76,7 +75,7 @@ export function AuthModal({triggerStyles, authAction}: AuthModalProps) {
           <LoginForm className="px-4" />
           <DrawerFooter className="pt-2">
             <DrawerClose asChild>
-              <Button className={cn("Trigger", triggerStyles)}>
+              <Button variant={"primary"}>
                 Cancel
               </Button>
             </DrawerClose>
@@ -85,6 +84,6 @@ export function AuthModal({triggerStyles, authAction}: AuthModalProps) {
       </Drawer>
     );
   } else if (authAction === "logout") {
-    return <Button>Logout</Button>;
+    return <Button variant="primary" className={cn("Trigger", triggerStyles)}>Logout</Button>;
   }
 }

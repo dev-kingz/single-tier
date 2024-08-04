@@ -44,7 +44,7 @@ const config: Config = {
             "--primary-foreground": "0 0% 98%",
             "--secondary": convertHexToHsl(colors.neutral[100]),
             "--secondary-foreground": convertHexToHsl(colors.neutral[900]),
-            "--muted": convertHexToHsl(colors.neutral[100]),
+            "--muted": convertHexToHsl(colors.neutral[300]),
             "--muted-foreground": "0 0% 45.1%",
             "--accent": convertHexToHsl(colors.neutral[200]),
             "--accent-foreground": convertHexToHsl(colors.neutral[900]),

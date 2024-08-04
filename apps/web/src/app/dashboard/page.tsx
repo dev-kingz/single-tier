@@ -15,7 +15,7 @@ const DashboardPage = () => {
         ]}
       />
 
-      <AuthModal authAction={"logout"} />
+      <AuthModal authAction={"login"} />
     </main>
   );
 };
