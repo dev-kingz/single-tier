@@ -36,7 +36,8 @@ export class AuthenticatorService {
     };
 
     // Check for the stayLoggedIn flag
-    const expiresIn = stayLoggedIn ? "7d" : "1d";
+    const expiresIn = stayLoggedIn ? "7d" : "20s";
+    const expiresInMs = 20 * 1000;
 
     return {
       user,
@@ -49,6 +50,7 @@ export class AuthenticatorService {
           expiresIn: "7d",
           secret: process.env.JWT_REFRESH_TOKEN,
         }),
+        expiresIn: new Date().setTime(new Date().getTime() + expiresInMs),
       },
     };
   }
@@ -60,6 +62,9 @@ export class AuthenticatorService {
       },
     };
 
+    const expiresInMs = 20 * 1000;
+
+
     return {
       tokens: {
         accessToken: await this.jwtService.signAsync(payload, {
@@ -70,6 +75,7 @@ export class AuthenticatorService {
           expiresIn: "7d",
           secret: process.env.JWT_REFRESH_TOKEN,
         }),
+        expiresIn: new Date().setTime(new Date().getTime() + expiresInMs),
       },
     };
   }
