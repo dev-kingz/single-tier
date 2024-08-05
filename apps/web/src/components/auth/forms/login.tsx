@@ -32,8 +32,6 @@ const LoginForm = ({className, setOpen}: LoginFormProps) => {
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof loginSchema>) {
-    console.log("values", values);
-    console.log('stayLoggedIn', typeof values.stayLoggedIn);
     const response = await SignIn(values);
     if (response) {
       router.refresh();
@@ -78,10 +76,7 @@ const LoginForm = ({className, setOpen}: LoginFormProps) => {
           render={({field}) => (
             <FormItem className="flexit gap-x-3">
               <FormControl className="-mb-2">
-                <Checkbox
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
+                <Checkbox checked={field.value} onCheckedChange={field.onChange} />
               </FormControl>
               <FormLabel>Stay Logged In</FormLabel>
               <FormMessage />

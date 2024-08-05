@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import {loginSchema} from "./schemas";
 import {JWT} from "next-auth/jwt";
+import {z} from "zod";
 
 async function refreshToken(token: JWT): Promise<JWT> {
   try {
@@ -35,15 +36,23 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
       credentials: {
         email: {},
         password: {},
-        stayLoggedIn: {type: "boolean"},
+        stayLoggedIn: {},
       },
       authorize: async (credentials) => {
         try {
           if (credentials === null) return null;
-          const {email, password, stayLoggedIn} = await loginSchema.parseAsync(credentials);
 
-          console.log("-------------------------stayLoggedIn", stayLoggedIn);
+          // Convert stayLoggedIn to boolean
+          const stayLoggedIn = credentials.stayLoggedIn === "true";
 
+          const {email, password} = await loginSchema.parseAsync({
+            ...credentials,
+            stayLoggedIn,
+          });
+
+          console.log("-------------stayLoggedIn", stayLoggedIn);
+
+          // const validatiedCredentials = loginSchema.parse(credentials);
           const res = await fetch(`${process.env.SERVER_URL}/auth/authenticator/login`, {
             method: "POST",
             headers: {

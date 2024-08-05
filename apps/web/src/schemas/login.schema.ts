@@ -7,5 +7,5 @@ export const loginSchema = z.object({
   password: z.string().min(6, {
     message: "Password must be at least 6 characters.",
   }),
-  stayLoggedIn: z.boolean().default(false).optional(),
+  stayLoggedIn: z.boolean(),
 });

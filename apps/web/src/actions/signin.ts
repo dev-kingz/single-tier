@@ -14,6 +14,9 @@ export async function SignIn(values: z.infer<typeof loginSchema>) {
 
     return response;
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      console.error("Validation error:", error.errors);
+    }
     throw new Error(error as any);
   }
 }
