@@ -14,7 +14,8 @@ export class AuthenticatorService {
   ) {}
 
   async login(loginDTO: LoginDto) {
-    const {email, password, stayLoggedIn} = loginDTO;
+    const {email, password} = loginDTO;
+    let {stayLoggedIn} = loginDTO;
 
     // Find the user document by profile
     const user = await this.userModel.findOne({email}).select("+password");
@@ -37,6 +38,8 @@ export class AuthenticatorService {
         id: user._id,
       },
     };
+
+    if(!stayLoggedIn) stayLoggedIn = false;
 
     // Check for the stayLoggedIn flag
     const expiresIn = stayLoggedIn ? "7d" : "1d";
@@ -66,7 +69,10 @@ export class AuthenticatorService {
       },
     };
 
-    const {stayLoggedIn} = refreshDTO;
+    let {stayLoggedIn} = refreshDTO;
+
+    if(!stayLoggedIn) stayLoggedIn = false;
+      
 
     // Check for the stayLoggedIn flag
     const expiresIn = stayLoggedIn ? "7d" : "1d";

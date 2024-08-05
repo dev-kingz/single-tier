@@ -42,7 +42,7 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
           if (credentials === null) return null;
           const {email, password, stayLoggedIn} = await loginSchema.parseAsync(credentials);
 
-          console.log("stayLoggedIn", stayLoggedIn);
+          console.log("-------------------------stayLoggedIn", stayLoggedIn);
 
           const res = await fetch(`${process.env.SERVER_URL}/auth/authenticator/login`, {
             method: "POST",
