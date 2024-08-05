@@ -26,6 +26,7 @@ declare module "next-auth" {
       accessToken: string;
       refreshToken: string;
       expiresIn: number;
+      stayLoggedIn: boolean;
     };
   }
 }
@@ -46,6 +47,7 @@ declare module "next-auth/jwt" {
       accessToken: string;
       refreshToken: string;
       expiresIn: number;
+      stayLoggedIn: boolean;
     };
   }
 }

@@ -10,7 +10,7 @@ import {Input} from "@/components/ui/input";
 import {BaseProps} from "@/types/theme";
 import {cn} from "@/lib/utils";
 import {SignIn} from "@/actions";
-import { useRouter } from "next/navigation";
+import {useRouter} from "next/navigation";
 
 interface LoginFormProps extends BaseProps {
   setOpen?: (value: boolean) => void;

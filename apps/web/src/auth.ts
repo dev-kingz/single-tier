@@ -1,18 +1,18 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import {loginSchema} from "./schemas";
-import { JWT } from "next-auth/jwt";
+import {JWT} from "next-auth/jwt";
 
-async function refreshToken(token:JWT): Promise<JWT> {
+async function refreshToken(token: JWT): Promise<JWT> {
   try {
-    const res= await fetch(`${process.env.SERVER_URL}/auth/authenticator/refresh`, {
+    const res = await fetch(`${process.env.SERVER_URL}/auth/authenticator/refresh`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token.tokens.refreshToken}`,
       },
+      body: JSON.stringify({stayLoggedIn: token.tokens.stayLoggedIn}),
     });
-    console.log("Refreshed!" + new Date().getTime());
 
     const response = await res.json();
 
@@ -34,19 +34,24 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
       credentials: {
         email: {},
         password: {},
+        stayLoggedIn: {type: "boolean"},
       },
       authorize: async (credentials) => {
         try {
           if (credentials === null) return null;
-          const {email, password} = await loginSchema.parseAsync(credentials);
-          
+          const {email, password, stayLoggedIn} = await loginSchema.parseAsync(credentials);
+
           const response = await fetch(`${process.env.SERVER_URL}/auth/authenticator/login`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({email, password}),
+            body: JSON.stringify({email, password, stayLoggedIn}),
           });
+
+          if (!response.ok) {
+            throw new Error("Invalid credentials");
+          }
 
           if (response) {
             const user = await response.json();
@@ -62,17 +67,19 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
   ],
   callbacks: {
     async jwt({token, user}) {
-      if (user)  return {...token, ...user};
+      if (user) return {...token, ...user};
 
-      if(new Date().getTime() < token.tokens.expiresIn) return token;
-
+      if (new Date().getTime() < token.tokens.expiresIn - 5 * 60 * 1000) {
+        return token; // Consider a buffer of 5 minutes
+      }
+      
       return await refreshToken(token);
     },
-    async session({token,session}) {
+    async session({token, session}) {
       session.user = token.user as any;
       session.tokens = token.tokens;
 
       return session;
-  },
+    },
   },
 });

@@ -17,9 +17,9 @@ const PrivacyAndPolicyPage = () => {
           {label: "Privacy and Policy", currentPage: true},
         ]}
       />
-      <Introduction/>
-      <InformationWeCollect/>
-      <InformationUse/>
+      <Introduction />
+      <InformationWeCollect />
+      <InformationUse />
     </main>
   );
 };

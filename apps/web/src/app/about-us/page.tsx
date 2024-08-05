@@ -10,8 +10,8 @@ const AboutUsPage = () => {
         subTitle="Get to know us!"
         showBreadcrumb
         breadcrumbList={[
-          { label: "Home", href: "/" },
-          { label: "About Us", currentPage: true },
+          {label: "Home", href: "/"},
+          {label: "About Us", currentPage: true},
         ]}
       />
 
@@ -23,7 +23,6 @@ const AboutUsPage = () => {
         width={500}
         height={300}
       />
-      
     </main>
   );
 };

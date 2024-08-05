@@ -1,6 +1,6 @@
 import {Body, Controller, Post, Request, UseGuards} from "@nestjs/common";
 import {AuthenticatorService} from "./authenticator.service";
-import {LoginDto} from "./dto";
+import {LoginDto, RefreshDto} from "./dto";
 import {RefreshGuard} from "./guards/refresh.guard";
 
 @Controller("/auth/authenticator")
@@ -14,7 +14,7 @@ export class AuthenticatorController {
 
   @UseGuards(RefreshGuard)
   @Post("refresh")
-  async refresh(@Request() request) {
-    return await this.authenticatorService.refresh(request);
+  async refresh(@Request() request, @Body() refreshDTO: RefreshDto) {
+    return await this.authenticatorService.refresh(request, refreshDTO);
   }
 }

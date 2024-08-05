@@ -1,13 +1,13 @@
-import React from 'react'
+import React from "react";
 import TitleHeader from "@/components/headers/title-header";
 import Introduction from "./sections/introduction";
-import SectionHeader from '@/components/headers/section-header';
-import Subtitle from '@/components/headers/section-header/subtitle';
+import SectionHeader from "@/components/headers/section-header";
+import Subtitle from "@/components/headers/section-header/subtitle";
 import {FcLandscape} from "react-icons/fc";
-import Cookies from './sections/cookies';
-import License from './sections/license';
-import Hyperlinking from './sections/hyperlinking';
-import IFrames from './sections/iFrames';
+import Cookies from "./sections/cookies";
+import License from "./sections/license";
+import Hyperlinking from "./sections/hyperlinking";
+import IFrames from "./sections/iFrames";
 
 const TermsAndConditionsPage = () => {
   return (
@@ -21,11 +21,11 @@ const TermsAndConditionsPage = () => {
           {label: "Terms and Conditions", currentPage: true},
         ]}
       />
-      <Introduction/>
-      <Cookies/>
-      <License/>
-      <Hyperlinking/>
-      <IFrames/>
+      <Introduction />
+      <Cookies />
+      <License />
+      <Hyperlinking />
+      <IFrames />
     </main>
   );
 };

@@ -1,23 +1,22 @@
-import SectionHeader from '@/components/headers/section-header'
-import React from 'react'
+import SectionHeader from "@/components/headers/section-header";
+import React from "react";
 
 const License = () => {
   return (
-    <section className="LicenseSection flexit-it flex-col px-8 sm:px-48 py-4">
+    <section className="LicenseSection flexit-it flex-col px-8 py-4 sm:px-48">
       <SectionHeader title="License" />
       <p className="Text">
-        Unless otherwise stated, DigiLearn and/or its licensors own the intellectual property
-        rights for all material on DigiLearn. All intellectual property rights are reserved. You
-        may access this from DigiLearn for your own personal use subjected to restrictions set in
-        these terms and conditions.
+        Unless otherwise stated, DigiLearn and/or its licensors own the intellectual property rights
+        for all material on DigiLearn. All intellectual property rights are reserved. You may access
+        this from DigiLearn for your own personal use subjected to restrictions set in these terms
+        and conditions.
         <br />
         <br />
         You must not:
         <br />
         <br />
       </p>
-      <ul
-        className="List list-disc">
+      <ul className="List list-disc">
         <li>
           <p>Republish material from DigiLearn</p>
         </li>
@@ -45,7 +44,7 @@ const License = () => {
         <br />
       </p>
     </section>
-  )
-}
+  );
+};
 
-export default License
+export default License;
