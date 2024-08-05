@@ -5,9 +5,9 @@ import {auth} from "@/auth";
 import {LogoutForm} from "@/components/auth/forms";
 
 const DashboardPage = async () => {
-  const session = await auth();
+  const Session = await auth();
 
-  if (!session?.user) {
+  if (!Session?.user) {
     return (
       <main>
         <TitleHeader
@@ -39,7 +39,8 @@ const DashboardPage = async () => {
         ]}
       />
       <div className="flexi w-full max-w-lg flex-col gap-y-5 px-5">
-        <p>{session?.user?.email}</p>
+        <p>{Session?.user.name}</p>
+        <p>{Session?.user.email}</p>
         <LogoutForm />
       </div>
     </main>

@@ -16,18 +16,18 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
         try {
           if (credentials === null) return null;
           const {email, password} = await loginSchema.parseAsync(credentials);
-          console.log("inside authorize", email, password);
+          
+          const response = await fetch(`${process.env.SERVER_URL}/auth/authenticator/login`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({email, password}),
+          });
 
-          const user = await fetch(`${process.env.SERVER_URL}/api/auth/login`, {
-
-          if (user) {
-            const isMatched = true;
-
-            if (isMatched) {
-              return user;
-            } else {
-              throw new Error("Invalid credentials");
-            }
+          if (response) {
+            const user = await response.json();
+            return user;
           } else {
             throw new Error("No user found");
           }
@@ -37,4 +37,17 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
       },
     }),
   ],
+  callbacks: {
+    async jwt({token, user}) {
+      if (user)  return {...token, ...user};
+      
+      return token;
+    },
+    async session({token,session}) {
+      session.user = token.user as any;
+      session.tokens = token.tokens;
+
+      return session;
+  },
+  },
 });
