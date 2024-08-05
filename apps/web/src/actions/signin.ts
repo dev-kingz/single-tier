@@ -1,13 +1,14 @@
 "use server";
+import {z} from "zod";
 import {signIn} from "@/auth";
 import {loginSchema} from "@/schemas";
-import {z} from "zod";
 
-export async function SignIn(formData: z.infer<typeof loginSchema>) {
+export async function SignIn(values: z.infer<typeof loginSchema>) {
   try {
     const response = await signIn("credentials", {
-      email: formData.email,
-      password: formData.password,
+      email: values.email,
+      password: values.password,
+      stayLoggedIn: values.stayLoggedIn,
       redirect: false,
     });
 

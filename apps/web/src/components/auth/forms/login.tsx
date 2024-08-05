@@ -11,6 +11,7 @@ import {BaseProps} from "@/types/theme";
 import {cn} from "@/lib/utils";
 import {SignIn} from "@/actions";
 import {useRouter} from "next/navigation";
+import {Checkbox} from "@/components/ui/checkbox";
 
 interface LoginFormProps extends BaseProps {
   setOpen?: (value: boolean) => void;
@@ -25,6 +26,7 @@ const LoginForm = ({className, setOpen}: LoginFormProps) => {
     defaultValues: {
       email: "",
       password: "",
+      stayLoggedIn: true,
     },
   });
 
@@ -64,6 +66,19 @@ const LoginForm = ({className, setOpen}: LoginFormProps) => {
               <FormControl>
                 <Input placeholder="******" {...field} />
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="stayLoggedIn"
+          render={({field}) => (
+            <FormItem className="flexit gap-x-3">
+              <FormControl className="-mb-2">
+                <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+              </FormControl>
+              <FormLabel>Stay Logged In</FormLabel>
               <FormMessage />
             </FormItem>
           )}
