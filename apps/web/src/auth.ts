@@ -50,8 +50,6 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
             stayLoggedIn,
           });
 
-          console.log("-------------stayLoggedIn", stayLoggedIn);
-
           // const validatiedCredentials = loginSchema.parse(credentials);
           const res = await fetch(`${process.env.SERVER_URL}/auth/authenticator/login`, {
             method: "POST",
