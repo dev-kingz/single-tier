@@ -25,26 +25,15 @@ import {useMediaQuery} from "@/hooks";
 
 interface AuthModalProps {
   triggerStyles?: string;
-  authAction: "login" | "signup" | "logout";
+  authAction: "login" | "signup";
 }
 
 export function AuthModal({triggerStyles, authAction}: AuthModalProps) {
   const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
-  if (authAction === "logout") {
-    return (
-      <Button variant="primary" className={cn("Trigger", triggerStyles)}>
-        Logout
-      </Button>
-    );
-  }
-
   const isLogin = authAction === "login";
   const actionText = isLogin ? "Login" : "Sign Up";
-  const descriptionText = isLogin
-    ? "Welcome back! Please login to continue."
-    : "Create an account to get started.";
 
   if (isDesktop) {
     return (
@@ -55,11 +44,10 @@ export function AuthModal({triggerStyles, authAction}: AuthModalProps) {
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
+          <DialogHeader className="hidden">
             <DialogTitle>{actionText}</DialogTitle>
-            <DialogDescription>{descriptionText}</DialogDescription>
           </DialogHeader>
-          {isLogin ? <LoginForm /> : <SignupForm />}
+          {isLogin ? <LoginForm setOpen={setOpen} /> : <SignupForm setOpen={setOpen} />}
         </DialogContent>
       </Dialog>
     );
@@ -73,11 +61,10 @@ export function AuthModal({triggerStyles, authAction}: AuthModalProps) {
         </Button>
       </DrawerTrigger>
       <DrawerContent className="flexi h-[80vh] flex-col justify-start">
-        <DrawerHeader>
+        <DrawerHeader className="hidden">
           <DrawerTitle>{actionText}</DrawerTitle>
-          <DrawerDescription>{descriptionText}</DrawerDescription>
         </DrawerHeader>
-        {isLogin ? <LoginForm /> : <SignupForm />}
+        {isLogin ? <LoginForm setOpen={setOpen} /> : <SignupForm setOpen={setOpen} />}
       </DrawerContent>
     </Drawer>
   );

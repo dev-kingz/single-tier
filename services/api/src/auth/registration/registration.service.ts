@@ -30,6 +30,9 @@ export class RegistrationService {
         },
       };
 
+      // Remove the password from the user object
+      user.password = undefined;
+
       // Check for the stayLoggedIn flag
       const expiresIn = "1d";
 

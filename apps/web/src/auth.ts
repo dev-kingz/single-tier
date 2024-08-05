@@ -1,34 +1,92 @@
 import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import {loginSchema} from "./schemas";
+import {JWT} from "next-auth/jwt";
+import {z} from "zod";
 
+async function refreshToken(token: JWT): Promise<JWT> {
+  try {
+    const res = await fetch(`${process.env.SERVER_URL}/auth/authenticator/refresh`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token.tokens.refreshToken}`,
+      },
+      body: JSON.stringify({stayLoggedIn: token.tokens.stayLoggedIn}),
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to refresh token");
+    }
+
+    const response = await res.json();
+    return {...token, tokens: response};
+  } catch (error) {
+    console.error("Error refreshing token:", error);
+    throw new Error("Authentication error");
+  }
+}
 
 export const {handlers, signIn, signOut, auth} = NextAuth({
+  session: {
+    strategy: "jwt",
+  },
   providers: [
-    Credentials({
-      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-      // e.g. domain, username, password, 2FA token, etc.
+    CredentialsProvider({
       credentials: {
         email: {},
         password: {},
+        stayLoggedIn: {},
       },
       authorize: async (credentials) => {
-        let user = null
- 
-        // logic to salt and hash password
-        const pwHash = saltAndHashPassword(credentials.password)
- 
-        // logic to verify if the user exists
-        user = await getUserFromDb(credentials.email, pwHash)
- 
-        if (!user) {
-          // No user found, so this is their first attempt to login
-          // meaning this is also the place you could do registration
-          throw new Error("User not found.")
+        try {
+          if (credentials === null) return null;
+
+          // Convert stayLoggedIn to boolean
+          const stayLoggedIn = credentials.stayLoggedIn === "true";
+
+          const {email, password} = await loginSchema.parseAsync({
+            ...credentials,
+            stayLoggedIn,
+          });
+
+          // const validatiedCredentials = loginSchema.parse(credentials);
+          const res = await fetch(`${process.env.SERVER_URL}/auth/authenticator/login`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({email, password, stayLoggedIn}),
+          });
+
+          if (!res.ok) {
+            throw new Error("Invalid credentials");
+          }
+
+          const user = await res.json();
+          return user || null;
+        } catch (error) {
+          console.error("Error during authorization:", error);
+          throw new Error("Authentication error");
         }
- 
-        // return user object with their profile data
-        return user
       },
     }),
-
   ],
+  callbacks: {
+    async jwt({token, user}) {
+      if (user) return {...token, ...user};
+
+      if (new Date().getTime() < token.tokens.expiresIn - 5 * 60 * 1000) {
+        return token; // Consider a buffer of 5 minutes
+      }
+
+      return await refreshToken(token);
+    },
+    async session({token, session}) {
+      session.user = token.user as any;
+      session.tokens = token.tokens;
+
+      return session;
+    },
+  },
 });

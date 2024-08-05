@@ -1,1 +1,1 @@
-import * as z from "zod";
+export * from "./login.schema";
