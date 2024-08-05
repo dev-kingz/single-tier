@@ -39,7 +39,7 @@ export class AuthenticatorService {
       },
     };
 
-    if(!stayLoggedIn) stayLoggedIn = false;
+    if (!stayLoggedIn) stayLoggedIn = false;
 
     // Check for the stayLoggedIn flag
     const expiresIn = stayLoggedIn ? "7d" : "1d";
@@ -71,8 +71,7 @@ export class AuthenticatorService {
 
     let {stayLoggedIn} = refreshDTO;
 
-    if(!stayLoggedIn) stayLoggedIn = false;
-      
+    if (!stayLoggedIn) stayLoggedIn = false;
 
     // Check for the stayLoggedIn flag
     const expiresIn = stayLoggedIn ? "7d" : "1d";

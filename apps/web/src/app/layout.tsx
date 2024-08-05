@@ -20,9 +20,43 @@ const secondary = Cinzel({
   variable: "--font-secondary",
 });
 
-export const metadata: Metadata = {
-  title: Brand.name,
-  description: Brand.slogan,
+const metadata: Metadata = {
+  metadataBase: new URL(Brand.url),
+  title: {
+    default: `${Brand.name} - ${Brand.slogan}`,
+    template: `%s - ${Brand.name}`,
+  },
+  description: Brand.description,
+  applicationName: Brand.name,
+  alternates: {
+    languages: {
+      "en-US": Brand.url,
+    },
+    media: {
+      "only screen and (max-width: 640px)": Brand.url,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: Brand.url,
+    title: `${Brand.name} - ${Brand.slogan}`,
+    description: Brand.description,
+    images: [
+      {
+        url: Brand.preview,
+        width: 1200,
+        height: 630,
+        alt: `${Brand.name} - ${Brand.slogan}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${Brand.name} - ${Brand.slogan}`,
+    images: Brand.preview,
+    description: Brand.description,
+  },
 };
 
 export default function RootLayout({
