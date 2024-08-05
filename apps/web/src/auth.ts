@@ -14,14 +14,15 @@ async function refreshToken(token: JWT): Promise<JWT> {
       body: JSON.stringify({stayLoggedIn: token.tokens.stayLoggedIn}),
     });
 
-    const response = await res.json();
+    if (!res.ok) {
+      throw new Error("Failed to refresh token");
+    }
 
-    return {
-      ...token,
-      tokens: response,
-    };
+    const response = await res.json();
+    return {...token, tokens: response};
   } catch (error) {
-    throw new Error(error as any);
+    console.error("Error refreshing token:", error);
+    throw new Error("Authentication error");
   }
 }
 
@@ -41,7 +42,7 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
           if (credentials === null) return null;
           const {email, password, stayLoggedIn} = await loginSchema.parseAsync(credentials);
 
-          const response = await fetch(`${process.env.SERVER_URL}/auth/authenticator/login`, {
+          const res = await fetch(`${process.env.SERVER_URL}/auth/authenticator/login`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -49,18 +50,15 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
             body: JSON.stringify({email, password, stayLoggedIn}),
           });
 
-          if (!response.ok) {
+          if (!res.ok) {
             throw new Error("Invalid credentials");
           }
 
-          if (response) {
-            const user = await response.json();
-            return user;
-          } else {
-            throw new Error("No user found");
-          }
+          const user = await res.json();
+          return user || null;
         } catch (error) {
-          throw new Error(error as any);
+          console.error("Error during authorization:", error);
+          throw new Error("Authentication error");
         }
       },
     }),
@@ -72,7 +70,7 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
       if (new Date().getTime() < token.tokens.expiresIn - 5 * 60 * 1000) {
         return token; // Consider a buffer of 5 minutes
       }
-      
+
       return await refreshToken(token);
     },
     async session({token, session}) {
