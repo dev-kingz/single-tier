@@ -59,15 +59,24 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
             body: JSON.stringify({email, password, stayLoggedIn}),
           });
 
+          // If the response is not OK, throw an error with the response message
           if (!res.ok) {
-            throw new Error("Invalid credentials");
-          }
+            const errorResponse = await res.json();
+            console.error(`Login error: ${errorResponse.message?.[0] || "Failed to login!"}`);
+            throw new Error(errorResponse.message?.[0] || "Failed to login!");
+        }
+        
 
           const user = await res.json();
           return user || null;
         } catch (error) {
-          console.error("Error during authorization:", error);
-          throw new Error("Authentication error");
+          if (error instanceof z.ZodError) {
+            console.error("Validation error:", error.errors);
+          } else if (error instanceof Error) {
+            throw new Error(error.message);
+          } else {
+            throw new Error("Failed to Login!");
+          }
         }
       },
     }),

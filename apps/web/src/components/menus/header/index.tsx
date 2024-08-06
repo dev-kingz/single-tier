@@ -19,6 +19,7 @@ const Header = ({children, className, type = "sticky"}: HeaderProps) => {
       className={cn(
         [
           "Header z-50 w-full",
+          "bg-background text-foreground drop-shadow-md",
           type === "sticky" && "sticky top-0",
           type === "fixed" && "fixed top-0",
           type === "static" && "static",
@@ -26,7 +27,7 @@ const Header = ({children, className, type = "sticky"}: HeaderProps) => {
         className,
       )}
     >
-      <Sheet open={isOpen} onOpenChange={setIsOpen}>
+      <Sheet key={"HamburgerMenu"} open={isOpen} onOpenChange={setIsOpen}>
         {children}
         <Separator />
         <HamburgerSidebar handleClose={handleClose} />

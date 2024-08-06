@@ -7,6 +7,7 @@ import Header from "@/components/menus/header";
 import MainSection from "@/components/menus/header/main-section";
 import Footer from "@/components/menus/footer";
 import {Brand} from "@/constants/brand";
+import { Toaster } from "@/components/ui/toaster";
 
 const primary = Poppins({
   subsets: ["latin"],
@@ -76,7 +77,9 @@ export default function RootLayout({
             <MainSection />
           </Header>
           {children}
+          
           <Footer />
+          <Toaster />
         </Providers>
       </body>
     </html>

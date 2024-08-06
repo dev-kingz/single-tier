@@ -1,5 +1,6 @@
 "use client";
 
+import {useState} from "react";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
 import {z} from "zod";
@@ -9,30 +10,21 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/
 import {Input} from "@/components/ui/input";
 import {BaseProps} from "@/types/theme";
 import {cn} from "@/lib/utils";
+import {signupSchema} from "@/schemas";
+import {Signup} from "@/actions";
+import {ToastAction} from "@/components/ui/toast";
+import {useToast} from "@/components/ui/use-toast";
+import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert";
+import {BiError} from "react-icons/bi";
+import {FormProps} from "./types";
 
-const formSchema = z.object({
-  name: z.string().min(3, {
-    message: "Name must be at least 3 characters.",
-  }),
-  username: z.string().min(3, {
-    message: "Username must be at least 3 characters.",
-  }),
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-  password: z.string().min(6, {
-    message: "Password must be at least 6 characters.",
-  }),
-});
+const SignupForm = ({className, setOpen, setAction}: FormProps) => {
+  const {toast} = useToast();
+  const [errorText, setErrorText] = useState("");
 
-interface SignupFormProps extends BaseProps {
-  setOpen?: (value: boolean) => void;
-}
-
-const SignupForm = ({setOpen, className}: SignupFormProps) => {
   // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof signupSchema>>({
+    resolver: zodResolver(signupSchema),
     defaultValues: {
       name: "",
       username: "",
@@ -42,17 +34,51 @@ const SignupForm = ({setOpen, className}: SignupFormProps) => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    if (setOpen) {
-      setOpen(false);
+  async function onSubmit(values: z.infer<typeof signupSchema>) {
+    try {
+      const response = await Signup(values);
+      console.log(response);
+      if (response) {
+        toast({
+          title: "Registration Successful🥳",
+          description: "Welcome to the community!",
+          action:
+            setOpen && setAction ? (
+              <ToastAction
+                className="border-none bg-transparent hover:bg-transparent"
+                altText="Login"
+              >
+                <Button
+                  variant={"primary"}
+                  rounded={"full"}
+                  className="h-full"
+                  onClick={() => {
+                    setAction("login");
+                  }}
+                >
+                  Login
+                </Button>
+              </ToastAction>
+            ) : (
+              <></>
+            ),
+        });
+        setErrorText("");
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+        setErrorText(error.message);
+      } else {
+        console.error("Failed to signup!");
+        setErrorText("Failed to signup!");
+      }
     }
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className={cn("space-y-8", className)}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className={cn("SignupForm w-full space-y-6", className)}>
         <h2>Signup</h2>
         <p>Create an account to get started.</p>
         <FormField
@@ -107,8 +133,15 @@ const SignupForm = ({setOpen, className}: SignupFormProps) => {
             </FormItem>
           )}
         />
+        {errorText && (
+          <Alert variant="destructive" className="space-x-2">
+            <BiError className="h-6 w-6" />
+            <AlertTitle>Heads up!</AlertTitle>
+            <AlertDescription>{errorText}</AlertDescription>
+          </Alert>
+        )}
         <Button variant={"primary"} className="w-full" type="submit">
-          Submit
+          Sign up
         </Button>
       </form>
     </Form>
