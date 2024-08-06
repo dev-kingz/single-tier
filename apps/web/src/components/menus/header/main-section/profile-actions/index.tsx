@@ -14,7 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {LogOut, User} from "lucide-react";
-import { signOut, useSession } from "next-auth/react";
+import {signOut, useSession} from "next-auth/react";
 
 const ProfileActions = () => {
   const session = useSession();
@@ -59,10 +59,11 @@ const ProfileActions = () => {
               <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => signOut()}>
-      <LogOut className="mr-2 h-4 w-4" />
-      <span>Log out</span>
-      <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-    </DropdownMenuItem>          </DropdownMenuGroup>
+              <LogOut className="mr-2 h-4 w-4" />
+              <span>Log out</span>
+              <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+            </DropdownMenuItem>{" "}
+          </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

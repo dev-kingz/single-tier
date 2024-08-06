@@ -29,7 +29,6 @@ const AuthModal = ({defaultAction = "signup", triggerStyles, ...props}: ModalPro
   const [action, setAction] = useState(defaultAction);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
-  console.log("defaultAction", defaultAction);
   const actionText = action === "signup" ? "Sign Up" : "Login";
 
   const TriggerButton = (
