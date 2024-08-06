@@ -1,13 +1,14 @@
 import "./globals.css";
 import type {Metadata} from "next";
 import Providers from "@/app/providers";
+import {SessionProvider} from "next-auth/react";
 
 import {Cinzel, Poppins} from "next/font/google";
 import Header from "@/components/menus/header";
 import MainSection from "@/components/menus/header/main-section";
 import Footer from "@/components/menus/footer";
 import {Brand} from "@/constants/brand";
-import { Toaster } from "@/components/ui/toaster";
+import {Toaster} from "@/components/ui/toaster";
 
 const primary = Poppins({
   subsets: ["latin"],
@@ -60,7 +61,7 @@ const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -72,15 +73,16 @@ export default function RootLayout({
       className={`${primary.variable} ${secondary.variable}`}
     >
       <body suppressHydrationWarning>
-        <Providers>
-          <Header>
-            <MainSection />
-          </Header>
-          {children}
-          
-          <Footer />
-          <Toaster />
-        </Providers>
+        <SessionProvider>
+          <Providers>
+            <Header>
+              <MainSection />
+            </Header>
+            {children}
+            <Footer />
+            <Toaster />
+          </Providers>
+        </SessionProvider>
       </body>
     </html>
   );

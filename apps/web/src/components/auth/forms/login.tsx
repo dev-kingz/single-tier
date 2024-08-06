@@ -37,29 +37,29 @@ const LoginForm = ({className, setOpen, setAction}: FormProps) => {
   async function onSubmit(values: z.infer<typeof loginSchema>) {
     try {
       const response = await SignIn(values);
-      console.log(response);
-      if (response) {
-        toast({
-          title: "Login Successful🥳",
-          description: "Welcome Back!",
-          action:
-            setOpen && setAction ? (
-              <ToastAction
-                className="border-none bg-transparent hover:bg-transparent"
-                altText="Login"
-              >
-                <Link href="/dashboard" onClick={()=> setOpen(false)}>
-                  <Button variant={"primary"} rounded={"full"} className="h-full">
-                    Visit Dashboard
-                  </Button>
-                </Link>
-              </ToastAction>
-            ) : (
-              <></>
-            ),
-        });
-        setErrorText("");
-      }
+      // console.log(response);
+      // if (response) {
+      //   toast({
+      //     title: "Login Successful🥳",
+      //     description: "Welcome Back!",
+      //     action:
+      //       setOpen && setAction ? (
+      //         <ToastAction
+      //           className="border-none bg-transparent hover:bg-transparent"
+      //           altText="Login"
+      //         >
+      //           <Link href="/dashboard" onClick={()=> setOpen(false)}>
+      //             <Button variant={"primary"} rounded={"full"} className="h-full">
+      //               Visit Dashboard
+      //             </Button>
+      //           </Link>
+      //         </ToastAction>
+      //       ) : (
+      //         <></>
+      //       ),
+      //   });
+      //   setErrorText("");
+      // }
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
