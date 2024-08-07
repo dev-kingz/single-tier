@@ -1,8 +1,8 @@
-import {Body, Controller, Post, Request, UseGuards} from "@nestjs/common";
+import {Body, Controller, Get, Post, Req, Res} from "@nestjs/common";
 import {AuthenticatorService} from "./authenticator.service";
-import {LoginDto, RefreshDto} from "./dto";
-import {RefreshGuard} from "../guards/refresh.guard";
-import { Public } from "../decorators/public.decorator";
+import {LoginDto} from "./dto";
+import {Public} from "../decorators/public.decorator";
+import {Request, Response} from "express";
 
 @Controller("/auth/authenticator")
 export class AuthenticatorController {
@@ -10,13 +10,21 @@ export class AuthenticatorController {
 
   @Public()
   @Post("login")
-  async login(@Body() loginDTO: LoginDto) {
-    return await this.authenticatorService.login(loginDTO);
+  async login(
+    @Body() loginDTO: LoginDto,
+    @Req() request: Request,
+    @Res({passthrough: true}) response: Response,
+  ) {
+    return await this.authenticatorService.login(loginDTO, request, response);
   }
 
-  @UseGuards(RefreshGuard)
-  @Post("refresh")
-  async refresh(@Request() request, @Body() refreshDTO: RefreshDto) {
-    return await this.authenticatorService.refresh(request, refreshDTO);
+  @Post("logout")
+  async logout(@Res({passthrough: true}) response: Response) {
+    return await this.authenticatorService.logout(response);
+  }
+
+  @Get()
+  async getSession(@Req() request: Request) {
+    return await this.authenticatorService.getSession(request);
   }
 }

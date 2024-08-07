@@ -3,12 +3,16 @@ import {JwtService} from "@nestjs/jwt";
 import {Request} from "express";
 import {IS_PUBLIC_KEY} from "../decorators/public.decorator";
 import {Reflector} from "@nestjs/core";
+import {InjectModel} from "@nestjs/mongoose";
+import {USER_MODEL, UserDocument} from "src/models/schemas/user";
+import {Model} from "mongoose";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
     private jwtService: JwtService,
     private reflector: Reflector,
+    @InjectModel(USER_MODEL) private readonly userModel: Model<UserDocument>,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -23,16 +27,29 @@ export class AuthGuard implements CanActivate {
 
     const request = context.switchToHttp().getRequest();
 
-    const token = this.extractTokenFromRequest(request);
-
-    if (!token) throw new UnauthorizedException();
+    const accessToken = this.extractTokenFromRequestCookie(request);
 
     try {
-      const payload = await this.jwtService.verifyAsync(token, {
+      const payload = await this.jwtService.verifyAsync(accessToken, {
         secret: process.env.JWT_SECRET,
       });
 
-      request["user"] = payload;
+      // Throw an error if the expiry date is less than the current date
+      const expiryDate = new Date(payload.exp * 1000);
+      if (new Date() > expiryDate) {
+        const response = context.switchToHttp().getResponse();
+        response.clearCookie("accessToken");
+        throw new UnauthorizedException();
+      }
+
+      // Get the user document from the database
+      const user = await this.userModel.findById(payload.user.id).select("-password");
+
+      if (!user) {
+        throw new UnauthorizedException();
+      }
+
+      request["user"] = user;
     } catch (error) {
       throw new UnauthorizedException();
     }
@@ -40,12 +57,13 @@ export class AuthGuard implements CanActivate {
     return true;
   }
 
-  private extractTokenFromRequest(request: Request) {
-    const authHeader = request.headers.authorization;
-    if (!authHeader) return undefined; // Return undefined if the header is missing
+  private extractTokenFromRequestCookie(request: Request) {
+    const accessToken = request.cookies["accessToken"];
 
-    const [type, token] = authHeader.split(" ");
+    if (!accessToken) {
+      throw new UnauthorizedException("Unauthorized");
+    }
 
-    return type === "Bearer" ? token : undefined;
+    return accessToken;
   }
 }
