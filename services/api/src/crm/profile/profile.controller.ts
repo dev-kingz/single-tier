@@ -1,15 +1,15 @@
-import {Controller, Get, Param, UseGuards} from "@nestjs/common";
+import {Controller, Get, Req, UseGuards} from "@nestjs/common";
 import {ProfileService} from "./profile.service";
-import {Types} from "mongoose";
-import {JwtGuard} from "src/auth/authenticator/guards/jwt.guard";
+import {AuthGuard} from "src/auth/guards";
+import {Request} from "express";
 
 @Controller("/crm/profile")
 export class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
 
-  @UseGuards(JwtGuard)
-  @Get(":id")
-  async getProfile(@Param("id") id: Types.ObjectId) {
-    return await this.profileService.getProfile(id);
+  @UseGuards(AuthGuard)
+  @Get()
+  async getProfile(@Req() request: Request) {
+    return await this.profileService.getProfile(request);
   }
 }

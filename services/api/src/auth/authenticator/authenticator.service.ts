@@ -1,10 +1,11 @@
 import {Injectable, UnauthorizedException} from "@nestjs/common";
-import {LoginDto, RefreshDto} from "./dto";
+import {LoginDto} from "./dto";
 import {InjectModel} from "@nestjs/mongoose";
 import {Model} from "mongoose";
 import {USER_MODEL, UserDocument} from "src/models/schemas/user";
 import {JwtService} from "@nestjs/jwt";
 import * as bcrypt from "bcrypt";
+import {Request} from "express";
 
 @Injectable()
 export class AuthenticatorService {
@@ -30,66 +31,30 @@ export class AuthenticatorService {
       throw new UnauthorizedException("Invalid email or password");
     }
 
-    // Remove the password from the account document
-    user.password = undefined;
-
     const payload = {
       user: {
         id: user._id,
       },
     };
-
     if (!stayLoggedIn) stayLoggedIn = false;
 
     // Check for the stayLoggedIn flag
     const expiresIn = stayLoggedIn ? "7d" : "1d";
-    const expiresInMs = stayLoggedIn ? 7 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000;
+
+    const accessToken = await this.jwtService.signAsync(payload, {
+      expiresIn,
+      secret: process.env.JWT_SECRET,
+    });
 
     return {
-      user,
-      tokens: {
-        accessToken: await this.jwtService.signAsync(payload, {
-          expiresIn: "1d",
-          secret: process.env.JWT_SECRET,
-        }),
-        refreshToken: await this.jwtService.signAsync(payload, {
-          expiresIn,
-          secret: process.env.JWT_REFRESH_TOKEN,
-        }),
-        expiresIn: new Date().setTime(new Date().getTime() + expiresInMs),
-        stayLoggedIn,
-      },
+      message: "Login successful!",
+      accessToken,
     };
   }
 
-  async refresh(user: any, refreshDTO: RefreshDto) {
-    const payload = {
-      user: {
-        id: user.id,
-      },
-    };
+  async getSession(request: Request) {
+    const user = request["user"];
 
-    let {stayLoggedIn} = refreshDTO;
-
-    if (!stayLoggedIn) stayLoggedIn = false;
-
-    // Check for the stayLoggedIn flag
-    const expiresIn = stayLoggedIn ? "7d" : "1d";
-    const expiresInMs = stayLoggedIn ? 7 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000;
-
-    return {
-      tokens: {
-        accessToken: await this.jwtService.signAsync(payload, {
-          expiresIn: "1d",
-          secret: process.env.JWT_SECRET,
-        }),
-        refreshToken: await this.jwtService.signAsync(payload, {
-          expiresIn,
-          secret: process.env.JWT_REFRESH_TOKEN,
-        }),
-        expiresIn: new Date().setTime(new Date().getTime() + expiresInMs),
-        stayLoggedIn,
-      },
-    };
+    return user;
   }
 }
