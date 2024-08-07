@@ -1,7 +1,7 @@
 import {Delete, Injectable, Param, UseGuards} from "@nestjs/common";
 import {InjectModel} from "@nestjs/mongoose";
 import {Model, Types} from "mongoose";
-import {JwtGuard} from "src/auth/authenticator/guards/jwt.guard";
+import {AuthGuard} from "src/auth/guards";
 import {USER_MODEL, UserDocument} from "src/models/schemas/user";
 
 @Injectable()

@@ -1,7 +1,6 @@
 import "./globals.css";
 import type {Metadata} from "next";
 import Providers from "@/app/providers";
-import {SessionProvider} from "next-auth/react";
 
 import {Cinzel, Poppins} from "next/font/google";
 import Header from "@/components/menus/header";
@@ -73,7 +72,6 @@ export default async function RootLayout({
       className={`${primary.variable} ${secondary.variable}`}
     >
       <body suppressHydrationWarning>
-        <SessionProvider>
           <Providers>
             <Header>
               <MainSection />
@@ -82,7 +80,6 @@ export default async function RootLayout({
             <Footer />
             <Toaster />
           </Providers>
-        </SessionProvider>
       </body>
     </html>
   );
