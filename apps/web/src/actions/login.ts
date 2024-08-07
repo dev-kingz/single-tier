@@ -1,44 +1,33 @@
 "use server";
+import axios from "axios";
 import {z} from "zod";
 import {loginSchema} from "@/schemas/dto";
 import {api} from "@/config/axios.config";
-import axios from "axios";
-import {cookies} from "next/headers";
-import {CookieParser} from "@/lib/cookie-parser";
+import {sessionSchema} from "@/schemas/models";
 
 export async function Login(values: z.infer<typeof loginSchema>) {
   try {
-    const {data, headers} = await api.post("auth/authenticator/login", values);
+    const {headers} = await api.post("auth/authenticator/login", values);
 
-    // look for the accessToken cookie in the response headers
-    const accessTokenString = headers["set-cookie"]?.find((cookie: string) =>
-      cookie.startsWith("accessToken"),
-    );
+    // Get AccessToken from Authorization Bearer Header `Bearer ${accessToken}`
+    const accessToken = headers.authorization.split(" ")[1];
 
-    if (!accessTokenString) {
-      cookies().delete("acessToken");
-      throw new Error("Failed to login!");
-    }
-    // extract the accessToken from the cookie string
-    const accessToken = CookieParser(accessTokenString);
-
-    // set the accessToken cookie
-    cookies().set("acessToken", accessToken?.accessToken, {
-      secure: accessToken?.secure === "true" || false,
-      httpOnly: true,
+    const {data} = await api.get("/auth/authenticator/getSession", {
+      headers: {Authorization: `Bearer ${accessToken}`},
     });
 
-    const message = data.message;
+    const user = await sessionSchema.parseAsync(data);
 
-    // const user = await sessionSchema.parseAsync(data);
+    if (!user) {
+      throw new Error("Failed to login!");
+    }
 
-    return message;
+    return user;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       if (error.response && error.response.data) {
         // Do something with this error...
         const {message} = error.response.data;
-        console.table(message);
         throw new Error(message);
       } else {
         console.error(error.message);

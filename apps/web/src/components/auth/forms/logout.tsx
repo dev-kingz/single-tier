@@ -8,8 +8,13 @@ interface LogoutProps {
 }
 
 export const LogoutForm = ({triggerStyles}: LogoutProps) => {
+  async function handleLogout(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    await Logout();
+  }
+
   return (
-    <form action={Logout}>
+    <form onSubmit={handleLogout}>
       <Button type="submit" variant="primary" className={cn("Trigger", triggerStyles)}>
         Logout
       </Button>

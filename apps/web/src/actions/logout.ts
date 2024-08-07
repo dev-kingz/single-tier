@@ -5,7 +5,13 @@ import {cookies} from "next/headers";
 
 export async function Logout() {
   try {
-    const {data} = await api.post("auth/authenticator/login");
+    const {data} = await api.post(
+      "/auth/authenticator/logout",
+      {},
+      {
+        withCredentials: true,
+      },
+    );
 
     // clear the accessToken cookie
     cookies().delete("accessToken");
@@ -18,14 +24,14 @@ export async function Logout() {
       if (error.response && error.response.data) {
         // Do something with this error...
         const {message} = error.response.data;
-        console.table(message);
         throw new Error(message);
       } else {
         console.error(error.message);
-        throw new Error("Failed to login!");
+        throw new Error("Failed to logout!");
       }
     } else {
       console.error(error);
     }
   }
 }
+

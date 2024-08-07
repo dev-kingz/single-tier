@@ -5,7 +5,7 @@ import {Model} from "mongoose";
 import {USER_MODEL, UserDocument} from "src/models/schemas/user";
 import {JwtService} from "@nestjs/jwt";
 import * as bcrypt from "bcrypt";
-import {Request, Response} from "express";
+import {Request} from "express";
 
 @Injectable()
 export class AuthenticatorService {
@@ -14,10 +14,7 @@ export class AuthenticatorService {
     private jwtService: JwtService,
   ) {}
 
-  async login(loginDTO: LoginDto, request: Request, response: Response) {
-    // check if the user is already logged in by checking the cookie
-    if (request.cookies["accessToken"]) throw new UnauthorizedException("User already logged in!");
-
+  async login(loginDTO: LoginDto) {
     const {email, password} = loginDTO;
     let {stayLoggedIn} = loginDTO;
 
@@ -49,21 +46,9 @@ export class AuthenticatorService {
       secret: process.env.JWT_SECRET,
     });
 
-    response.cookie("accessToken", accessToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-    });
-
     return {
       message: "Login successful!",
-    };
-  }
-
-  async logout(response: Response) {
-    response.clearCookie("accessToken");
-
-    return {
-      message: "Logout successful!",
+      accessToken,
     };
   }
 

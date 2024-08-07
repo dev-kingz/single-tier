@@ -16,12 +16,15 @@ import {Login} from "@/actions";
 import {Checkbox} from "@/components/ui/checkbox";
 import {BiError} from "react-icons/bi";
 import {FormProps} from "./types";
-import { useRouter } from "next/navigation";
+import {useRouter} from "next/navigation";
+import {useDispatch} from "react-redux";
+import {logout, setSession} from "@/store/slices/user.slice";
 
 const LoginForm = ({className, open, setOpen}: FormProps) => {
   const router = useRouter();
   const {toast} = useToast();
   const [errorText, setErrorText] = useState("");
+  const dispatch = useDispatch();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -36,15 +39,15 @@ const LoginForm = ({className, open, setOpen}: FormProps) => {
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof loginSchema>) {
     try {
-      const response = await Login(values);
-      console.log(response);
-      if (response) {
+      const user = await Login(values);
+      if (user) {
         toast({
           title: "Login Successful🥳",
           description: "Welcome Back!",
         });
         if (open && setOpen) setOpen(false);
         setErrorText("");
+        dispatch(setSession(user));
         router.push("/"); // Redirect to the home page
       }
     } catch (error) {
@@ -56,6 +59,7 @@ const LoginForm = ({className, open, setOpen}: FormProps) => {
         console.error("Failed to login!");
         setErrorText("Failed to login!");
       }
+      dispatch(logout());
     }
   }
 

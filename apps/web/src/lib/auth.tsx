@@ -1,8 +1,8 @@
 "use client";
-import {logout, setSession} from "@/store/slices/user.slice";
+import {logout, selectUser, setSession} from "@/store/slices/user.slice";
 import {useRouter} from "next/navigation";
 import React, {useEffect} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getCookie, deleteCookie} from "cookies-next";
 import {sessionSchema} from "@/schemas/models";
 import {api} from "@/config/axios.config";
@@ -16,10 +16,7 @@ const Auth = () => {
   useEffect(() => {
     async function checkUser() {
       try {
-        console.log("----------process.env.NEXT_PUBLIC_SERVER_URL", process.env.NEXT_PUBLIC_SERVER_URL);
         const {data, headers} = await api.get("/auth/authenticator/getSession");
-        console.log("----------data", data);
-        console.log("--------------------headers", headers);
 
         // look for the accessToken cookie in the response headers
         const accessToken = headers["set-cookie"]?.find((cookie: string) =>
@@ -30,7 +27,7 @@ const Auth = () => {
 
         if (!user && !accessToken) {
           dispatch(logout());
-          deleteCookie("acessToken");
+          deleteCookie("accessToken");
           return;
         }
 

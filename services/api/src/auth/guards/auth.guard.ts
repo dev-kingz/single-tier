@@ -28,8 +28,12 @@ export class AuthGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
 
     try {
-      const accessToken = this.extractTokenFromRequestCookie(request);
+      const accessToken = this.extractTokenFromRequest(request);
+      if (!accessToken) {
+        throw new UnauthorizedException();
+      }
 
+      
       const payload = await this.jwtService.verifyAsync(accessToken, {
         secret: process.env.JWT_SECRET,
       });
@@ -37,8 +41,6 @@ export class AuthGuard implements CanActivate {
       // Throw an error if the expiry date is less than the current date
       const expiryDate = new Date(payload.exp * 1000);
       if (new Date() > expiryDate) {
-        const response = context.switchToHttp().getResponse();
-        response.clearCookie("accessToken");
         throw new UnauthorizedException();
       }
 
@@ -57,13 +59,8 @@ export class AuthGuard implements CanActivate {
     return true;
   }
 
-  private extractTokenFromRequestCookie(request: Request) {
-    const accessToken = request.cookies["accessToken"];
-
-    if (!accessToken) {
-      throw new UnauthorizedException("Unauthorized");
-    }
-
-    return accessToken;
+  private extractTokenFromRequest(request: Request) {
+    const [type, token] = request.headers.authorization?.split(' ') ?? [];
+    return type === 'Bearer' ? token : undefined;
   }
 }

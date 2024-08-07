@@ -2,7 +2,6 @@ import {NestFactory} from "@nestjs/core";
 import {AppModule} from "./app.module";
 import {ValidationPipe} from "@nestjs/common";
 import {useContainer} from "class-validator";
-import * as cookieParser from "cookie-parser";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -20,12 +19,6 @@ async function bootstrap() {
 
   // wrap AppModule with UseContainer
   useContainer(app.select(AppModule), {fallbackOnErrors: true});
-
-  app.use(cookieParser());
-  app.enableCors({
-    origin: process.env.ORIGIN,
-    credentials: true,
-  });
 
   // Retrieve the configuration values
   const base_url = process.env.BASE_URL;
