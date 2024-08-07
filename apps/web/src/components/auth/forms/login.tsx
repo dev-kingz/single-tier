@@ -10,15 +10,16 @@ import {Button} from "@/components/ui/button";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert";
 import {Input} from "@/components/ui/input";
-import {ToastAction} from "@/components/ui/toast";
 import {useToast} from "@/components/ui/use-toast";
 import {cn} from "@/lib/utils";
 import {Login} from "@/actions";
 import {Checkbox} from "@/components/ui/checkbox";
 import {BiError} from "react-icons/bi";
 import {FormProps} from "./types";
+import { useRouter } from "next/navigation";
 
 const LoginForm = ({className, open, setOpen}: FormProps) => {
+  const router = useRouter();
   const {toast} = useToast();
   const [errorText, setErrorText] = useState("");
 
@@ -41,10 +42,10 @@ const LoginForm = ({className, open, setOpen}: FormProps) => {
         toast({
           title: "Login Successful🥳",
           description: "Welcome Back!",
-          // time: 5000,
         });
         if (open && setOpen) setOpen(false);
         setErrorText("");
+        router.push("/"); // Redirect to the home page
       }
     } catch (error) {
       if (error instanceof Error) {

@@ -27,10 +27,11 @@ const userSlice = createSlice({
   },
 });
 
-// Actions
-export const {setSession, logout} = userSlice.actions;
-
 // Selectors
 export const selectUser = (state: RootState) => state.user;
 
+// Actions
+export const {setSession, logout} = userSlice.actions;
+
+// Reducer
 export default userSlice.reducer;

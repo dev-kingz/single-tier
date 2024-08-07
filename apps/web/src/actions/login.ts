@@ -16,6 +16,7 @@ export async function Login(values: z.infer<typeof loginSchema>) {
     );
 
     if (!accessToken) {
+      cookies().delete("acessToken");
       throw new Error("Failed to login!");
     }
 

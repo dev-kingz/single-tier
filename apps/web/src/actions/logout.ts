@@ -1,25 +1,28 @@
 "use server";
-import {z} from "zod";
-import {signupSchema} from "@/schemas/dto";
 import {api} from "@/config/axios.config";
-import {userSchema} from "@/schemas/models";
 import axios from "axios";
+import {cookies} from "next/headers";
 
-export async function Signup(values: z.infer<typeof signupSchema>) {
+export async function Logout() {
   try {
-    const {data} = await api.post("/auth/registration/register", values);
+    const {data} = await api.post("auth/authenticator/login");
 
-    const user = await userSchema.parseAsync(data);
+    // clear the accessToken cookie
+    cookies().delete("accessToken");
 
-    return user;
+    const message = data.message;
+
+    return message;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       if (error.response && error.response.data) {
+        // Do something with this error...
         const {message} = error.response.data;
+        console.table(message);
         throw new Error(message);
       } else {
         console.error(error.message);
-        throw new Error("Failed to signup!");
+        throw new Error("Failed to login!");
       }
     } else {
       console.error(error);
