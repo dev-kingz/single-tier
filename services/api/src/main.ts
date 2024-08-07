@@ -25,10 +25,6 @@ async function bootstrap() {
   const port = process.env.NODE_ENV === "production" ? 4000 : 4001;
   const appName = process.env.APP_NAME;
 
-  app.enableCors({
-    origin: process.env.ORIGIN,
-  });
-
   // Use the retrieved configuration values
   await app.listen(port);
   console.log(`\n${appName} is running on: ${base_url}:${port}\n`);
