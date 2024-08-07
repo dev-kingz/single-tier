@@ -13,13 +13,12 @@ import {Input} from "@/components/ui/input";
 import {ToastAction} from "@/components/ui/toast";
 import {useToast} from "@/components/ui/use-toast";
 import {cn} from "@/lib/utils";
-import {SignIn} from "@/actions";
+import {Login} from "@/actions";
 import {Checkbox} from "@/components/ui/checkbox";
 import {BiError} from "react-icons/bi";
 import {FormProps} from "./types";
-import Link from "next/link";
 
-const LoginForm = ({className, setOpen, setAction}: FormProps) => {
+const LoginForm = ({className, open, setOpen}: FormProps) => {
   const {toast} = useToast();
   const [errorText, setErrorText] = useState("");
 
@@ -36,28 +35,15 @@ const LoginForm = ({className, setOpen, setAction}: FormProps) => {
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof loginSchema>) {
     try {
-      const response = await SignIn(values);
+      const response = await Login(values);
       console.log(response);
       if (response) {
         toast({
           title: "Login Successful🥳",
           description: "Welcome Back!",
-          action:
-            setOpen && setAction ? (
-              <ToastAction
-                className="border-none bg-transparent hover:bg-transparent"
-                altText="Login"
-              >
-                <Link href="/dashboard" onClick={()=> setOpen(false)}>
-                  <Button variant={"primary"} rounded={"full"} className="h-full">
-                    Visit Dashboard
-                  </Button>
-                </Link>
-              </ToastAction>
-            ) : (
-              <></>
-            ),
+          // time: 5000,
         });
+        if (open && setOpen) setOpen(false);
         setErrorText("");
       }
     } catch (error) {

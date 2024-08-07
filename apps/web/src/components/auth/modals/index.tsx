@@ -48,7 +48,7 @@ const AuthModal = ({defaultAction = "signup", triggerStyles, ...props}: ModalPro
           <div className="flexi w-full flex-col gap-y-4">
             {action === "signup" ? (
               <>
-                <SignupForm setOpen={setOpen} setAction={setAction} />
+                <SignupForm open={open} setOpen={setOpen} setAction={setAction} />
                 <div className="AlreadyHaveAnAccount flexi w-full gap-x-2 text-center">
                   <p className="ppl">Already have an account?</p>
                   <Button
@@ -63,7 +63,7 @@ const AuthModal = ({defaultAction = "signup", triggerStyles, ...props}: ModalPro
               </>
             ) : (
               <>
-                <LoginForm setOpen={setOpen} setAction={setAction} />
+                <LoginForm open={open} setOpen={setOpen} />
                 <div className="DontHaveAnAccount flexi w-full gap-x-2 text-center">
                   <p className="ppl">Don't have an account?</p>
                   <Button variant="link" className="DontHaveAnAccountButton ppl" onClick={() => setAction("signup")}>
@@ -88,7 +88,7 @@ const AuthModal = ({defaultAction = "signup", triggerStyles, ...props}: ModalPro
         <div className="flexi w-full flex-col gap-y-4 px-10 py-6">
           {action === "signup" ? (
             <>
-              <SignupForm setOpen={setOpen} setAction={setAction} />
+              <SignupForm open={open} setOpen={setOpen} setAction={setAction} />
               <div className="AlreadyHaveAnAccount flexi w-full gap-x-2 text-center">
                 <p>Already have an account?</p>
                 <Button variant="link" className="DontHaveAnAccountButton ppl" onClick={() => setAction("login")}>
@@ -98,7 +98,7 @@ const AuthModal = ({defaultAction = "signup", triggerStyles, ...props}: ModalPro
             </>
           ) : (
             <>
-              <LoginForm setOpen={setOpen} setAction={setAction} />
+              <LoginForm open={open} setOpen={setOpen} />
               <div className="DontHaveAnAccount flexi w-full gap-x-2 text-center">
                 <p>Don't have an account?</p>
                 <Button variant="link"className="DontHaveAnAccountButton ppl" onClick={() => setAction("signup")}>

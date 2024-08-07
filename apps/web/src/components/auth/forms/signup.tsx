@@ -40,6 +40,7 @@ const SignupForm = ({className, setOpen, setAction}: FormProps) => {
         toast({
           title: `Hi ${response.name}!🥳`,
           description: "Welcome to the community!",
+          time: 7000,
           action:
             setOpen && setAction ? (
               <ToastAction

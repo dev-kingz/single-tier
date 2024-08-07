@@ -24,9 +24,10 @@ export class RegistrationService {
         throw new ServiceUnavailableException();
       }
 
-      return {
-        message: "User created successfully",
-      };
+      // Remove the password from the user object
+      user.password = undefined;
+
+      return user;
     } catch (error) {
       if (error.name === "ValidationError") {
         throw new BadRequestException(error.errors);
