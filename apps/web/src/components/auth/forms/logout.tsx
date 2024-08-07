@@ -1,20 +1,32 @@
 import React from "react";
-import {SignOut} from "@/actions";
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
+import {useDispatch} from "react-redux";
+import {logout} from "@/store/slices/user.slice";
 
 interface LogoutProps {
   triggerStyles?: string;
 }
 
-const LogoutForm = ({triggerStyles}: LogoutProps) => {
+export const LogoutForm = ({triggerStyles}: LogoutProps) => {
+  const dispatch = useDispatch();
+
+  async function handleLogout(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    dispatch(logout());
+    localStorage.removeItem("accessToken");
+  }
+
   return (
-    <form action={SignOut}>
-      <Button type="submit" variant="primary" className={cn("Trigger", triggerStyles)}>
+    <form onSubmit={handleLogout}>
+      <Button
+        type="submit"
+        variant="primary"
+        rounded={"full"}
+        className={cn("Trigger", triggerStyles)}
+      >
         Logout
       </Button>
     </form>
   );
 };
-
-export {LogoutForm};

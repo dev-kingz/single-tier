@@ -21,7 +21,8 @@ interface IBrand {
 export const Brand = {
   name: "DevKingz",
   slogan: "Turning Dreams into Reality!",
-  description: "DevKingz takes pride in crafting impactful websites that are tailored to your business needs. With our focus on cutting-edge technology and personalized solutions, we ensure your business stands out in the digital realm.",
+  description:
+    "DevKingz takes pride in crafting impactful websites that are tailored to your business needs. With our focus on cutting-edge technology and personalized solutions, we ensure your business stands out in the digital realm.",
   email: "contact@devkingz.com",
   url: "https://devkingz.com",
   socials: {

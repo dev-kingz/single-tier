@@ -26,7 +26,7 @@ const config: Config = {
           "html, body, :root": {"@apply h-full font-primary": {}},
 
           // Page Layout
-          main: {"@apply flex items-center justify-start flex-col h-full w-full": {}},
+          main: {"@apply flex items-center justify-start flex-col min-h-[70vh] w-full": {}},
 
           // Colors
           ":root": {
@@ -75,7 +75,7 @@ const config: Config = {
             "--muted-foreground": "0 0% 63.9%",
             "--accent": convertHexToHsl(colors.neutral[600]),
             "--accent-foreground": "0 0% 98%",
-            "--destructive": "0 62.8% 30.6%",
+            "--destructive": convertHexToHsl(colors.red[600]),
             "--destructive-foreground": "0 0% 98%",
             "--border": convertHexToHsl(colors.neutral[600]),
             "--input": convertHexToHsl(colors.neutral[600]),
