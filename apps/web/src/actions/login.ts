@@ -34,7 +34,7 @@ export async function Login(values: z.infer<typeof loginSchema>) {
       if (error.response && error.response.data) {
         // Do something with this error...
         const {message} = error.response.data;
-        throw new Error(message);
+        return {error: message};
       } else {
         console.error(error.message);
         throw new Error("Failed to login!");

@@ -40,6 +40,9 @@ const LoginForm = ({className, open, setOpen}: FormProps) => {
   async function onSubmit(values: z.infer<typeof loginSchema>) {
     try {
       const session = await Login(values);
+      if (session?.error) {
+        throw new Error(session.error);
+      }
       if (session) {
         toast({
           title: "Login Successful🥳",
@@ -93,7 +96,7 @@ const LoginForm = ({className, open, setOpen}: FormProps) => {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="******" {...field} />
+                <Input placeholder="******" type="password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

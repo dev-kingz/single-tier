@@ -36,9 +36,12 @@ const SignupForm = ({className, setOpen, setAction}: FormProps) => {
   async function onSubmit(values: z.infer<typeof signupSchema>) {
     try {
       const response = await Signup(values);
+      if (response?.error) {
+        throw new Error(response.error);
+      }
       if (response) {
         toast({
-          title: `Hi ${response.name}!🥳`,
+          title: `Hi ${response.user?.name}!🥳`,
           description: "Welcome to the community!",
           action:
             setOpen && setAction ? (
@@ -129,7 +132,7 @@ const SignupForm = ({className, setOpen, setAction}: FormProps) => {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="******" {...field} />
+                <Input placeholder="******" type="password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

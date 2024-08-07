@@ -26,7 +26,7 @@ const config: Config = {
           "html, body, :root": {"@apply h-full font-primary": {}},
 
           // Page Layout
-          main: {"@apply flex items-center justify-start flex-col h-full w-full": {}},
+          main: {"@apply flex items-center justify-start flex-col min-h-[70vh] w-full": {}},
 
           // Colors
           ":root": {

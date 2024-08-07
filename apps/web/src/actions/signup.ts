@@ -11,12 +11,12 @@ export async function Signup(values: z.infer<typeof signupSchema>) {
 
     const user = await userSchema.parseAsync(data);
 
-    return user;
+    return {user};
   } catch (error) {
     if (axios.isAxiosError(error)) {
       if (error.response && error.response.data) {
         const {message} = error.response.data;
-        throw new Error(message);
+        return {error: message};
       } else {
         console.error(error.message);
         throw new Error("Failed to signup!");
