@@ -5,7 +5,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
 import {z} from "zod";
 
-import {loginSchema} from "@/schemas";
+import {loginSchema} from "@/schemas/dto";
 import {Button} from "@/components/ui/button";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert";
@@ -37,36 +37,37 @@ const LoginForm = ({className, setOpen, setAction}: FormProps) => {
   async function onSubmit(values: z.infer<typeof loginSchema>) {
     try {
       const response = await SignIn(values);
-      // console.log(response);
-      // if (response) {
-      //   toast({
-      //     title: "Login Successful🥳",
-      //     description: "Welcome Back!",
-      //     action:
-      //       setOpen && setAction ? (
-      //         <ToastAction
-      //           className="border-none bg-transparent hover:bg-transparent"
-      //           altText="Login"
-      //         >
-      //           <Link href="/dashboard" onClick={()=> setOpen(false)}>
-      //             <Button variant={"primary"} rounded={"full"} className="h-full">
-      //               Visit Dashboard
-      //             </Button>
-      //           </Link>
-      //         </ToastAction>
-      //       ) : (
-      //         <></>
-      //       ),
-      //   });
-      //   setErrorText("");
-      // }
+      console.log(response);
+      if (response) {
+        toast({
+          title: "Login Successful🥳",
+          description: "Welcome Back!",
+          action:
+            setOpen && setAction ? (
+              <ToastAction
+                className="border-none bg-transparent hover:bg-transparent"
+                altText="Login"
+              >
+                <Link href="/dashboard" onClick={()=> setOpen(false)}>
+                  <Button variant={"primary"} rounded={"full"} className="h-full">
+                    Visit Dashboard
+                  </Button>
+                </Link>
+              </ToastAction>
+            ) : (
+              <></>
+            ),
+        });
+        setErrorText("");
+      }
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
-        setErrorText(error.message);
+        // replace the message string's comma with line break
+        setErrorText(error.message.replace(",", "\n"));
       } else {
-        console.error("Failed to signup!");
-        setErrorText("Failed to signup!");
+        console.error("Failed to login!");
+        setErrorText("Failed to login!");
       }
     }
   }

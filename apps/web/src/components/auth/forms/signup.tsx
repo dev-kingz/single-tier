@@ -8,9 +8,8 @@ import {z} from "zod";
 import {Button} from "@/components/ui/button";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
-import {BaseProps} from "@/types/theme";
 import {cn} from "@/lib/utils";
-import {signupSchema} from "@/schemas";
+import {signupSchema} from "@/schemas/dto";
 import {Signup} from "@/actions";
 import {ToastAction} from "@/components/ui/toast";
 import {useToast} from "@/components/ui/use-toast";
@@ -37,10 +36,9 @@ const SignupForm = ({className, setOpen, setAction}: FormProps) => {
   async function onSubmit(values: z.infer<typeof signupSchema>) {
     try {
       const response = await Signup(values);
-      console.log(response);
       if (response) {
         toast({
-          title: "Registration Successful🥳",
+          title: `Hi ${response.name}!🥳`,
           description: "Welcome to the community!",
           action:
             setOpen && setAction ? (
@@ -68,7 +66,8 @@ const SignupForm = ({className, setOpen, setAction}: FormProps) => {
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
-        setErrorText(error.message);
+        // replace the message string's comma with line break
+        setErrorText(error.message.replace(",", "\n"));
       } else {
         console.error("Failed to signup!");
         setErrorText("Failed to signup!");
@@ -78,7 +77,10 @@ const SignupForm = ({className, setOpen, setAction}: FormProps) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className={cn("SignupForm w-full space-y-6", className)}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className={cn("SignupForm w-full space-y-6", className)}
+      >
         <h2>Signup</h2>
         <p>Create an account to get started.</p>
         <FormField

@@ -1,32 +1,30 @@
 "use server";
 import {z} from "zod";
-import {signupSchema} from "@/schemas";
+import {signupSchema} from "@/schemas/dto";
+import {api} from "@/config/axios.config";
+import {userSchema} from "@/schemas/models";
+import axios from "axios";
 
 export async function Signup(values: z.infer<typeof signupSchema>) {
   try {
-    const res = await fetch(process.env.SERVER_URL + "/auth/registration/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    });
-    // If the response is not OK, throw an error with the response message
-    if (!res.ok) {
-      const errorResponse = await res.json();
-      throw new Error(errorResponse.message?.[0] || "Failed to sign up!");
-    }
-    
-    const response = await res.json();
+    const {data} = await api.post("/auth/registration/register", values);
 
-    return response;
+    const user = await userSchema.parseAsync(data);
+
+    return user;
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      console.error("Validation error:", error.errors);
-    } else if (error instanceof Error) {
-      throw new Error(error.message);
+    if (axios.isAxiosError(error)) {
+      if (error.response && error.response.data) {
+        // Do something with this error...
+        const {message} = error.response.data;
+        console.table(message);
+        throw new Error(message);
+      } else {
+        console.error(error.message);
+        throw new Error("Failed to signup!");
+      }
     } else {
-      throw new Error("Failed to sign up!");
+      console.error(error);
     }
   }
 }

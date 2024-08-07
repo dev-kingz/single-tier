@@ -1,11 +1,12 @@
 "use server";
 import {z} from "zod";
-import {loginSchema} from "@/schemas";
+import {loginSchema} from "@/schemas/dto";
 
 export async function SignIn(values: z.infer<typeof loginSchema>) {
   try {
-    // const response = await signIn("credentials", {
-    //   email: values.email,
+    // const {data } 
+    // // const response = await signIn("credentials", {
+    // //   email: values.email,
     //   password: values.password,
     //   stayLoggedIn: values.stayLoggedIn,
     //   redirect: false,

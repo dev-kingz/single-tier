@@ -22,4 +22,9 @@ export class AuthenticatorController {
   async logout(@Res({passthrough: true}) response: Response) {
     return await this.authenticatorService.logout(response);
   }
+
+  @Get("getSession")
+  async getSession(@Req() request: Request) {
+    return await this.authenticatorService.getSession(request);
+  }
 }
