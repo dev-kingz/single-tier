@@ -42,7 +42,7 @@ export class AuthenticatorService {
     if (!stayLoggedIn) stayLoggedIn = false;
 
     // Check for the stayLoggedIn flag
-    const expiresIn = stayLoggedIn ? "7d" : "20s";
+    const expiresIn = stayLoggedIn ? "7d" : "1d";
 
     const accessToken = await this.jwtService.signAsync(payload, {
       expiresIn,
