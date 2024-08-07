@@ -1,6 +1,5 @@
 import React from "react";
 import TitleHeader from "@/components/headers/title-header";
-import {LogoutForm} from "@/components/auth/forms";
 
 const DashboardPage = async () => {
   // if (!session?.user) {
@@ -37,7 +36,6 @@ const DashboardPage = async () => {
       <div className="flexi w-full max-w-lg flex-col gap-y-5 px-5">
         <p>name</p>
         <p>email</p>
-        <LogoutForm />
       </div>
     </main>
   );
