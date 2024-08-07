@@ -65,7 +65,7 @@ const AuthModal = ({defaultAction = "signup", triggerStyles, ...props}: ModalPro
               <>
                 <LoginForm open={open} setOpen={setOpen} />
                 <div className="DontHaveAnAccount flexi w-full gap-x-2 text-center">
-                  <p className="ppl">Don't have an account?</p>
+                  <p className="ppl">Don&apos;t have an account?</p>
                   <Button
                     variant="link"
                     className="DontHaveAnAccountButton ppl"
@@ -108,7 +108,7 @@ const AuthModal = ({defaultAction = "signup", triggerStyles, ...props}: ModalPro
             <>
               <LoginForm open={open} setOpen={setOpen} />
               <div className="DontHaveAnAccount flexi w-full gap-x-2 text-center">
-                <p>Don't have an account?</p>
+                <p>Don&apos;t have an account?</p>
                 <Button
                   variant="link"
                   className="DontHaveAnAccountButton ppl"
