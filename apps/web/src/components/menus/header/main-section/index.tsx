@@ -11,7 +11,7 @@ const MainSection = ({className, type = "sticky"}: HeaderProps) => {
       className={cn(
         [
           "MainSection",
-          "flexib w-full p-2 sm:p-3 max-w-7xl mx-auto",
+          "flexib mx-auto w-full max-w-7xl p-2 sm:p-3",
           type === "sticky" && "sticky top-0 z-50",
           type === "fixed" &&
             "fixed top-0 z-50 bg-transparent text-white drop-shadow-none dark:bg-transparent dark:text-white",

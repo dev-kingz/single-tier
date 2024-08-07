@@ -3,7 +3,6 @@ import TitleHeader from "@/components/headers/title-header";
 import {LogoutForm} from "@/components/auth/forms";
 
 const DashboardPage = async () => {
-
   // if (!session?.user) {
   //   return (
   //     <main>

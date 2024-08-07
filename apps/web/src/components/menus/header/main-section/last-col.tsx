@@ -9,7 +9,10 @@ const LastCol = () => {
     <div className="LastCol flexi gap-x-1 sm:gap-x-3">
       <ProfileActions />
       <ThemeToggle rounded={"full"} className="hidden sm:flex" />
-      <SheetTrigger asChild className="flex sm:hidden hover:scale-125 active:scale-125 duration-200 transition-all">
+      <SheetTrigger
+        asChild
+        className="flex transition-all duration-200 hover:scale-125 active:scale-125 sm:hidden"
+      >
         <Button variant="link">
           <RxHamburgerMenu className="text-foreground h-6 w-6 stroke-1" />
         </Button>

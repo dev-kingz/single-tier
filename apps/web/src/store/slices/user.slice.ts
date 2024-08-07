@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {RootState} from "..";
 
 interface UserState {
-  token: string | null;
+  accessToken: string | null;
   user: {
     _id: string;
     name: string;
@@ -12,7 +12,7 @@ interface UserState {
 }
 
 const initialState: UserState = {
-  token: null,
+  accessToken: null,
   user: null,
 };
 
@@ -20,17 +20,15 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    login: (state, action) => {
-      state.token = action.payload;
+    setAccessToken: (state, action) => {
+      state.accessToken = action.payload;
     },
     setSession: (state, action) => {
       state.user = action.payload;
     },
     logout: (state) => {
-      state.token = null;
+      state.accessToken = null;
       state.user = null;
-      // Clear the local storage
-      localStorage.removeItem("token");
     },
   },
 });
@@ -39,7 +37,7 @@ const userSlice = createSlice({
 export const selectUser = (state: RootState) => state.user;
 
 // Actions
-export const {login, setSession, logout} = userSlice.actions;
+export const {setAccessToken, setSession, logout} = userSlice.actions;
 
 // Reducer
 export default userSlice.reducer;

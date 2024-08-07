@@ -1,7 +1,7 @@
 import {Controller, Get, Req, UseGuards} from "@nestjs/common";
 import {ProfileService} from "./profile.service";
 import {AuthGuard} from "src/auth/guards";
-import { Request } from "express";
+import {Request} from "express";
 
 @Controller("/crm/profile")
 export class ProfileController {

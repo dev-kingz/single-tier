@@ -66,7 +66,11 @@ const AuthModal = ({defaultAction = "signup", triggerStyles, ...props}: ModalPro
                 <LoginForm open={open} setOpen={setOpen} />
                 <div className="DontHaveAnAccount flexi w-full gap-x-2 text-center">
                   <p className="ppl">Don't have an account?</p>
-                  <Button variant="link" className="DontHaveAnAccountButton ppl" onClick={() => setAction("signup")}>
+                  <Button
+                    variant="link"
+                    className="DontHaveAnAccountButton ppl"
+                    onClick={() => setAction("signup")}
+                  >
                     Sign up
                   </Button>
                 </div>
@@ -91,7 +95,11 @@ const AuthModal = ({defaultAction = "signup", triggerStyles, ...props}: ModalPro
               <SignupForm open={open} setOpen={setOpen} setAction={setAction} />
               <div className="AlreadyHaveAnAccount flexi w-full gap-x-2 text-center">
                 <p>Already have an account?</p>
-                <Button variant="link" className="DontHaveAnAccountButton ppl" onClick={() => setAction("login")}>
+                <Button
+                  variant="link"
+                  className="DontHaveAnAccountButton ppl"
+                  onClick={() => setAction("login")}
+                >
                   Login
                 </Button>
               </div>
@@ -101,7 +109,11 @@ const AuthModal = ({defaultAction = "signup", triggerStyles, ...props}: ModalPro
               <LoginForm open={open} setOpen={setOpen} />
               <div className="DontHaveAnAccount flexi w-full gap-x-2 text-center">
                 <p>Don't have an account?</p>
-                <Button variant="link"className="DontHaveAnAccountButton ppl" onClick={() => setAction("signup")}>
+                <Button
+                  variant="link"
+                  className="DontHaveAnAccountButton ppl"
+                  onClick={() => setAction("signup")}
+                >
                   Sign up
                 </Button>
               </div>

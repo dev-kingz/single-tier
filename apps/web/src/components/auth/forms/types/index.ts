@@ -1,4 +1,4 @@
-import { BaseProps } from "@/types/theme";
+import {BaseProps} from "@/types/theme";
 
 export interface FormProps extends BaseProps {
   open?: boolean;

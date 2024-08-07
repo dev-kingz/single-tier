@@ -18,7 +18,7 @@ import {BiError} from "react-icons/bi";
 import {FormProps} from "./types";
 import {useRouter} from "next/navigation";
 import {useDispatch} from "react-redux";
-import {logout, setSession} from "@/store/slices/user.slice";
+import {logout, setAccessToken, setSession} from "@/store/slices/user.slice";
 
 const LoginForm = ({className, open, setOpen}: FormProps) => {
   const router = useRouter();
@@ -39,15 +39,17 @@ const LoginForm = ({className, open, setOpen}: FormProps) => {
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof loginSchema>) {
     try {
-      const user = await Login(values);
-      if (user) {
+      const session = await Login(values);
+      if (session) {
         toast({
           title: "Login Successful🥳",
           description: "Welcome Back!",
         });
         if (open && setOpen) setOpen(false);
         setErrorText("");
-        dispatch(setSession(user));
+        localStorage.setItem("accessToken", session.accessToken);
+        dispatch(setAccessToken(session.accessToken));
+        dispatch(setSession(session.user));
         router.push("/"); // Redirect to the home page
       }
     } catch (error) {

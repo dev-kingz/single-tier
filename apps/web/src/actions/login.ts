@@ -7,22 +7,28 @@ import {sessionSchema} from "@/schemas/models";
 
 export async function Login(values: z.infer<typeof loginSchema>) {
   try {
-    const {headers} = await api.post("auth/authenticator/login", values);
+    const {data} = await api.post("auth/authenticator/login", values);
 
-    // Get AccessToken from Authorization Bearer Header `Bearer ${accessToken}`
-    const accessToken = headers.authorization.split(" ")[1];
+    const accessToken = data?.accessToken;
 
-    const {data} = await api.get("/auth/authenticator/getSession", {
+    if (!accessToken) {
+      throw new Error("Failed to login!");
+    }
+
+    const {data: session} = await api.get("/auth/authenticator/getSession", {
       headers: {Authorization: `Bearer ${accessToken}`},
     });
 
-    const user = await sessionSchema.parseAsync(data);
+    const user = await sessionSchema.parseAsync(session);
 
     if (!user) {
       throw new Error("Failed to login!");
     }
 
-    return user;
+    return {
+      user,
+      accessToken,
+    };
   } catch (error) {
     if (axios.isAxiosError(error)) {
       if (error.response && error.response.data) {
@@ -37,4 +43,9 @@ export async function Login(values: z.infer<typeof loginSchema>) {
       console.error(error);
     }
   }
+}
+
+function extractTokenFromRequest(authorizationString: string) {
+  const [type, token] = authorizationString?.split(" ") ?? [];
+  return type === "Bearer" ? token : undefined;
 }

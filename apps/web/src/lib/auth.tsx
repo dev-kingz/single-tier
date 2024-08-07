@@ -1,9 +1,8 @@
 "use client";
-import {logout, selectUser, setSession} from "@/store/slices/user.slice";
+import {logout, setSession, setAccessToken} from "@/store/slices/user.slice";
 import {useRouter} from "next/navigation";
-import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {getCookie, deleteCookie} from "cookies-next";
+import React, {useEffect, useState} from "react";
+import {useDispatch} from "react-redux";
 import {sessionSchema} from "@/schemas/models";
 import {api} from "@/config/axios.config";
 
@@ -11,33 +10,43 @@ const Auth = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  // Check if user is authenticated by having a useEffect that calls the getSession API function each time the cookie named "accessToken" is changed and also on each page load.
+  // Local state to store the accessToken
+  const [token, setToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    // If window is mounted, get the accessToken from localStorage
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("accessToken");
+      setToken(token);
+    }
+  }, []);
 
   useEffect(() => {
     async function checkUser() {
       try {
-        const {data, headers} = await api.get("/auth/authenticator/getSession");
-
-        // look for the accessToken cookie in the response headers
-        const accessToken = headers["set-cookie"]?.find((cookie: string) =>
-          cookie.startsWith("accessToken"),
-        );
-
+        const {data} = await api.get("/auth/authenticator/getSession", {
+          headers: {Authorization: `Bearer ${token}`},
+        });
         const user = await sessionSchema.parseAsync(data);
 
-        if (!user && !accessToken) {
+        if (user) {
+          dispatch(setAccessToken(token));
+          dispatch(setSession(user));
+        } else {
           dispatch(logout());
-          deleteCookie("accessToken");
-          return;
+          localStorage.removeItem("accessToken");
         }
-
-        dispatch(setSession(user));
       } catch (error) {
         dispatch(logout());
+        localStorage.removeItem("accessToken");
       }
     }
-    checkUser();
-  }, [router, getCookie("accessToken")]);
+
+    // Only check the session if there is an accessToken
+    if (token) {
+      checkUser();
+    }
+  }, [token, dispatch, router]);
 
   return <></>;
 };
