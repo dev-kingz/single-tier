@@ -16,6 +16,7 @@ const Auth = () => {
   useEffect(() => {
     async function checkUser() {
       try {
+        console.log("----------process.env.NEXT_PUBLIC_SERVER_URL", process.env.NEXT_PUBLIC_SERVER_URL);
         const {data, headers} = await api.get("/auth/authenticator/getSession");
         console.log("----------data", data);
         console.log("--------------------headers", headers);
