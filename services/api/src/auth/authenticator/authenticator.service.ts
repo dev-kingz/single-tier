@@ -66,10 +66,4 @@ export class AuthenticatorService {
       message: "Logout successful!",
     };
   }
-
-  async getSession(request: Request) {
-    const user = request["user"];
-
-    return user;
-  }
 }
