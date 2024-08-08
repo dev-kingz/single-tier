@@ -19,7 +19,7 @@ export async function Signup(values: z.infer<typeof signupSchema>) {
         return {error: message};
       } else {
         console.error(error.message);
-        throw new Error("Failed to signup!");
+        return {error: "Failed to signup!"};
       }
     } else {
       console.error(error);

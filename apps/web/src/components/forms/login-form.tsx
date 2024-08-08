@@ -18,12 +18,13 @@ import {BiError} from "react-icons/bi";
 import {FormProps} from "./types";
 import {useRouter} from "next/navigation";
 import {useDispatch} from "react-redux";
-import {logout, setAccessToken, setLoading, setSession} from "@/store/slices/user.slice";
+import {logout, setAccessToken, setStatus, setSession} from "@/store/slices/user.slice";
 
 const LoginForm = ({className, open, setOpen}: FormProps) => {
   const router = useRouter();
   const {toast} = useToast();
   const [errorText, setErrorText] = useState("");
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   // 1. Define your form.
@@ -39,12 +40,12 @@ const LoginForm = ({className, open, setOpen}: FormProps) => {
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof loginSchema>) {
     try {
-      dispatch(setLoading(true));
+      setLoading(true);
       const session = await Login(values);
       if (session?.error) {
         throw new Error(session.error);
       }
-      if (session) {
+      if (session?.user) {
         toast({
           title: "Login Successful🥳",
           description: "Welcome Back!",
@@ -54,8 +55,9 @@ const LoginForm = ({className, open, setOpen}: FormProps) => {
         localStorage.setItem("accessToken", session.accessToken);
         dispatch(setAccessToken(session.accessToken));
         dispatch(setSession(session.user));
-        router.push("/"); // Redirect to the home page
-        dispatch(setLoading(false));
+        setLoading(false);
+        dispatch(setStatus("fulfilled"));
+        router.push("/");
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -66,8 +68,8 @@ const LoginForm = ({className, open, setOpen}: FormProps) => {
         console.error("Failed to login!");
         setErrorText("Failed to login!");
       }
+      setLoading(false);
       dispatch(logout());
-      dispatch(setLoading(false));
     }
   }
 
@@ -125,8 +127,8 @@ const LoginForm = ({className, open, setOpen}: FormProps) => {
             <AlertDescription>{errorText}</AlertDescription>
           </Alert>
         )}
-        <Button variant={"primary"} className="w-full" type="submit">
-          Login
+        <Button variant={"primary"} className="w-full" type="submit" disabled={loading}>
+          {loading ? "Logging in..." : "Login"}
         </Button>
       </form>
     </Form>

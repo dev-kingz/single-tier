@@ -2,7 +2,6 @@ import React from "react";
 import TitleHeader from "@/components/headers/title-header";
 
 const DashboardPage = async () => {
-
   return (
     <main>
       <TitleHeader
@@ -14,10 +13,6 @@ const DashboardPage = async () => {
           {label: "Dashboard", currentPage: true},
         ]}
       />
-      <div className="flexi w-full max-w-lg flex-col gap-y-5 px-5">
-        <p>name</p>
-        <p>email</p>
-      </div>
     </main>
   );
 };

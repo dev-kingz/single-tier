@@ -21,7 +21,7 @@ import {MdOutlineSpaceDashboard} from "react-icons/md";
 import Link from "next/link";
 
 const ProfileActions = () => {
-  const {user, loading} = useSelector(selectUser);
+  const {status, user} = useSelector(selectUser);
   const dispatch = useDispatch();
 
   function handleLogout() {
@@ -29,9 +29,23 @@ const ProfileActions = () => {
     localStorage.removeItem("accessToken");
   }
 
-  if (loading) return null;
+  if (status === "pending") {
+    return null;
+  }
 
-  if (user) {
+  if (status === "rejected") {
+    return (
+      <div className="ProfileActions flexi gap-x-2">
+        <AuthModal
+          defaultAction="login"
+          triggerStyles="bg-transparent text-foreground w-full hidden sm:flex"
+        />
+        <AuthModal triggerStyles="w-full" />
+      </div>
+    );
+  }
+
+  if (status === "fulfilled" && user) {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -82,17 +96,7 @@ const ProfileActions = () => {
     );
   }
 
-  return (
-    <>
-      <div className="ProfileActions flexi gap-x-2">
-        <AuthModal
-          defaultAction="login"
-          triggerStyles="bg-transparent text-foreground w-full hidden sm:flex"
-        />
-        <AuthModal triggerStyles="w-full" />
-      </div>
-    </>
-  );
+  return null;
 };
 
 export default ProfileActions;

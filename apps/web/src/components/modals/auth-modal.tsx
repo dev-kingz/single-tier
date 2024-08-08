@@ -124,5 +124,3 @@ export const AuthModal = ({defaultAction = "signup", triggerStyles, ...props}: M
     </Drawer>
   );
 };
-
-

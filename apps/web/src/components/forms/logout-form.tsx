@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
 import {useDispatch} from "react-redux";
-import {logout} from "@/store/slices/user.slice";
+import {logout, setStatus} from "@/store/slices/user.slice";
 
 interface LogoutProps {
   children?: React.ReactNode;
@@ -11,11 +11,19 @@ interface LogoutProps {
 
 export const LogoutForm = ({children, triggerStyles}: LogoutProps) => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   async function handleLogout(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    dispatch(logout());
-    localStorage.removeItem("accessToken");
+    setLoading(true);
+    try {
+      dispatch(logout());
+      dispatch(setStatus("rejected"));
+      localStorage.removeItem("accessToken");
+    } catch (error) {
+      console.error("Failed to logout:", error);
+    }
+    setLoading(false);
   }
 
   return (
@@ -28,8 +36,9 @@ export const LogoutForm = ({children, triggerStyles}: LogoutProps) => {
           variant="primary"
           rounded={"full"}
           className={cn("Trigger", triggerStyles)}
+          disabled={loading}
         >
-          Logout
+          {loading ? "Logging out..." : "Logout"}
         </Button>
       )}
     </form>

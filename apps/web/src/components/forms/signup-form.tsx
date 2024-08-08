@@ -20,6 +20,7 @@ import {FormProps} from "./types";
 const SignupForm = ({className, setOpen, setAction}: FormProps) => {
   const {toast} = useToast();
   const [errorText, setErrorText] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof signupSchema>>({
@@ -35,6 +36,7 @@ const SignupForm = ({className, setOpen, setAction}: FormProps) => {
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof signupSchema>) {
     try {
+      setLoading(true);
       const response = await Signup(values);
       if (response?.error) {
         throw new Error(response.error);
@@ -65,6 +67,7 @@ const SignupForm = ({className, setOpen, setAction}: FormProps) => {
             ),
         });
         setErrorText("");
+        setLoading(false);
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -75,6 +78,7 @@ const SignupForm = ({className, setOpen, setAction}: FormProps) => {
         console.error("Failed to signup!");
         setErrorText("Failed to signup!");
       }
+      setLoading(false);
     }
   }
 
@@ -145,8 +149,8 @@ const SignupForm = ({className, setOpen, setAction}: FormProps) => {
             <AlertDescription>{errorText}</AlertDescription>
           </Alert>
         )}
-        <Button variant={"primary"} className="w-full" type="submit">
-          Sign up
+        <Button variant={"primary"} className="w-full" type="submit" disabled={loading}>
+          {loading ? "Signing up..." : "Sign up"}
         </Button>
       </form>
     </Form>

@@ -2,7 +2,6 @@ import React from "react";
 import TitleHeader from "@/components/headers/title-header";
 
 const SettingsPage = async () => {
-
   return (
     <main>
       <TitleHeader

@@ -22,13 +22,13 @@ export class AuthenticatorService {
     const user = await this.userModel.findOne({email}).select("+password");
 
     if (!user) {
-      throw new UnauthorizedException("Invalid email or password");
+      throw new UnauthorizedException("Invalid email or password!");
     }
 
     // Compare the passwords
     const isPasswordMatch = await bcrypt.compare(password, user.password);
     if (!isPasswordMatch) {
-      throw new UnauthorizedException("Invalid email or password");
+      throw new UnauthorizedException("Invalid email or password!");
     }
 
     const payload = {
