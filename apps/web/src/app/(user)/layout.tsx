@@ -27,7 +27,6 @@ export default function DashboardLayout({
   }
 
   if (!user) {
-    // This return is just to ensure nothing is rendered while the redirection is happening
     return null;
   }
 
