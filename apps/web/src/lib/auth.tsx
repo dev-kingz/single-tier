@@ -1,5 +1,5 @@
 "use client";
-import {logout, setSession, setAccessToken} from "@/store/slices/user.slice";
+import {logout, setSession, setAccessToken, setLoading} from "@/store/slices/user.slice";
 import {useRouter} from "next/navigation";
 import React, {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
@@ -32,12 +32,15 @@ const Auth = () => {
         if (user) {
           dispatch(setAccessToken(token));
           dispatch(setSession(user));
+          dispatch(setLoading(false));
         } else {
           dispatch(logout());
+          dispatch(setLoading(false));
           localStorage.removeItem("accessToken");
         }
       } catch (error) {
         dispatch(logout());
+        dispatch(setLoading(false));
         localStorage.removeItem("accessToken");
       }
     }
@@ -46,6 +49,8 @@ const Auth = () => {
     if (token) {
       checkUser();
     }
+    dispatch(logout());
+    dispatch(setLoading(false));
   }, [token, dispatch, router]);
 
   return <></>;
