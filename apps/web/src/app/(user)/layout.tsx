@@ -1,4 +1,5 @@
 "use client";
+import React, {useEffect} from "react";
 import {selectUser} from "@/store/slices/user.slice";
 import {useRouter} from "next/navigation";
 import {useSelector} from "react-redux";
@@ -11,17 +12,24 @@ export default function DashboardLayout({
   const router = useRouter();
   const {user, loading} = useSelector(selectUser);
 
-  if (loading) {
-    return <div className="flexi min-h-[70vh] w-full flex-col">Loading...</div>;
-  }
-
-  if (!loading && !user) {
-    if (!user) {
+  useEffect(() => {
+    if (!loading && !user) {
       router.push("/");
     }
+  }, [loading, user, router]);
 
-    if (user) {
-      return <div className="flexit min-h-[70vh] w-full flex-col">{children}</div>;
-    }
+  if (loading) {
+    return (
+      <div className="flexi min-h-[70vh] w-full flex-col">
+        <h2>Loading...</h2>
+      </div>
+    );
   }
+
+  if (!user) {
+    // This return is just to ensure nothing is rendered while the redirection is happening
+    return null;
+  }
+
+  return <main>{children}</main>;
 }

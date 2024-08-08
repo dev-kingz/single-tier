@@ -16,11 +16,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {NavList} from "../constants";
+import {NavList} from "../header/constants";
 import Link from "next/link";
 import {Separator} from "@/components/ui/separator";
 import {RiArrowRightWideFill} from "react-icons/ri";
-import AuthModal from "@/components/modals";
+import {AuthModal} from "@/components/modals";
 import {ThemeToggle} from "@/components/toggles/theme-toggle";
 import {useSelector} from "react-redux";
 import {selectUser} from "@/store/slices/user.slice";
@@ -29,7 +29,7 @@ interface HamburgerSidebarProps {
   handleClose: () => void;
 }
 
-const HamburgerSidebar = ({handleClose}: HamburgerSidebarProps) => {
+export const HamburgerSidebar = ({handleClose}: HamburgerSidebarProps) => {
   const navList = NavList;
   const {user} = useSelector(selectUser);
 
@@ -101,5 +101,3 @@ const HamburgerSidebar = ({handleClose}: HamburgerSidebarProps) => {
     </SheetContent>
   );
 };
-
-export default HamburgerSidebar;

@@ -1,7 +1,7 @@
 import React from "react";
 import TitleHeader from "@/components/headers/title-header";
 
-const DashboardPage = async () => {
+const SettingsPage = async () => {
 
   return (
     <main>
@@ -22,4 +22,4 @@ const DashboardPage = async () => {
   );
 };
 
-export default DashboardPage;
+export default SettingsPage;

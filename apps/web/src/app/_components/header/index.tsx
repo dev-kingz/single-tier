@@ -1,7 +1,7 @@
 "use client";
 import React, {useState} from "react";
 import {cn} from "@/lib/utils";
-import HamburgerSidebar from "@/app/_components/header/hamburger-sidebar";
+import {HamburgerSidebar} from "@/app/_components/sidebars";
 import {Sheet} from "@/components/ui/sheet";
 import {BaseProps} from "@/types/theme";
 import {Separator} from "@/components/ui/separator";
