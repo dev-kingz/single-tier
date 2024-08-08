@@ -26,7 +26,7 @@ const config: Config = {
           "html, body, :root": {"@apply h-full font-primary": {}},
 
           // Page Layout
-          main: {"@apply flex items-center justify-start flex-col min-h-[70vh] w-full": {}},
+          main: {"@apply flex items-center justify-start flex-col min-h-[60vh] w-full": {}},
 
           // Colors
           ":root": {
@@ -50,7 +50,7 @@ const config: Config = {
             "--destructive": "0 84.2% 60.2%",
             "--destructive-foreground": "0 0% 98%",
             "--border": convertHexToHsl(colors.neutral[200]),
-            "--input": convertHexToHsl(colors.neutral[200]),
+            "--input": convertHexToHsl(colors.neutral[300]),
             "--ring": "0 0% 3.9%",
             "--radius": "0.5rem",
             "--chart-1": "12 76% 61%",

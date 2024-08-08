@@ -4,9 +4,9 @@ import Providers from "@/app/providers";
 import {Auth} from "@/lib/auth";
 
 import {Cinzel, Poppins} from "next/font/google";
-import Header from "@/components/menus/header";
-import MainSection from "@/components/menus/header/main-section";
-import Footer from "@/components/menus/footer";
+import Header from "@/app/_components/header";
+import MainSection from "@/app/_components/header/main-section";
+import Footer from "@/app/_components/footer";
 import {Brand} from "@/constants/brand";
 import {Toaster} from "@/components/ui/toaster";
 

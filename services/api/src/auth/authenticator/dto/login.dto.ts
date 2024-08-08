@@ -5,7 +5,7 @@ import {Exists} from "src/validators/exists";
 export class LoginDto {
   @IsEmail()
   @IsNotEmpty()
-  @Exists({modelName: USER_MODEL})
+  @Exists({modelName: USER_MODEL}, {message: "Invalid email or password!"})
   email: string;
 
   @IsString()
